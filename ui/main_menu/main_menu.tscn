@@ -178,4 +178,5 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_fbb4t")
 
+[connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="animation_finished" from="TitleAnimator" to="." method="_on_title_animator_animation_finished"]
