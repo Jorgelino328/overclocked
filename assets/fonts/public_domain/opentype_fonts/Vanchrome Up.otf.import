@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://d31ecp828bbb1"
+path="res://.godot/imported/Vanchrome Up.otf-a7c80a1e4c7519ef45b3f1dc50a1e273.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/public_domain/opentype_fonts/Vanchrome Up.otf"
+dest_files=["res://.godot/imported/Vanchrome Up.otf-a7c80a1e4c7519ef45b3f1dc50a1e273.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

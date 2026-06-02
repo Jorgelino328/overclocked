@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://ckfgivaate0nf"
+path="res://.godot/imported/Mesmerize Ex Sb It.otf-8470062028b11542c08b854fb9d386fd.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/public_domain/opentype_fonts/Mesmerize Ex Sb It.otf"
+dest_files=["res://.godot/imported/Mesmerize Ex Sb It.otf-8470062028b11542c08b854fb9d386fd.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

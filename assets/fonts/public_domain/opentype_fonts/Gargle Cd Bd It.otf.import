@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://dcqlemvdn4jmf"
+path="res://.godot/imported/Gargle Cd Bd It.otf-738045c2086a1d043530a5c5adfc769d.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/public_domain/opentype_fonts/Gargle Cd Bd It.otf"
+dest_files=["res://.godot/imported/Gargle Cd Bd It.otf-738045c2086a1d043530a5c5adfc769d.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

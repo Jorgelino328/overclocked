@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://buq6api2iptn0"
+path="res://.godot/imported/Model Worker.otf-b4f4f938b8e82b62a321f49e25a5b43a.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/public_domain/opentype_fonts/Model Worker.otf"
+dest_files=["res://.godot/imported/Model Worker.otf-b4f4f938b8e82b62a321f49e25a5b43a.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
