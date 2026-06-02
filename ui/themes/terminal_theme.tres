@@ -1,28 +1,25 @@
-[gd_resource type="Theme" format=3 uid="uid://bll1u5sr4vd6f"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bll1u5sr4vd6f"]
 
-[ext_resource type="StyleBox" uid="uid://dg0iy464r5thb" path="res://ui/themes/gradient_button_disabled.tres" id="1_emjvh"]
 [ext_resource type="StyleBox" uid="uid://bi57ilihwhl7k" path="res://ui/themes/gradient_button.tres" id="2_i0vd0"]
 [ext_resource type="FontFile" uid="uid://bf0nsh18p7nlq" path="res://assets/fonts/public_domain/opentype_fonts/Neuropol.otf" id="2_m822g"]
-[ext_resource type="StyleBox" uid="uid://bwtjb6fvbalf3" path="res://ui/themes/dark_panel.tres" id="4_ajcgl"]
+[ext_resource type="StyleBox" uid="uid://dgik56qyyry2u" path="res://ui/themes/transparent_background.tres" id="4_6totm"]
+[ext_resource type="StyleBox" uid="uid://csmijdftc62ef" path="res://ui/themes/dak_green_panel.tres" id="4_wroew"]
 
 [resource]
-Button/colors/font_color = Color(0.3137255, 0.94509804, 0.28235295, 1)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_pressed_color = Color(0.6313726, 0.6745098, 0.14509805, 1)
-Button/font_sizes/font_size = 26
-Button/styles/disabled = ExtResource("1_emjvh")
-Button/styles/disabled_mirrored = ExtResource("1_emjvh")
-Button/styles/focus = ExtResource("2_i0vd0")
+Button/colors/font_color = Color(0.313726, 0.945098, 0.282353, 1)
+Button/colors/font_focus_color = Color(0.313726, 0.945098, 0.282353, 1)
+Button/colors/font_hover_color = Color(0.494118, 0.988235, 0.458824, 1)
+Button/colors/font_hover_pressed_color = Color(0.494118, 0.988235, 0.458824, 1)
+Button/colors/font_pressed_color = Color(0.494118, 0.988235, 0.458824, 1)
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("2_m822g")
+Button/styles/disabled = ExtResource("4_6totm")
+Button/styles/focus = ExtResource("4_6totm")
 Button/styles/hover = ExtResource("2_i0vd0")
-Button/styles/hover_mirrored = ExtResource("2_i0vd0")
-Button/styles/hover_pressed = ExtResource("2_i0vd0")
-Button/styles/hover_pressed_mirrored = ExtResource("2_i0vd0")
-Button/styles/normal = ExtResource("2_i0vd0")
-Button/styles/normal_mirrored = ExtResource("2_i0vd0")
-Button/styles/pressed = ExtResource("2_i0vd0")
-Button/styles/pressed_mirrored = ExtResource("2_i0vd0")
-Label/colors/font_color = Color(0.3137255, 0.99607843, 0.28235295, 1)
-Label/font_sizes/font_size = 26
+Button/styles/normal = ExtResource("4_6totm")
+Button/styles/pressed = ExtResource("4_6totm")
+CheckButton/fonts/font = ExtResource("2_m822g")
+Label/colors/font_color = Color(0.313726, 0.945098, 0.282353, 1)
+Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("2_m822g")
-LineEdit/fonts/font = ExtResource("2_m822g")
-Panel/styles/panel = ExtResource("4_ajcgl")
+Panel/styles/panel = ExtResource("4_wroew")
