@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c143xiti05vyi"]
+[gd_scene format=3 uid="uid://c143xiti05vyi"]
 
 [ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_uhj5c"]
-[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="2_njs6o"]
+[ext_resource type="Script" uid="uid://bbvbkbkyt1i26" path="res://ui/main_menu/main_menu.gd" id="2_njs6o"]
 [ext_resource type="AudioStream" uid="uid://cldqvnu7g1qwb" path="res://assets/audio/sfx/Keyboard.wav" id="3_fbb4t"]
+[ext_resource type="AudioStream" uid="uid://bgmki451vvp8l" path="res://assets/audio/sfx/blipHover.wav" id="4_3c04x"]
+[ext_resource type="AudioStream" uid="uid://chuat0k5o38ka" path="res://assets/audio/sfx/blipSelect.wav" id="4_i5wg5"]
 
 [sub_resource type="Gradient" id="Gradient_gw13q"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
@@ -29,7 +31,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasContainer/MenuContainer/Label:text")
+tracks/0/path = NodePath("CanvasContainer/MenuContainer/Title:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -46,7 +48,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasContainer/MenuContainer/Label:text")
+tracks/0/path = NodePath("CanvasContainer/MenuContainer/Title:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +64,7 @@ length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasContainer/MenuContainer/Label:text")
+tracks/0/path = NodePath("CanvasContainer/MenuContainer/Title:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -74,7 +76,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("TypingSfx:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -86,12 +88,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_32ouq"]
 _data = {
-"RESET": SubResource("Animation_hmwpx"),
-"idle": SubResource("Animation_d4q7g"),
-"show_title": SubResource("Animation_7lqq6")
+&"RESET": SubResource("Animation_hmwpx"),
+&"idle": SubResource("Animation_d4q7g"),
+&"show_title": SubResource("Animation_7lqq6")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=194472076]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,33 +104,33 @@ theme = ExtResource("1_uhj5c")
 script = ExtResource("2_njs6o")
 metadata/_edit_lock_ = true
 
-[node name="ScreenEffect" type="Control" parent="."]
+[node name="ScreenEffect" type="Control" parent="." unique_id=1906276371]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DarkBackground" type="ColorRect" parent="ScreenEffect"]
+[node name="DarkBackground" type="ColorRect" parent="ScreenEffect" unique_id=2007040232]
 layout_mode = 0
 offset_right = 1198.0
 offset_bottom = 682.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="CrtEffect" type="TextureRect" parent="ScreenEffect"]
+[node name="CrtEffect" type="TextureRect" parent="ScreenEffect" unique_id=1928439031]
 layout_mode = 0
 offset_right = 1151.0
 offset_bottom = 650.0
 texture = SubResource("GradientTexture2D_lv1wm")
 stretch_mode = 1
 
-[node name="ScreenGlow" type="TextureRect" parent="ScreenEffect"]
+[node name="ScreenGlow" type="TextureRect" parent="ScreenEffect" unique_id=2050095953]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 649.0
 texture = SubResource("GradientTexture2D_rf6vh")
 metadata/_edit_lock_ = true
 
-[node name="CanvasContainer" type="HBoxContainer" parent="."]
+[node name="CanvasContainer" type="HBoxContainer" parent="." unique_id=309820183]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -138,45 +140,54 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="MenuContainer" type="VBoxContainer" parent="CanvasContainer"]
+[node name="MenuContainer" type="VBoxContainer" parent="CanvasContainer" unique_id=246653915]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasContainer/MenuContainer"]
+[node name="Title" type="Label" parent="CanvasContainer/MenuContainer" unique_id=215200045]
 custom_minimum_size = Vector2(303, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Overclocked"
 vertical_alignment = 1
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasContainer/MenuContainer"]
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasContainer/MenuContainer" unique_id=1133687579]
 layout_mode = 2
 alignment = 1
 
-[node name="Play" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer"]
+[node name="Play" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer" unique_id=800284304]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "> Iniciar Sistema"
 
-[node name="Settings" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer"]
+[node name="Settings" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer" unique_id=683170337]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "> Configurações"
 
-[node name="Exit" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer"]
+[node name="Exit" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer" unique_id=934584516]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "> Desligar"
 icon_alignment = 1
 
-[node name="TitleAnimator" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_32ouq")
-}
+[node name="TitleAnimator" type="AnimationPlayer" parent="." unique_id=637066304]
+libraries/ = SubResource("AnimationLibrary_32ouq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="TypingSfx" type="AudioStreamPlayer" parent="." unique_id=641799264]
 stream = ExtResource("3_fbb4t")
+volume_db = 24.0
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1047375075]
+stream = ExtResource("4_3c04x")
+
+[node name="SelectSfx" type="AudioStreamPlayer" parent="." unique_id=2034605370]
+stream = ExtResource("4_i5wg5")
+
+[connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Settings" to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Exit" to="." method="_on_mouse_entered"]
 [connection signal="animation_finished" from="TitleAnimator" to="." method="_on_title_animator_animation_finished"]
+[connection signal="finished" from="SelectSfx" to="." method="_on_select_sfx_finished"]
