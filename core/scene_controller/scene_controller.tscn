@@ -11,5 +11,7 @@ script = ExtResource("1_ywrif")
 [node name="GlobalAudio" type="Node" parent="." unique_id=1605703738]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=1947835538]
+bus = &"Music"
 
 [node name="SFX" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=268427201]
+bus = &"SFX"

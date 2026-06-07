@@ -1,5 +1,7 @@
 extends Control
 
+@export var music = preload("res://assets/audio/music/menu_music.ogg")
+
 # Define sinais da cena
 signal menu()
 

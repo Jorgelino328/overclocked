@@ -4,8 +4,9 @@ extends Node
 @onready var bgm_player := $GlobalAudio/BackgroundMusic
 @onready var sfx_player := $GlobalAudio/SFX
 
-var current_track : AudioStream = null
-var select_sfx := preload("res://assets/audio/sfx/button_select.wav")
+var current_track := preload("res://assets/audio/music/menu_music.ogg")
+var select_sfx := preload("res://assets/audio/sfx/button_select.ogg")
+var death_sfx := preload("res://assets/audio/sfx/death.ogg")
 
 
 # Preload de Cenas de UI para transições mais rápidas
@@ -76,7 +77,7 @@ func _on_level_clear():
 	change_scene(next_scene)
 	
 func _on_game_over():
-	# await play_sfx(some_failure_sfx)
+	await play_sfx(death_sfx)
 	var next_scene = GAME_OVER.instantiate()
 	next_scene.level_path = current_scene.scene_file_path
 	change_scene(next_scene)
