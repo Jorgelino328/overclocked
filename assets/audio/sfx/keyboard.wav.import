@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cldqvnu7g1qwb"
-path="res://.godot/imported/Keyboard.wav-9a59227a4daf236726d039cb7f92cee2.sample"
+path="res://.godot/imported/keyboard.wav-211415f76abf4af90662838980671065.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/Keyboard.wav"
-dest_files=["res://.godot/imported/Keyboard.wav-9a59227a4daf236726d039cb7f92cee2.sample"]
+source_file="res://assets/audio/sfx/keyboard.wav"
+dest_files=["res://.godot/imported/keyboard.wav-211415f76abf4af90662838980671065.sample"]
 
 [params]
 

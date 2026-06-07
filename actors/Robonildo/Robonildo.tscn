@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b664d6vuql7i8"]
+[gd_scene format=3 uid="uid://b664d6vuql7i8"]
 
-[ext_resource type="Script" path="res://actors/Robonildo/Robonildo.gd" id="1_vnl3t"]
-[ext_resource type="Texture2D" uid="uid://cssd0lohhy84e" path="res://actors/Robonildo/Robonildo.png" id="2_lpi51"]
+[ext_resource type="Script" uid="uid://c3154wmk4nd62" path="res://actors/Robonildo/Robonildo.gd" id="1_vnl3t"]
+[ext_resource type="Texture2D" uid="uid://cssd0lohhy84e" path="res://assets/sprites/Robonildo.png" id="2_lpi51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18luw"]
 size = Vector2(50, 70)
@@ -40,25 +40,23 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f15kf"]
 _data = {
-"RESET": SubResource("Animation_uxixy"),
-"walk": SubResource("Animation_hfao4")
+&"RESET": SubResource("Animation_uxixy"),
+&"walk": SubResource("Animation_hfao4")
 }
 
-[node name="Robonildo" type="CharacterBody2D"]
+[node name="Robonildo" type="CharacterBody2D" unique_id=646253238]
 texture_filter = 1
 script = ExtResource("1_vnl3t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1564527355]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_18luw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1565838249]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(5, 5)
 texture = ExtResource("2_lpi51")
 hframes = 3
 
-[node name="RobonildoAnimator" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_f15kf")
-}
+[node name="RobonildoAnimator" type="AnimationPlayer" parent="." unique_id=656517308]
+libraries/ = SubResource("AnimationLibrary_f15kf")

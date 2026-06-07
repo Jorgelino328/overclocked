@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cn6j2h33mvld"]
+
+[ext_resource type="Script" uid="uid://jimfvvpn7gg" path="res://ui/game_over/game_over.gd" id="1_ns3eh"]
+
+[node name="GameOver" type="Control" unique_id=896810955]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ns3eh")

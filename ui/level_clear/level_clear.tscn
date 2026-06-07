@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7t1h6s1e10vv"]
+
+[ext_resource type="Script" uid="uid://dt6gtsca6xe4o" path="res://ui/level_clear/level_clear.gd" id="1_mek0w"]
+
+[node name="LevelClear" type="Control" unique_id=947730558]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mek0w")
