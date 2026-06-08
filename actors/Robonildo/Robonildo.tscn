@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://b664d6vuql7i8"]
 
-[ext_resource type="Script" path="res://actors/Robonildo/Robonildo.gd" id="1_vnl3t"]
-[ext_resource type="Texture2D" uid="uid://cssd0lohhy84e" path="res://actors/Robonildo/Robonildo.png" id="2_lpi51"]
+[ext_resource type="Script" uid="uid://c3154wmk4nd62" path="res://actors/Robonildo/Robonildo.gd" id="1_vnl3t"]
+[ext_resource type="Texture2D" uid="uid://cssd0lohhy84e" path="res://assets/sprites/Robonildo.png" id="2_maejr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18luw"]
-size = Vector2(50, 70)
+size = Vector2(116, 138.5)
 
 [sub_resource type="Animation" id="Animation_uxixy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("RobonildoSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,42 +21,176 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_hfao4"]
-resource_name = "walk"
-length = 0.6
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_lp60f"]
+resource_name = "RESET_side"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("RobonildoSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_maejr"]
+resource_name = "death"
+length = 1.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1.035265, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_ufnah"]
+resource_name = "idle"
+length = 1.25
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_q1wcr"]
+resource_name = "idle_turn"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1, 2]
+"values": [6, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ewks5"]
+resource_name = "jump"
+step = 0.25
+
+[sub_resource type="Animation" id="Animation_j43hc"]
+
+[sub_resource type="Animation" id="Animation_73y8d"]
+resource_name = "run"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_auqjj"]
+resource_name = "start_run"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_hfao4"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_pd6ww"]
+resource_name = "turn"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f15kf"]
 _data = {
-"RESET": SubResource("Animation_uxixy"),
-"walk": SubResource("Animation_hfao4")
+&"RESET": SubResource("Animation_uxixy"),
+&"RESET_side": SubResource("Animation_lp60f"),
+&"death": SubResource("Animation_maejr"),
+&"idle": SubResource("Animation_ufnah"),
+&"idle_turn": SubResource("Animation_q1wcr"),
+&"jump": SubResource("Animation_ewks5"),
+&"jump_land": SubResource("Animation_j43hc"),
+&"run": SubResource("Animation_73y8d"),
+&"run_start": SubResource("Animation_auqjj"),
+&"walk": SubResource("Animation_hfao4"),
+&"walk_turn": SubResource("Animation_pd6ww")
 }
 
 [node name="Robonildo" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_vnl3t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1564527355]
 shape = SubResource("RectangleShape2D_18luw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 2.38419e-07)
+[node name="RobonildoSprite" type="Sprite2D" parent="." unique_id=1565838249]
+position = Vector2(-4.7683716e-07, -9.536743e-07)
 scale = Vector2(5, 5)
-texture = ExtResource("2_lpi51")
-hframes = 3
+texture = ExtResource("2_maejr")
+hframes = 17
 
 [node name="RobonildoAnimator" type="AnimationPlayer" parent="."]
 libraries = {
