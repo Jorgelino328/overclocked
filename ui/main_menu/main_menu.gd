@@ -1,7 +1,7 @@
 extends Control
 
 # Mudar para cena do nível 1 quando estiver pronto
-var start_level = load("res://levels/testing/level_prototype.tscn")
+var start_level = "res://levels/testing/level_prototype.tscn"
 
 # Define sinais da cena
 signal new_game(level: PackedScene)
