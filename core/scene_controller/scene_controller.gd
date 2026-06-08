@@ -17,8 +17,6 @@ const GAME_OVER = preload("res://ui/game_over/game_over.tscn")
 
 func _ready() -> void:
 	bgm_player.stream = current_track
-	if current_track != null:
-		bgm_player.play()
 	connect_signals()
 
 ## Pede para a cena atual conectar seus sinais ao controlador.
@@ -98,3 +96,8 @@ func _on_next_level(level_path : String):
 # TODO: Implement load checkpoint logic
 func _on_continue_game():
 	pass
+
+## Espera 3 segundos antes de tocar a música do menu
+func _on_timer_timeout() -> void:
+	if current_track != null:
+		bgm_player.play()
