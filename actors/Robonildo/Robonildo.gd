@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 # Variáveis costumizáveis no Inspector do Godot 
-@export var speed_slow := 100.0
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
 @export var jump_velocity := -600.0
@@ -12,7 +11,7 @@ extends CharacterBody2D
 @onready var sprite = $RobonildoSprite
 
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING , RUNNING , JUMPING , DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,11 +19,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Inicia o jogo no estado Idle
 var anim_state := State.IDLE
 
-
 var time_walking := 0.0
 var time_running := 0.0
 var time_idle := 0.0
+var just_jumped := false
 var sideways := false
+var dead_anim := false
 
 func _physics_process(delta):
 	# Adiciona gravidade caso esteja fora do chão.
@@ -43,14 +43,19 @@ func _physics_process(delta):
 	# Se o personagem estiver vivo, decide o estado atual
 	if anim_state != State.DYING:
 		
-		# Se está no ar
+		# Se está no ar 
 		if not is_on_floor():
 			anim_state = State.JUMPING
-			
+		
 		# Se acabou de pular
 		elif Input.is_action_just_pressed("jump"):
+			just_jumped = true
+			anim_state = State.JUMPING
 			velocity.y = jump_velocity
-			anim_state = State.JUMPING 
+		
+		# Se está olhando pra cima ou pra baixo
+		elif Input.is_action_pressed("look_up") or Input.is_action_pressed("look_down") :
+			anim_state = State.LOOKING
 			
 		# Se está se movendo no chão
 		elif direction:
@@ -58,7 +63,7 @@ func _physics_process(delta):
 			anim_state = State.WALKING if anim_state != State.RUNNING else State.RUNNING
 			
 		# Se  está parado no chão
-		else:
+		elif anim_state != State.LOOKING:
 			anim_state = State.IDLE
 			
 	# Aciona as animações PRIMEIRO, pois elas alteram a variável de velocidade. 
@@ -71,6 +76,7 @@ func _physics_process(delta):
 			velocity.x = direction * current_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
+			
 	else:
 		# Garante que a velocidade seja zerada ao morrer
 		velocity.x = 0.0
@@ -81,7 +87,7 @@ func _physics_process(delta):
 
 func animation_handler(direction,delta):
 	# Vira o sprite caso esteja indo pra esquerda.
-	if direction != 0:
+	if direction != 0 and anim_state != State.DYING:
 		sprite.flip_h = (direction < 0)
 	
 	# Define animação baseado no estado
@@ -89,17 +95,19 @@ func animation_handler(direction,delta):
 		State.IDLE:
 			# Quando acaba de parar (Frame 0).
 			if time_idle == 0.0:
-				if sideways:
+				if sideways and time_running == 0.0:
 					animation_player.play("RESET_side") # Fica congelado virado de lado.
-				else:
+				elif sideways:
+					animation_player.play("run_stop") # Para de correr e permanece de lado.
+				elif !sideways:
 					animation_player.play("RESET") # Fica congelado virado de frente.
 
 			# Após 1 segundo parado
 			if time_idle < 1.0 and (time_idle + delta) >= 1.0:
 				# Se estiver de lado, se vira e toca animação idle.
 				if sideways:
-					animation_player.play("idle_turn")
-					animation_player.queue("idle")
+					animation_player.play("turn_front")
+					animation_player.queue("idle") 
 					sideways = false # Reseta o estado para os próximos movimentos.
 				
 				# Se estiver de frente, toca animação idle imediatamente.
@@ -112,16 +120,17 @@ func animation_handler(direction,delta):
 			time_idle += delta
 			
 		State.WALKING:
-			# Se vira e começa a andar.
+			# Se vira (caso já não esteja de lado) e começa a andar .
 			if time_walking == 0.0:
-				animation_player.play("walk_turn")
-				animation_player.queue("walk")
-			
+				if !sideways: 
+					animation_player.play("turn_side")
+					animation_player.queue("walk")
+				else:
+					animation_player.play("walk")
+					
 			# Acelera quando estiver andando, mas para enquanto a animação de início estiver tocando.
 			if animation_player.current_animation == "walk":
 				current_speed = speed_walk
-			elif animation_player.current_animation == "walk_turn" :
-				current_speed = speed_slow
 			
 			# Atualiza os timers.
 			time_walking += delta
@@ -134,7 +143,7 @@ func animation_handler(direction,delta):
 				
 		State.RUNNING:
 			# Se vira e começa a correr.
-			if time_walking >= 0.0 and time_running == 0.0:
+			if time_walking > 0.0 and time_running == 0.0:
 				animation_player.play("run_start")
 				animation_player.queue("run")
 			
@@ -147,17 +156,59 @@ func animation_handler(direction,delta):
 			time_running += delta 
 			time_idle = 0.0
 			
-			# TODO: Add animation for stopping from run for smoother transition.
-			
 		State.JUMPING:
-			# TODO: Implementar mecânica de pulo.
-			pass
+			# Se vira e começa a correr.
+			if just_jumped:
+				if sideways:
+					animation_player.play("jump_side_start")
+					animation_player.queue("jump_side")
+				else:
+					animation_player.play("jump_front_start")
+					animation_player.queue("jump_front")
+				just_jumped = false
+			
+			# Se caindo (y positivo), tocar animação de aterrissagem.
+			elif velocity.y >= 0.0:
+				if sideways:
+					animation_player.play("jump_side_land")
+				else:
+					animation_player.play("jump_front_land")
+				
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+		
+		State.LOOKING:
+			# Toca a animação apropriada dependendo da orientação (de lado/frente).
+			if Input.is_action_pressed("look_up"):
+				if sideways:
+					animation_player.play("look_side_up")
+				else:
+					animation_player.play("look_front_up")
+			elif Input.is_action_pressed("look_down"):
+				if sideways:
+					animation_player.play("look_side_down")
+				else:
+					animation_player.play("look_front_down")
+			else:
+				anim_state = State.IDLE
+				
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+				
 		State.DYING:
 			# WARNING: Sistema de HP ainda não implementado, 
 			# a única maneira de entrar nesse estado no momento é pressionando a tecla 0 no teclado.
 			
-			# Toca animação de morte caso já não tenha tocado.
-			if animation_player.current_animation != "death":
-				animation_player.play("death")
-				
-			# TODO: Implementar animações diferentes para morte enquanto corre/anda/pula.
+			# Toca animação de morte correta para a situação
+			if !dead_anim:
+				if sideways and time_running > 0.0:
+					animation_player.play("death_run")
+				elif sideways and time_walking > 0.0:
+					animation_player.play("death_walk")
+				elif sideways:
+					animation_player.play("death_side")
+				else:
+					animation_player.play("death_front")
+				dead_anim = true # Evita que animação toque novamente

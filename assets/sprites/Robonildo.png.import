@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cssd0lohhy84e"
-path="res://.godot/imported/Robonildo.png-96034c23d75b7ed19851aea2b458dc27.ctex"
+path="res://.godot/imported/Robonildo.png-cd7346be383eccd87df634dc726295cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/Robonildo/Robonildo.png"
-dest_files=["res://.godot/imported/Robonildo.png-96034c23d75b7ed19851aea2b458dc27.ctex"]
+source_file="res://assets/sprites/Robonildo.png"
+dest_files=["res://.godot/imported/Robonildo.png-cd7346be383eccd87df634dc726295cd.ctex"]
 
 [params]
 
