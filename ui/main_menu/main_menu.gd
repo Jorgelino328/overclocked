@@ -18,7 +18,7 @@ func setup_connections(controller: Node) -> void:
 	settings.connect(controller._on_settings)
 	quit.connect(controller._on_quit)
 
-func _on_title_animator_animation_finished(anim_name):
+func _on_title_animator_animation_finished():
 	$TitleAnimator.play("idle")
 
 
