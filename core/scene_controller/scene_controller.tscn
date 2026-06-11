@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cdfu8dinxac3h"]
+
+[ext_resource type="Script" uid="uid://dy72f18pwbw62" path="res://core/scene_controller/scene_controller.gd" id="1_ywrif"]
+[ext_resource type="PackedScene" uid="uid://c143xiti05vyi" path="res://ui/main_menu/main_menu.tscn" id="2_e8btk"]
+
+[node name="SceneController" type="Node" unique_id=180810919]
+script = ExtResource("1_ywrif")
+
+[node name="MainMenu" parent="." unique_id=194472076 instance=ExtResource("2_e8btk")]
+
+[node name="GlobalAudio" type="Node" parent="." unique_id=1605703738]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=1947835538]
+bus = &"Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=268427201]
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="." unique_id=390858948]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
