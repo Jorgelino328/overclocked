@@ -12,21 +12,29 @@ signal quit()
 func _ready():
 	$TitleAnimator.play("show_title")
 
+func setup_connections(controller: Node) -> void:
+	new_game.connect(controller._on_next_level)
+	continue_game.connect(controller._on_continue_game)
+	settings.connect(controller._on_settings)
+	quit.connect(controller._on_quit)
 
 func _on_title_animator_animation_finished():
 	$TitleAnimator.play("idle")
 
 
-func _on_play_pressed():
-	$SelectSfx.play()
-
-
 func _on_mouse_entered() -> void:
 	$HoverSfx.play()
 
-#AVISO: Fazer o botão de play depender da música pra trocar de nível não é uma boa prática!
-#Idealmente a música deveria tocar num controlador de cena externo para que o som persista
-#Essa solução é apenas para esse protótipo simples
-func _on_select_sfx_finished() -> void:
-	get_tree().change_scene_to_file("res://scenes/level_prototype.tscn")
+
+func _on_play_pressed():
+	emit_signal("new_game", start_level)
+
+func _on_settings_pressed() -> void:
+	emit_signal("settings")
+
+func _on_exit_pressed() -> void:
+	emit_signal("quit")
 	
+# TODO: Add working continue button
+func _on_continue_pressed() -> void:
+	pass

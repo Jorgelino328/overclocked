@@ -2,9 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_uhj5c"]
 [ext_resource type="Script" uid="uid://bbvbkbkyt1i26" path="res://ui/main_menu/main_menu.gd" id="2_njs6o"]
-[ext_resource type="AudioStream" uid="uid://cldqvnu7g1qwb" path="res://assets/audio/sfx/Keyboard.wav" id="3_fbb4t"]
-[ext_resource type="AudioStream" uid="uid://bgmki451vvp8l" path="res://assets/audio/sfx/blipHover.wav" id="4_3c04x"]
-[ext_resource type="AudioStream" uid="uid://chuat0k5o38ka" path="res://assets/audio/sfx/blipSelect.wav" id="4_i5wg5"]
+[ext_resource type="AudioStream" uid="uid://b5bemh0fqkmj8" path="res://assets/audio/sfx/keyboard.ogg" id="3_i5wg5"]
+[ext_resource type="AudioStream" uid="uid://b1oeekfae2ehi" path="res://assets/audio/sfx/button_hover.ogg" id="4_3c04x"]
 
 [sub_resource type="Gradient" id="Gradient_gw13q"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
@@ -176,18 +175,19 @@ icon_alignment = 1
 libraries/ = SubResource("AnimationLibrary_32ouq")
 
 [node name="TypingSfx" type="AudioStreamPlayer" parent="." unique_id=641799264]
-stream = ExtResource("3_fbb4t")
+stream = ExtResource("3_i5wg5")
 volume_db = 24.0
+bus = &"SFX"
 
 [node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1047375075]
 stream = ExtResource("4_3c04x")
-
-[node name="SelectSfx" type="AudioStreamPlayer" parent="." unique_id=2034605370]
-stream = ExtResource("4_i5wg5")
+volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Settings" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Exit" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="animation_finished" from="TitleAnimator" to="." method="_on_title_animator_animation_finished"]
-[connection signal="finished" from="SelectSfx" to="." method="_on_select_sfx_finished"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://olv0hyvd27bt"]
+
+[ext_resource type="Script" uid="uid://bmcb464rdgcd5" path="res://ui/settings/settings.gd" id="1_bjc66"]
+
+[node name="Settings" type="Control" unique_id=1405700474]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bjc66")
