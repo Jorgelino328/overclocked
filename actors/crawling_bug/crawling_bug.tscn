@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://b7rehd2fooj1j"]
+
+[ext_resource type="Script" uid="uid://b5ykievy8scoo" path="res://actors/crawling_bug/crawling_bug.gd" id="1_h1wry"]
+[ext_resource type="Texture2D" uid="uid://dl5v2h0jpfil6" path="res://assets/sprites/platformer-bugs/crawler_0.png" id="1_n6yih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1wry"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(264, 0, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbvva"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(198, 32, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rp60"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(132, 32, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xuhm"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(66, 32, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkbky"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(0, 32, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2whhf"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(132, 0, 66, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxsxw"]
+atlas = ExtResource("1_n6yih")
+region = Rect2(198, 0, 66, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ukt5g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1wry")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_rbvva")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_8rp60")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7xuhm")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_rkbky")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2whhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxsxw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vp5r"]
+size = Vector2(43, 21)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h1wry"]
+radius = 7.9999995
+height = 28.0
+
+[node name="CrawlingBug" type="RigidBody2D" unique_id=596403267]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_h1wry")
+
+[node name="CBugAnimator" type="AnimatedSprite2D" parent="." unique_id=615781754]
+sprite_frames = SubResource("SpriteFrames_ukt5g")
+animation = &"walk"
+frame_progress = 0.74673426
+metadata/_edit_lock_ = true
+
+[node name="CBugCollider" type="CollisionShape2D" parent="." unique_id=1404056445]
+position = Vector2(-6.5, 5.5)
+shape = SubResource("RectangleShape2D_2vp5r")
+metadata/_edit_lock_ = true
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1207740552]
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox" unique_id=1792573797]
+position = Vector2(-9, 7)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_h1wry")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

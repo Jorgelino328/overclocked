@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cn6j2h33mvld"]
 
+[ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_5nexe"]
 [ext_resource type="Script" uid="uid://jimfvvpn7gg" path="res://ui/game_over/game_over.gd" id="1_ns3eh"]
 
 [node name="GameOver" type="Control" unique_id=896810955]
@@ -9,4 +10,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_5nexe")
 script = ExtResource("1_ns3eh")
+
+[node name="GOBackground" type="ColorRect" parent="." unique_id=931829000]
+layout_mode = 0
+offset_right = 1184.0
+offset_bottom = 668.0
+color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Label" parent="." unique_id=628276663]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 230.0
+offset_right = 858.0
+offset_bottom = 346.0
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+
+[node name="Back" type="Button" parent="." unique_id=444336456]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 365.0
+offset_right = 743.0
+offset_bottom = 405.0
+text = "> Back to menu"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

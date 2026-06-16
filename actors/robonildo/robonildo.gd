@@ -1,9 +1,11 @@
-extends CharacterBody2D
+## Define o script do jogador como uma classe do tipo "Player", para facilitar identificação
+class_name Player extends CharacterBody2D
 
 # Variáveis costumizáveis no Inspector do Godot 
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
 @export var jump_velocity := -600.0
+@export var hp := 10
 
 # Variáveis definidas ao inicializar Node
 @onready var current_speed := speed_walk
@@ -31,12 +33,13 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	# TEST: O IF statement abaixo existe apenas para testar a animação de morte.
-	# Lembre-se de removê-lo, junto do input "test_death_anim" nas configurações
-	# do projeto quando o sistema de HP e morte estiverem devidamente implementados.
-	if Input.is_action_just_pressed("test_death_anim"):
+	if Input.is_action_just_pressed("debug_button"):
+		print("Current HP :", hp)
+		
+	# Se a HP do jogador chega a 0, toca a animação de morte
+	if hp <= 0:
 		anim_state = State.DYING
-
+		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
 
