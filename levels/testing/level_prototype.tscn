@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://qb2vxdw8xos7"]
 
 [ext_resource type="Script" uid="uid://we7keixwpuvx" path="res://levels/testing/level_prototype.gd" id="1_1egrw"]
-[ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/Robonildo/Robonildo.tscn" id="1_qm64n"]
+[ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="1_qm64n"]
+[ext_resource type="PackedScene" uid="uid://b7rehd2fooj1j" path="res://actors/crawling_bug/crawling_bug.tscn" id="3_1phht"]
+[ext_resource type="PackedScene" uid="uid://dhw4p4prgabpl" path="res://objects/platforms/test_platform/test_platform.tscn" id="3_13kkt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vr5co"]
-size = Vector2(219, 41.5)
-
-[node name="LevelPrototype" type="Node2D" unique_id=993375350]
+[node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")
+player = NodePath("Robonildo")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1842800962]
 offset_left = -27.0
@@ -18,53 +18,16 @@ color = Color(0.0392157, 0, 0.109804, 1)
 metadata/_edit_lock_ = true
 
 [node name="Robonildo" parent="." unique_id=345648955 instance=ExtResource("1_qm64n")]
-position = Vector2(593, 343)
+position = Vector2(596, 321)
 
-[node name="Platform1" type="StaticBody2D" parent="." unique_id=1227602556]
-position = Vector2(598, 402)
-metadata/_edit_group_ = true
+[node name="TestPlatform" parent="." unique_id=371593943 instance=ExtResource("3_13kkt")]
+position = Vector2(345, 257)
 
-[node name="ColorRect" type="ColorRect" parent="Platform1" unique_id=1259820541]
-offset_left = -109.0
-offset_top = -19.0
-offset_right = 109.0
-offset_bottom = 22.0
-color = Color(1, 0, 1, 1)
-metadata/_edit_lock_ = true
+[node name="TestPlatform2" parent="." unique_id=30131207 instance=ExtResource("3_13kkt")]
+position = Vector2(597, 407)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=648140746]
-position = Vector2(0, 1.25)
-shape = SubResource("RectangleShape2D_vr5co")
-metadata/_edit_lock_ = true
+[node name="TestPlatform3" parent="." unique_id=39150343 instance=ExtResource("3_13kkt")]
+position = Vector2(950, 261)
 
-[node name="Platform2" type="StaticBody2D" parent="." unique_id=1176344145]
-position = Vector2(806, 255)
-
-[node name="ColorRect" type="ColorRect" parent="Platform2" unique_id=506945870]
-offset_left = -109.0
-offset_top = -19.0
-offset_right = 109.0
-offset_bottom = 22.0
-color = Color(1, 0, 1, 1)
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=64862339]
-position = Vector2(0, 1.25)
-shape = SubResource("RectangleShape2D_vr5co")
-metadata/_edit_lock_ = true
-
-[node name="Platform3" type="StaticBody2D" parent="." unique_id=1646952410]
-position = Vector2(381, 256)
-
-[node name="ColorRect" type="ColorRect" parent="Platform3" unique_id=1461929230]
-offset_left = -109.0
-offset_top = -19.0
-offset_right = 109.0
-offset_bottom = 22.0
-color = Color(1, 0, 1, 1)
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1972771792]
-position = Vector2(0, 1.25)
-shape = SubResource("RectangleShape2D_vr5co")
-metadata/_edit_lock_ = true
+[node name="CrawlingBug" parent="." unique_id=596403267 instance=ExtResource("3_1phht")]
+position = Vector2(362, 228)

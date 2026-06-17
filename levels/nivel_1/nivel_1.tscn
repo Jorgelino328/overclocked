@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://1b170smdyso7"]
 
-[ext_resource type="Script" uid="uid://bv7h3gfh5f13k" path="res://node_2d.gd" id="1_0hol4"]
-[ext_resource type="Texture2D" uid="uid://b18shjyipkfvc" path="res://icon.svg" id="2_q6r6c"]
-[ext_resource type="Script" uid="uid://b48bgr2mjfki6" path="res://character_body_2d.gd" id="3_kdubu"]
-[ext_resource type="Texture2D" uid="uid://cssd0lohhy84e" path="res://assets/sprites/Robonildo.png" id="4_0hol4"]
-[ext_resource type="Texture2D" uid="uid://cnomeonrkd3u7" path="res://assets/sprites/cooler_png.png" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://bv7h3gfh5f13k" path="res://levels/nivel_1/nivel_1.gd" id="1_nvdoj"]
+[ext_resource type="Texture2D" uid="uid://b18shjyipkfvc" path="res://icon.svg" id="2_jlscb"]
+[ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="3_qolb2"]
+[ext_resource type="PackedScene" uid="uid://dd8rq3c33rptc" path="res://objects/platforms/cooler/cooler.tscn" id="4_nakes"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
-texture = ExtResource("2_q6r6c")
+texture = ExtResource("2_jlscb")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -133,54 +132,26 @@ texture = ExtResource("2_q6r6c")
 7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_4d7sh"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_rj586")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ir8iy"]
-size = Vector2(15, 18)
-
-[sub_resource type="Animation" id="Animation_0hol4"]
-resource_name = "Idle"
-length = 2.4
-loop_mode = 1
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6r6c"]
-_data = {
-&"Idle": SubResource("Animation_0hol4")
-}
-
-[node name="Node2D" type="Node2D" unique_id=1708044034]
-script = ExtResource("1_0hol4")
+[node name="Nivel1" type="Node2D" unique_id=1708044034 node_paths=PackedStringArray("player")]
+texture_filter = 1
+script = ExtResource("1_nvdoj")
+player = NodePath("Robonildo")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=866893549]
 tile_set = SubResource("TileSet_4d7sh")
 format = 2
-layer_0/tile_data = PackedInt32Array(7405649, 262144, 2, 7405650, 262144, 2, 7405651, 196608, 2, 7405652, 262144, 2, 7405653, 196608, 2, 7405654, 262144, 2, 7405648, 196608, 2, 7405646, 196608, 2, 7405647, 262144, 2, 7405655, 196608, 2, 7405656, 262144, 2, 7405645, 262144, 2, 7405644, 262144, 2, 7405643, 262144, 2, 7405642, 262144, 2, 7405641, 262144, 2, 7405662, 262144, 2, 7405663, 262144, 2, 7405657, 262144, 2, 7405658, 262144, 2, 7405659, 262144, 2, 7405660, 262144, 2, 7405661, 262144, 2, 7405664, 196608, 2, 7405665, 262144, 2, 7405666, 196608, 2, 7405667, 262144, 2, 7405668, 196608, 2, 7405669, 262144, 2, 7405670, 196608, 2, 7405671, 262144, 2, 7405672, 196608, 2, 7405673, 262144, 2, 7405674, 196608, 2, 7405675, 262144, 2, 7340140, 196608, 2, 7143533, 196608, 2, 7077998, 196608, 2, 7012463, 196608, 2, 7012464, 196608, 2, 7012465, 196608, 2, 7078002, 196608, 2, 7143539, 196608, 2, 7209076, 196608, 2, 7274613, 196608, 2, 7340150, 196608, 2, 7405687, 196608, 2, 7405688, 196608, 2, 7405689, 262144, 2, 7405690, 196608, 2, 7405691, 262144, 2, 7405692, 196608, 2, 7405693, 262144, 2, 7405694, 196608, 2, 7405695, 262144, 2, 7405696, 196608, 2, 7405697, 262144, 2, 7405698, 196608, 2, 7405699, 262144, 2, 7405700, 196608, 2, 7405701, 262144, 2, 7405702, 196608, 2, 7405703, 262144, 2, 7405707, 196608, 2, 7405708, 262144, 2, 7405712, 196608, 2, 7405713, 262144, 2, 7405716, 196608, 2, 7405717, 262144, 2, 7405722, 196608, 2, 7405723, 262144, 2, 7405728, 196608, 2, 7405729, 262144, 2, 7405730, 196608, 2, 7405731, 262144, 2, 7405732, 196608, 2, 7405733, 262144, 2, 7405734, 196608, 2, 7405735, 262144, 2, 7405736, 196608, 2, 7405737, 262144, 2, 7405738, 196608, 2, 7405739, 262144, 2, 7405740, 196608, 2, 7405741, 262144, 2, 7405742, 196608, 2, 7405743, 262144, 2, 7405744, 196608, 2, 7405745, 262144, 2, 7405746, 196608, 2, 7405747, 262144, 2, 7405748, 196608, 2, 7405749, 262144, 2)
+layer_0/tile_data = PackedInt32Array(2293788, 262144, 2, 2293789, 262144, 2, 2293790, 262144, 2, 2293791, 262144, 2, 2293792, 262144, 2, 2293793, 196608, 2, 2293794, 262144, 2, 2293795, 196608, 2, 2293796, 262144, 2, 2293797, 262144, 2, 2293798, 196608, 2, 2293799, 262144, 2, 2293800, 196608, 2, 2293801, 262144, 2, 2293802, 196608, 2, 2293803, 262144, 2, 2293804, 262144, 2, 2293805, 262144, 2, 2293806, 262144, 2, 2293807, 262144, 2, 2293808, 262144, 2, 2293809, 262144, 2, 2293810, 262144, 2, 2293811, 196608, 2, 2293812, 262144, 2, 2293813, 196608, 2, 2293814, 262144, 2, 2293815, 196608, 2, 2293816, 262144, 2, 2293817, 196608, 2, 2293818, 262144, 2, 2293819, 196608, 2, 2293820, 262144, 2, 2293821, 196608, 2, 2293822, 262144, 2, 2228287, 196608, 2, 2031680, 196608, 2, 1966145, 196608, 2, 1900610, 196608, 2, 1900611, 196608, 2, 1900612, 196608, 2, 1966149, 196608, 2, 2031686, 196608, 2, 2097223, 196608, 2, 2162760, 196608, 2, 2228297, 196608, 2, 2293834, 196608, 2, 2293835, 196608, 2, 2293836, 262144, 2, 2293837, 196608, 2, 2293838, 262144, 2, 2293839, 196608, 2, 2293840, 262144, 2, 2293841, 196608, 2, 2293842, 262144, 2, 2293843, 196608, 2, 2293844, 262144, 2, 2293845, 196608, 2, 2293846, 262144, 2, 2293847, 196608, 2, 2293848, 262144, 2, 2293849, 196608, 2, 2293850, 262144, 2, 2293854, 196608, 2, 2293855, 262144, 2, 2293859, 196608, 2, 2293860, 262144, 2, 2293863, 196608, 2, 2293864, 262144, 2, 2293869, 196608, 2, 2293870, 262144, 2, 2293875, 196608, 2, 2293876, 262144, 2, 2293877, 196608, 2, 2293878, 262144, 2, 2293879, 196608, 2, 2293880, 262144, 2, 2293881, 196608, 2, 2293882, 262144, 2, 2293883, 196608, 2, 2293884, 262144, 2, 2293885, 196608, 2, 2293886, 262144, 2, 2293887, 196608, 2, 2293888, 262144, 2, 2293889, 196608, 2, 2293890, 262144, 2, 2293891, 196608, 2, 2293892, 262144, 2, 2293893, 196608, 2, 2293894, 262144, 2, 2293895, 196608, 2, 2293896, 262144, 2)
 
-[node name="PontoDeInicio" type="Marker2D" parent="." unique_id=1307641101]
-
-[node name="Robonildo" type="CharacterBody2D" parent="." unique_id=130727043]
-position = Vector2(1311, 1800)
-script = ExtResource("3_kdubu")
-
-[node name="Sprite2D" type="Sprite2D" parent="Robonildo" unique_id=1430269802]
-position = Vector2(-1, -7)
-texture = ExtResource("4_0hol4")
-hframes = 61
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Robonildo" unique_id=1430494399]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_ir8iy")
+[node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("3_qolb2")]
+texture_filter = 0
+position = Vector2(515, 492)
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
-position = Vector2(24, -236)
+position = Vector2(77, -141)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Robonildo" unique_id=1417993229]
-libraries/ = SubResource("AnimationLibrary_q6r6c")
-
-[node name="Cooler" type="Area2D" parent="." unique_id=565138271]
-
-[node name="Sprite2D" type="Sprite2D" parent="Cooler" unique_id=584400161]
-position = Vector2(2878.0002, 1772)
-scale = Vector2(2.0000012, -2.218751)
-texture = ExtResource("5_q6r6c")
+[node name="Cooler" parent="." unique_id=747921168 instance=ExtResource("4_nakes")]
+position = Vector2(2144, 524)

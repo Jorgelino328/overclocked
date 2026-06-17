@@ -1,14 +1,21 @@
-extends CharacterBody2D
+## Define o script do jogador como uma classe do tipo "Player", para facilitar identificação
+class_name Player extends CharacterBody2D
 
 # Variáveis costumizáveis no Inspector do Godot 
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
 @export var jump_velocity := -600.0
+@export var hp := 10
+@export var i_frames := 1
+@export var i_frame_dur = 0.2
 
 # Variáveis definidas ao inicializar Node
 @onready var current_speed := speed_walk
 @onready var animation_player = $RobonildoAnimator
 @onready var sprite = $RobonildoSprite
+@onready var hurt_sfx = $SFX/HurtSFX
+@onready var jump_sfx = $SFX/JumpSFX
+@onready var rocket_sfx = $SFX/RocketSFX
 
 # Define estados possíveis do personagem
 enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
@@ -25,18 +32,18 @@ var time_idle := 0.0
 var just_jumped := false
 var sideways := false
 var dead_anim := false
+var knockback = Vector2.ZERO
+var is_invincible = false
 
 func _physics_process(delta):
 	# Adiciona gravidade caso esteja fora do chão.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	# TEST: O IF statement abaixo existe apenas para testar a animação de morte.
-	# Lembre-se de removê-lo, junto do input "test_death_anim" nas configurações
-	# do projeto quando o sistema de HP e morte estiverem devidamente implementados.
-	if Input.is_action_just_pressed("test_death_anim"):
+	# Se a HP do jogador chega a 0, toca a animação de morte
+	if hp <= 0:
 		anim_state = State.DYING
-
+		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
 
@@ -76,7 +83,9 @@ func _physics_process(delta):
 			velocity.x = direction * current_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
-			
+		
+		# Aplica o Knockback, se houver
+		velocity += knockback
 	else:
 		# Garante que a velocidade seja zerada ao morrer
 		velocity.x = 0.0
@@ -89,6 +98,10 @@ func animation_handler(direction,delta):
 	# Vira o sprite caso esteja indo pra esquerda.
 	if direction != 0 and anim_state != State.DYING:
 		sprite.flip_h = (direction < 0)
+	
+	# Para o loop de foguete ao parar de correr
+	if time_running <= 0:
+		rocket_sfx.stop() 
 	
 	# Define animação baseado no estado
 	match anim_state:
@@ -146,6 +159,7 @@ func animation_handler(direction,delta):
 			if time_walking > 0.0 and time_running == 0.0:
 				animation_player.play("run_start")
 				animation_player.queue("run")
+				rocket_sfx.play()
 			
 			# Acelera quando estiver correndo.
 			if animation_player.current_animation == "run":
@@ -159,6 +173,7 @@ func animation_handler(direction,delta):
 		State.JUMPING:
 			# Se vira e começa a correr.
 			if just_jumped:
+				jump_sfx.play()
 				if sideways:
 					animation_player.play("jump_side_start")
 					animation_player.queue("jump_side")
@@ -196,11 +211,8 @@ func animation_handler(direction,delta):
 			time_walking = 0.0
 			time_running = 0.0
 			time_idle = 0.0
-				
-		State.DYING:
-			# WARNING: Sistema de HP ainda não implementado, 
-			# a única maneira de entrar nesse estado no momento é pressionando a tecla 0 no teclado.
 			
+		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:
 				if sideways and time_running > 0.0:
@@ -212,3 +224,23 @@ func animation_handler(direction,delta):
 				else:
 					animation_player.play("death_front")
 				dead_anim = true # Evita que animação toque novamente
+
+func take_damage(dmg):
+	if is_invincible:
+		return
+	
+	hurt_sfx.play()
+	hp -= dmg
+	is_invincible = true
+
+	var tween_alpha = create_tween()
+	
+	var flash_count: int = int(i_frames / i_frame_dur)
+	
+	tween_alpha.set_loops(flash_count)
+	
+	tween_alpha.tween_property(sprite, "self_modulate:a", 0.2, 0.0)
+	tween_alpha.tween_property(sprite, "self_modulate:a", 1.0, i_frame_dur)
+	
+	await get_tree().create_timer(i_frames).timeout
+	is_invincible = false

@@ -4,7 +4,7 @@ extends Control
 var start_level = "res://levels/testing/level_prototype.tscn"
 
 # Define sinais da cena
-signal new_game(level: PackedScene)
+signal new_game(level: String)
 signal continue_game()
 signal settings()
 signal quit()
