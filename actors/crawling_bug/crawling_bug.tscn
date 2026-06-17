@@ -2,99 +2,173 @@
 
 [ext_resource type="Script" uid="uid://b5ykievy8scoo" path="res://actors/crawling_bug/crawling_bug.gd" id="1_h1wry"]
 [ext_resource type="Texture2D" uid="uid://dl5v2h0jpfil6" path="res://assets/sprites/platformer-bugs/crawler_0.png" id="1_n6yih"]
+[ext_resource type="AudioStream" uid="uid://cie06c8twb21d" path="res://assets/audio/sfx/explosion.ogg" id="3_rbvva"]
+[ext_resource type="AudioStream" uid="uid://dmcd4st37xax7" path="res://assets/audio/sfx/bug_walk_1.ogg" id="4_7xuhm"]
+[ext_resource type="AudioStream" uid="uid://13cdoti1jpyq" path="res://assets/audio/sfx/bug_walk_2.ogg" id="5_rkbky"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h1wry"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(264, 0, 66, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1wry"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rbvva"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(198, 32, 66, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1wry"]
+size = Vector2(19, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rp60"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(132, 32, 66, 32)
+[sub_resource type="Animation" id="Animation_7xuhm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CBugSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkSFX1:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WalkSFX2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7xuhm"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(66, 32, 66, 32)
+[sub_resource type="Animation" id="Animation_2whhf"]
+resource_name = "death"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CBugSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 8, 7, 6, 5]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkbky"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(0, 32, 66, 32)
+[sub_resource type="Animation" id="Animation_vxsxw"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CBugSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkSFX1:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WalkSFX2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2whhf"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(132, 0, 66, 32)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ukt5g"]
+_data = {
+&"RESET": SubResource("Animation_7xuhm"),
+&"death": SubResource("Animation_2whhf"),
+&"walk": SubResource("Animation_vxsxw")
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vxsxw"]
-atlas = ExtResource("1_n6yih")
-region = Rect2(198, 0, 66, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ukt5g"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h1wry")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_rbvva")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_8rp60")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_7xuhm")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_rkbky")
-}],
-"loop": false,
-"name": &"death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2whhf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vxsxw")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vp5r"]
-size = Vector2(43, 21)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h1wry"]
-radius = 7.9999995
-height = 28.0
-
-[node name="CrawlingBug" type="RigidBody2D" unique_id=596403267]
+[node name="CrawlingBug" type="CharacterBody2D" unique_id=1428627728]
 texture_filter = 1
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_h1wry")
-
-[node name="CBugAnimator" type="AnimatedSprite2D" parent="." unique_id=615781754]
-sprite_frames = SubResource("SpriteFrames_ukt5g")
-animation = &"walk"
-frame_progress = 0.74673426
 metadata/_edit_lock_ = true
 
+[node name="WallCheck" type="RayCast2D" parent="." unique_id=930583644]
+target_position = Vector2(24, 0)
+collision_mask = 4
+metadata/_edit_lock_ = true
+
+[node name="CBugSprite" type="Sprite2D" parent="." unique_id=857789781]
+self_modulate = Color(0.23921569, 1, 0.43529412, 1)
+texture = ExtResource("1_n6yih")
+offset = Vector2(9, -6)
+hframes = 5
+vframes = 2
+frame = 2
+
 [node name="CBugCollider" type="CollisionShape2D" parent="." unique_id=1404056445]
-position = Vector2(-6.5, 5.5)
-shape = SubResource("RectangleShape2D_2vp5r")
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_h1wry")
 metadata/_edit_lock_ = true
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1207740552]
-
-[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox" unique_id=1792573797]
-position = Vector2(-9, 7)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_h1wry")
+position = Vector2(9, -6)
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox" unique_id=1792573797]
+position = Vector2(-5, 6.5000005)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_h1wry")
+metadata/_edit_lock_ = true
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2135050321]
+stream = ExtResource("3_rbvva")
+bus = &"SFX"
+
+[node name="WalkSFX1" type="AudioStreamPlayer2D" parent="." unique_id=1183912486]
+stream = ExtResource("4_7xuhm")
+volume_db = -25.0
+bus = &"SFX"
+
+[node name="WalkSFX2" type="AudioStreamPlayer2D" parent="." unique_id=1518291656]
+stream = ExtResource("5_rkbky")
+volume_db = -25.0
+bus = &"SFX"
+
+[node name="CBugAnimator" type="AnimationPlayer" parent="." unique_id=1017653521]
+libraries/ = SubResource("AnimationLibrary_ukt5g")
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]
+[connection signal="animation_finished" from="CBugAnimator" to="." method="_on_c_bug_animator_animation_finished"]

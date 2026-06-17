@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnomeonrkd3u7"
-path="res://.godot/imported/cooler_png.png-84125fa93636154a781fb4fdb566b415.ctex"
+uid="uid://dcfs8qfkfad5a"
+path="res://.godot/imported/scifi_platform_BG1.jpg-19d2bef72ccf57779f301690835eb063.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cooler_png.png"
-dest_files=["res://.godot/imported/cooler_png.png-84125fa93636154a781fb4fdb566b415.ctex"]
+source_file="res://assets/tilesets/sci-fi-tiles/scifi_platform_BG1.jpg"
+dest_files=["res://.godot/imported/scifi_platform_BG1.jpg-19d2bef72ccf57779f301690835eb063.ctex"]
 
 [params]
 

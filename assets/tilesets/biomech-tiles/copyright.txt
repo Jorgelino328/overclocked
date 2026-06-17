@@ -1,0 +1,11 @@
+Author: 
+Mindfields51, hosted by OpenGameArt.org
+
+License(s): 
+CC0
+
+Note: 
+Na descrição do asset, dizia: "biomechamorphs_001A.png  is an edited version by reddit user Ciphertext008".
+
+Isso me fez suspeitar um pouco se é licensa livre mesmo, mas chequei o post, e o u/Ciphertext008 disse:
+"No credit needed, go nuts.", então CC0 está correto mesmo.
