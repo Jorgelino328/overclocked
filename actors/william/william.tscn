@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://tdj5mcoq8s5m"]
+
+[ext_resource type="Script" uid="uid://byp05o88aqc2x" path="res://actors/william/william.gd" id="1_lx2ea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub80a"]
+size = Vector2(64, 140)
+
+[node name="William" type="Area2D" unique_id=1928850773]
+script = ExtResource("1_lx2ea")
+
+[node name="WilliamSprite" type="AnimatedSprite2D" parent="." unique_id=496375814]
+
+[node name="WilliamArea" type="CollisionShape2D" parent="." unique_id=482112346]
+shape = SubResource("RectangleShape2D_ub80a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

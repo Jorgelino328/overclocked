@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cupmkta0aira1"]
+
+[ext_resource type="Script" uid="uid://bgh2xj7t7dje3" path="res://actors/gabriel/gabriel.gd" id="1_napme"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62b83"]
+size = Vector2(64, 140)
+
+[node name="Gabriel" type="Area2D" unique_id=383317222]
+script = ExtResource("1_napme")
+
+[node name="GabrielSprite" type="AnimatedSprite2D" parent="." unique_id=464535642]
+
+[node name="GabrielArea" type="CollisionShape2D" parent="." unique_id=621151535]
+shape = SubResource("RectangleShape2D_62b83")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dpgx2gej78uvh"]
+
+[ext_resource type="Script" uid="uid://dt466wfk1b346" path="res://actors/olivia/olivia.gd" id="1_r6rck"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rbqh"]
+size = Vector2(64, 140)
+
+[node name="Olivia" type="Area2D" unique_id=1459887797]
+script = ExtResource("1_r6rck")
+
+[node name="OliviaSprite" type="AnimatedSprite2D" parent="." unique_id=1492730220]
+
+[node name="OliviaArea" type="CollisionShape2D" parent="." unique_id=1355816628]
+shape = SubResource("RectangleShape2D_6rbqh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
