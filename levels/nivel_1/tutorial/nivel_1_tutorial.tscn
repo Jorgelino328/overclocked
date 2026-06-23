@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bi40rc1c0n7on"]
+
+[ext_resource type="Script" uid="uid://cuadu55ivv515" path="res://levels/nivel_1/tutorial/nivel_1_tutorial.gd" id="1_xei3w"]
+[ext_resource type="PackedScene" uid="uid://s1ugftu76qga" path="res://ui/dialogue_ui/dialogue_ui.tscn" id="2_s5fkk"]
+
+[node name="Nivel1Tutorial" type="Node2D" unique_id=799911268]
+script = ExtResource("1_xei3w")
+
+[node name="DialogueUI" parent="." unique_id=1220506929 instance=ExtResource("2_s5fkk")]

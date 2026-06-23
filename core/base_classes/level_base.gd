@@ -4,6 +4,9 @@ class_name Level extends Node2D
 # Define o jogador da fase, para ajudar a trocar de cena baseado no seu estado
 @export var player : Player
 
+# Importa UI de diálogo
+var dialogueUI = preload("res://ui/dialogue_ui/dialogue_ui.tscn")
+
 # Define sinais da cena
 signal next_level(level: String)
 signal menu()

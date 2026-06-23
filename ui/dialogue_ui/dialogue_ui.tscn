@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://s1ugftu76qga"]
+
+[ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_lfmeu"]
+[ext_resource type="Script" uid="uid://dysmiitwqthff" path="res://ui/dialogue_ui/dialogue_ui.gd" id="2_ldc8m"]
+[ext_resource type="AudioStream" uid="uid://clbptcflt0fgb" path="res://assets/audio/sfx/dialogue.ogg" id="3_ldc8m"]
+
+[node name="DialogueUI" type="CanvasLayer" unique_id=1220506929]
+script = ExtResource("2_ldc8m")
+metadata/_edit_horizontal_guides_ = [158.0]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=299409950]
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 449.0
+offset_bottom = 649.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lfmeu")
+
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1161529325]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Continue" type="Label" parent="VBoxContainer/Panel" unique_id=449791674]
+layout_mode = 0
+offset_left = 833.0
+offset_top = 147.0
+offset_right = 1141.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(1, 0.94509804, 0.28235295, 1)
+theme_override_font_sizes/font_size = 18
+text = "Press SPACE to continue"
+
+[node name="Name" type="RichTextLabel" parent="VBoxContainer/Panel" unique_id=1544037961]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 15.0
+offset_right = 655.0
+offset_bottom = 67.0
+theme_override_colors/default_color = Color(1, 0.94509804, 0.28235295, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+text = "TEST"
+scroll_active = false
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer/Panel" unique_id=1513825474]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 69.0
+offset_right = 1126.0
+offset_bottom = 178.0
+bbcode_enabled = true
+text = "The Quick Brown Fox Jumps Over the Lazy Dog
+But i don't care
+ [b] - BILL[/b] "
+metadata/_edit_lock_ = true
+
+[node name="Portrait" type="Sprite2D" parent="VBoxContainer/Panel" unique_id=1354417751]
+position = Vector2(95, 95)
+scale = Vector2(5, 5)
+
+[node name="Timer" type="Timer" parent="." unique_id=818286340]
+
+[node name="dialogueTick" type="AudioStreamPlayer" parent="." unique_id=1484178280]
+stream = ExtResource("3_ldc8m")

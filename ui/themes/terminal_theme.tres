@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bll1u5sr4vd6f"]
+[gd_resource type="Theme" format=3 uid="uid://bll1u5sr4vd6f"]
 
 [ext_resource type="StyleBox" uid="uid://bi57ilihwhl7k" path="res://ui/themes/gradient_button.tres" id="2_i0vd0"]
 [ext_resource type="FontFile" uid="uid://bf0nsh18p7nlq" path="res://assets/fonts/public_domain/opentype_fonts/Neuropol.otf" id="2_m822g"]
@@ -23,3 +23,5 @@ Label/colors/font_color = Color(0.313726, 0.945098, 0.282353, 1)
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("2_m822g")
 Panel/styles/panel = ExtResource("4_wroew")
+RichTextLabel/colors/default_color = Color(0.3137255, 0.94509804, 0.28235295, 1)
+RichTextLabel/fonts/normal_font = ExtResource("2_m822g")

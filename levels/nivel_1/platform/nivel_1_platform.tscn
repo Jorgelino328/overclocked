@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://1b170smdyso7"]
 
-[ext_resource type="Script" uid="uid://bv7h3gfh5f13k" path="res://levels/nivel_1/nivel_1.gd" id="1_nvdoj"]
-[ext_resource type="Texture2D" uid="uid://b18shjyipkfvc" path="res://icon.svg" id="2_jlscb"]
-[ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="3_qolb2"]
-[ext_resource type="PackedScene" uid="uid://dd8rq3c33rptc" path="res://objects/platforms/cooler/cooler.tscn" id="4_nakes"]
+[ext_resource type="Script" uid="uid://bv7h3gfh5f13k" path="res://levels/nivel_1/platform/nivel_1_platform.gd" id="1_4881d"]
+[ext_resource type="Texture2D" uid="uid://b18shjyipkfvc" path="res://icon.svg" id="2_27551"]
+[ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="3_26is7"]
+[ext_resource type="PackedScene" uid="uid://dd8rq3c33rptc" path="res://objects/platforms/cooler/cooler.tscn" id="4_c4tcy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
-texture = ExtResource("2_jlscb")
+texture = ExtResource("2_27551")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -136,9 +136,9 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_rj586")
 
-[node name="Nivel1" type="Node2D" unique_id=1708044034 node_paths=PackedStringArray("player")]
+[node name="Nivel1Platform" type="Node2D" unique_id=1708044034 node_paths=PackedStringArray("player")]
 texture_filter = 1
-script = ExtResource("1_nvdoj")
+script = ExtResource("1_4881d")
 player = NodePath("Robonildo")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=866893549]
@@ -146,12 +146,12 @@ tile_set = SubResource("TileSet_4d7sh")
 format = 2
 layer_0/tile_data = PackedInt32Array(2293788, 262144, 2, 2293789, 262144, 2, 2293790, 262144, 2, 2293791, 262144, 2, 2293792, 262144, 2, 2293793, 196608, 2, 2293794, 262144, 2, 2293795, 196608, 2, 2293796, 262144, 2, 2293797, 262144, 2, 2293798, 196608, 2, 2293799, 262144, 2, 2293800, 196608, 2, 2293801, 262144, 2, 2293802, 196608, 2, 2293803, 262144, 2, 2293804, 262144, 2, 2293805, 262144, 2, 2293806, 262144, 2, 2293807, 262144, 2, 2293808, 262144, 2, 2293809, 262144, 2, 2293810, 262144, 2, 2293811, 196608, 2, 2293812, 262144, 2, 2293813, 196608, 2, 2293814, 262144, 2, 2293815, 196608, 2, 2293816, 262144, 2, 2293817, 196608, 2, 2293818, 262144, 2, 2293819, 196608, 2, 2293820, 262144, 2, 2293821, 196608, 2, 2293822, 262144, 2, 2228287, 196608, 2, 2031680, 196608, 2, 1966145, 196608, 2, 1900610, 196608, 2, 1900611, 196608, 2, 1900612, 196608, 2, 1966149, 196608, 2, 2031686, 196608, 2, 2097223, 196608, 2, 2162760, 196608, 2, 2228297, 196608, 2, 2293834, 196608, 2, 2293835, 196608, 2, 2293836, 262144, 2, 2293837, 196608, 2, 2293838, 262144, 2, 2293839, 196608, 2, 2293840, 262144, 2, 2293841, 196608, 2, 2293842, 262144, 2, 2293843, 196608, 2, 2293844, 262144, 2, 2293845, 196608, 2, 2293846, 262144, 2, 2293847, 196608, 2, 2293848, 262144, 2, 2293849, 196608, 2, 2293850, 262144, 2, 2293854, 196608, 2, 2293855, 262144, 2, 2293859, 196608, 2, 2293860, 262144, 2, 2293863, 196608, 2, 2293864, 262144, 2, 2293869, 196608, 2, 2293870, 262144, 2, 2293875, 196608, 2, 2293876, 262144, 2, 2293877, 196608, 2, 2293878, 262144, 2, 2293879, 196608, 2, 2293880, 262144, 2, 2293881, 196608, 2, 2293882, 262144, 2, 2293883, 196608, 2, 2293884, 262144, 2, 2293885, 196608, 2, 2293886, 262144, 2, 2293887, 196608, 2, 2293888, 262144, 2, 2293889, 196608, 2, 2293890, 262144, 2, 2293891, 196608, 2, 2293892, 262144, 2, 2293893, 196608, 2, 2293894, 262144, 2, 2293895, 196608, 2, 2293896, 262144, 2)
 
-[node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("3_qolb2")]
+[node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("3_26is7")]
 texture_filter = 0
 position = Vector2(515, 492)
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
 position = Vector2(77, -141)
 
-[node name="Cooler" parent="." unique_id=747921168 instance=ExtResource("4_nakes")]
+[node name="Cooler" parent="." unique_id=747921168 instance=ExtResource("4_c4tcy")]
 position = Vector2(2144, 524)
