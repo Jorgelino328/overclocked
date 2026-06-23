@@ -121,12 +121,10 @@ texture_filter = 1
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_h1wry")
-metadata/_edit_lock_ = true
 
 [node name="WallCheck" type="RayCast2D" parent="." unique_id=930583644]
 target_position = Vector2(24, 0)
 collision_mask = 4
-metadata/_edit_lock_ = true
 
 [node name="CBugSprite" type="Sprite2D" parent="." unique_id=857789781]
 self_modulate = Color(0.23921569, 1, 0.43529412, 1)
@@ -139,7 +137,6 @@ frame = 2
 [node name="CBugCollider" type="CollisionShape2D" parent="." unique_id=1404056445]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_h1wry")
-metadata/_edit_lock_ = true
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1207740552]
 position = Vector2(9, -6)

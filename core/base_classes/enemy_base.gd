@@ -22,7 +22,7 @@ class_name Enemy extends CharacterBody2D
 var is_dead := false;
 
 ## WARNING: Lembre de adicionar super._process(delta) na classe filha caso for adicionar um novo _process
-func _process(delta):
+func _process(_delta):
 	if hp <= 0:
 		is_dead = true
 

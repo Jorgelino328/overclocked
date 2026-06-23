@@ -62,7 +62,8 @@ func _physics_process(delta):
 		
 		# Se está olhando pra cima ou pra baixo
 		elif Input.is_action_pressed("look_up") or Input.is_action_pressed("look_down") :
-			anim_state = State.LOOKING
+			if not Input.is_action_pressed("walk_left") or Input.is_action_pressed("walk_right"): 
+				anim_state = State.LOOKING
 			
 		# Se está se movendo no chão
 		elif direction:

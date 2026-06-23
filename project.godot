@@ -68,6 +68,7 @@ test_death_anim={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Wall/Floor"
 2d_physics/layer_4="Items"
+2d_physics/layer_5="EnemyDoor"
 
 [physics]
 
