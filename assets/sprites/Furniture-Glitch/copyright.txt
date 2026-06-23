@@ -1,0 +1,9 @@
+Authors: 
+Originally from Glitch - http://glitchthegame.com
+
+via the coding skills of bart from OpenGameArt.org
+
+SVG files cleaned up or reworked by anarres
+	
+License(s): 
+CC0

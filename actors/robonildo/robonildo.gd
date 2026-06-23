@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 # Variáveis costumizáveis no Inspector do Godot 
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
-@export var jump_velocity := -600.0
+@export var jump_velocity := -350.0
 @export var hp := 10
 @export var i_frames := 1
 @export var i_frame_dur = 0.2
