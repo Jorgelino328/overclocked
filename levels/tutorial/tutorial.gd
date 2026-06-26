@@ -6,10 +6,11 @@ enum DialogueState { START, INTRO, TUTORIAL_1, TUTORIAL_2, TUTORIAL_3, END }
 @onready var level_path = "res://levels/nivel_1/nivel_1.tscn"
 
 var curr_dialogue = DialogueState.START
-var intro_dialogue = "res://assets/dialogue/tutorial.json"
-var tutorial_mov = "res://assets/dialogue/tutorial_mov.json"
-var tutorial_partes = "res://assets/dialogue/tutorial_partes.json"
-var tutorial_ufrn = "res://assets/dialogue/tutorial_ufrn.json"
+var intro_dialogue = "res://assets/dialogue/intro.json"
+var tutorial_basic = "res://assets/dialogue/tutorial_basic.json"
+var tutorial_mec_1 = "res://assets/dialogue/tutorial_mec_1.json"
+var tutorial_partes_1 = "res://assets/dialogue/tutorial_partes_1.json"
+var tutorial_ufrn_1 = "res://assets/dialogue/tutorial_ufrn.json"
 var freeze = true
 var awake = true
 
@@ -47,9 +48,9 @@ func _process(_delta):
 		freeze_chars()
 
 func connect_signals():
-	gab.tutorial_1.connect(play_scene.bind(tutorial_mov))
-	wil.tutorial_2.connect(play_scene.bind(tutorial_partes))
-	oli.tutorial_3.connect(play_scene.bind(tutorial_ufrn))
+	gab.tutorial_mec_1.connect(play_scene.bind(tutorial_mec_1))
+	wil.tutorial_partes_1.connect(play_scene.bind(tutorial_partes_1))
+	oli.tutorial_ufrn_1.connect(play_scene.bind(tutorial_ufrn_1))
 
 
 func play_scene(scene):

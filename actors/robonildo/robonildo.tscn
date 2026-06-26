@@ -711,7 +711,6 @@ _data = {
 
 [node name="Robonildo" type="CharacterBody2D" unique_id=1274667847]
 texture_filter = 1
-position = Vector2(39, 215)
 collision_mask = 20
 script = ExtResource("1_vnl3t")
 
