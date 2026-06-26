@@ -1,12 +1,57 @@
-[gd_scene format=3 uid="uid://7t1h6s1e10vv"]
+[gd_scene format=3 uid="uid://c6yoovys2bnyl"]
 
-[ext_resource type="Script" uid="uid://dt6gtsca6xe4o" path="res://ui/level_clear/level_clear.gd" id="1_mek0w"]
+[ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_cfe3l"]
+[ext_resource type="Script" uid="uid://dt6gtsca6xe4o" path="res://ui/level_clear/level_clear.gd" id="2_beln3"]
 
-[node name="LevelClear" type="Control" unique_id=947730558]
+[node name="LevelClear" type="Control" unique_id=896810955]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mek0w")
+theme = ExtResource("1_cfe3l")
+script = ExtResource("2_beln3")
+
+[node name="GOBackground" type="ColorRect" parent="." unique_id=931829000]
+layout_mode = 0
+offset_right = 1184.0
+offset_bottom = 668.0
+color = Color(0, 0, 0, 1)
+
+[node name="LevelClear" type="Label" parent="." unique_id=628276663]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 219.0
+offset_right = 1010.0
+offset_bottom = 335.0
+theme_override_font_sizes/font_size = 64
+text = "NÍVEL CONCLUÍDO!"
+
+[node name="Back" type="Button" parent="." unique_id=444336456]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 365.0
+offset_right = 743.0
+offset_bottom = 405.0
+text = "> Back to menu"
+
+[node name="ContinueButton" type="Button" parent="." unique_id=225727612]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 331.0
+offset_right = 740.0
+offset_bottom = 371.0
+text = "> Continue"
+
+[node name="QuitButton" type="Button" parent="." unique_id=724500819]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 396.0
+offset_right = 738.0
+offset_bottom = 436.0
+text = "> Quit"
+
+[connection signal="pressed" from="Back" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_pressed"]

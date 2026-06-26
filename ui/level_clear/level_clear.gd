@@ -14,3 +14,12 @@ func setup_connections(controller: Node) -> void:
 	quit.connect(controller._on_quit)
 
 # TODO: Criar os eventos para cada botão e emitir os sinais apropriados
+func _on_next_pressed() -> void:
+	print("Carregando próxima fase: ", level_path)
+	emit_signal("next_level", level_path)
+
+func _on_menu_pressed() -> void:
+	emit_signal("menu")
+
+func _on_quit_pressed() -> void:
+	emit_signal("quit")

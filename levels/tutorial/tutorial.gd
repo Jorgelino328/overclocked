@@ -1,4 +1,5 @@
-extends Level
+# extends Level
+extends "res://core/base_classes/level_base.gd" # (Use o caminho que você copiou)
 
 enum DialogueState { START, INTRO, TUTORIAL_1, TUTORIAL_2, TUTORIAL_3, END }
 

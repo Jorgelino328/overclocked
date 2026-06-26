@@ -1,13 +1,15 @@
 ## Define o script do jogador como uma classe do tipo "Player", para facilitar identificação
 class_name Player extends CharacterBody2D
 
+signal morreu
+
 # Variáveis costumizáveis no Inspector do Godot 
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
 @export var jump_velocity := -350.0
 @export var hp := 10
-@export var i_frames := 1
-@export var i_frame_dur = 0.2
+@export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
+@export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
 
 # Variáveis definidas ao inicializar Node
 @onready var current_speed := speed_walk
@@ -42,8 +44,9 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 	# Se a HP do jogador chega a 0, toca a animação de morte
-	if hp <= 0:
+	if hp <= 0 and anim_state != State.DYING:
 		anim_state = State.DYING
+		_gerenciar_sequencia_morte()
 		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
@@ -234,6 +237,7 @@ func take_damage(dmg):
 	hurt_sfx.play()
 	hp -= dmg
 	is_invincible = true
+	print("Dano recebido: ", dmg, " | HP restante: ", hp)
 
 	var tween_alpha = create_tween()
 	
@@ -246,3 +250,45 @@ func take_damage(dmg):
 	
 	await get_tree().create_timer(i_frames).timeout
 	is_invincible = false
+
+# func take_damage(dmg):
+# 	# Ignora o dano se já estiver invencível ou se já estiver no meio da animação de morte
+# 	if is_invincible or anim_state == State.DYING:
+# 		return
+	
+# 	hurt_sfx.play()
+# 	hp -= dmg
+# 	print("Dano recebido: ", dmg, " | HP restante: ", hp)
+	
+# 	# Verifica a morte EXATAMENTE no milissegundo em que toma o golpe
+# 	if hp <= 0:
+# 		anim_state = State.DYING
+# 		_gerenciar_sequencia_morte()
+# 		return # Interrompe a função aqui para ele não piscar invencível enquanto morre
+		
+# 	# --- Só continua daqui para baixo se ele sobreviveu ao golpe ---
+# 	is_invincible = true
+# 	var tween_alpha = create_tween()
+	
+# 	var flash_count: int = int(i_frames / i_frame_dur)
+# 	tween_alpha.set_loops(flash_count)
+# 	tween_alpha.tween_property(sprite, "self_modulate:a", 0.2, 0.01)
+# 	tween_alpha.tween_property(sprite, "self_modulate:a", 1.0, i_frame_dur)
+	
+# 	await get_tree().create_timer(i_frames).timeout
+# 	is_invincible = false
+
+# func _gerenciar_sequencia_morte():
+# 	await animation_player.animation_finished
+# 	emit_signal("morreu")
+
+func _gerenciar_sequencia_morte():
+	print("Robonildo caiu! Iniciando transição...")
+	
+	# Em vez de depender do Godot avisar que a animação acabou,
+	# nós usamos um Timer absoluto. Isso impede que o jogo trave
+	# caso alguma animação fique presa em loop.
+	await get_tree().create_timer(1.5).timeout
+	
+	print("Pausa dramática concluída! Abrindo tela verde...")
+	emit_signal("morreu")

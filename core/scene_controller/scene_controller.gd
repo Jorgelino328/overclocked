@@ -68,10 +68,21 @@ func _on_settings():
 	await play_sfx(select_sfx)
 	change_scene(SETTINGS.instantiate())
 
-func _on_level_clear():
-	# await play_sfx(some_success_sfx)
+# func _on_level_clear():
+# 	# await play_sfx(some_success_sfx)
+# 	var next_scene = LEVEL_CLEAR.instantiate()
+# 	next_scene.level_path = current_scene.level_path
+# 	change_scene(next_scene)
+
+func _on_level_clear(proxima_fase_path: String):
+	# Se quiser colocar um som de vitória depois, é só descomentar!
+	# await play_sfx(win_sfx)
+	
 	var next_scene = LEVEL_CLEAR.instantiate()
-	next_scene.level_path = current_scene.level_path
+	
+	# Injeta a string da próxima fase dentro da tela de Level Clear
+	next_scene.level_path = proxima_fase_path 
+	
 	change_scene(next_scene)
 	
 func _on_game_over():
