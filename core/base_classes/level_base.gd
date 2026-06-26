@@ -9,6 +9,7 @@ var dialogueUI = preload("res://ui/dialogue_ui/dialogue_ui.tscn")
 
 # Define sinais da cena
 signal next_level(level: String)
+signal level_cleared(proxima_fase_path: String)
 signal game_over()
 signal menu()
 signal quit()
@@ -29,6 +30,7 @@ func _conectar_player_dinamico() -> void:
 func setup_connections(controller) -> void:
 	next_level.connect(controller._on_next_level)
 	game_over.connect(controller._on_game_over)
+	level_cleared.connect(controller._on_level_clear)
 	menu.connect(controller._on_menu)
 	quit.connect(controller._on_quit)
 
