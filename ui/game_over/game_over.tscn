@@ -36,4 +36,22 @@ offset_right = 743.0
 offset_bottom = 405.0
 text = "> Back to menu"
 
+[node name="RestartButton" type="Button" parent="." unique_id=225727612]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 402.0
+offset_right = 743.0
+offset_bottom = 442.0
+text = "> Restart"
+
+[node name="QuitButton" type="Button" parent="." unique_id=724500819]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 439.0
+offset_right = 741.0
+offset_bottom = 479.0
+text = "> Quit"
+
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_pressed"]

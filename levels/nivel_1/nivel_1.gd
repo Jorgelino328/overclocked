@@ -1,4 +1,5 @@
-extends Level
+# extends Level
+extends "res://core/base_classes/level_base.gd" # (Use o caminho que você copiou)
 
 @onready var level_path = "res://levels/testing/level_prototype.tscn"
 

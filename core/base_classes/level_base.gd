@@ -9,13 +9,32 @@ var dialogueUI = preload("res://ui/dialogue_ui/dialogue_ui.tscn")
 
 # Define sinais da cena
 signal next_level(level: String)
+signal game_over()
 signal menu()
 signal quit()
 
-func setup_connections(controller: Node) -> void:
+func _ready() -> void:
+	if player:
+		player.morreu.connect(_on_player_morreu)
+	else:
+		call_deferred("_conectar_player_dinamico")
+
+func _conectar_player_dinamico() -> void:
+	for child in get_children():
+		if child is Player:
+			player = child
+			player.morreu.connect(_on_player_morreu)
+			break
+
+func setup_connections(controller) -> void:
 	next_level.connect(controller._on_next_level)
+	game_over.connect(controller._on_game_over)
 	menu.connect(controller._on_menu)
 	quit.connect(controller._on_quit)
+
+# Função acionada assim que o Robonildo termina a animação de morte
+func _on_player_morreu() -> void:
+	emit_signal("game_over")
 
 ### Se o jogador morre, troca para tela de game over
 ### WARNING: Lembre de adicionar super._process(delta) na classe filha caso for adicionar um novo _process
