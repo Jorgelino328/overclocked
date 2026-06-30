@@ -19,6 +19,7 @@ signal morreu
 @onready var hurt_sfx = $SFX/HurtSFX
 @onready var jump_sfx = $SFX/JumpSFX
 @onready var rocket_sfx = $SFX/RocketSFX
+@onready var heal_sfx = $SFX/HealSFX
 
 # Define estados possíveis do personagem
 enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
@@ -231,7 +232,12 @@ func animation_handler(direction,delta):
 				else:
 					animation_player.play("death_front")
 				dead_anim = true # Evita que animação toque novamente
-				
+
+func heal(heal_amnt):
+	heal_sfx.play()
+	hp = clamp(hp + heal_amnt, 0, max_hp)
+	emit_signal("health_changed", hp, max_hp)
+
 func take_damage(dmg):
 	if is_invincible:
 		return

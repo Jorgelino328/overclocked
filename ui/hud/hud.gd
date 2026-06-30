@@ -41,11 +41,8 @@ func update_hearts(current_hp, max_hp):
 		var hp_left = current_hp - (i * HP_PER_HEART)
 		
 		if hp_left >= 10:
-			print("full")
 			atlas.region = Rect2(0, 0, 8, 8)  # Full
 		elif hp_left >= 5:
-			print("half")
 			atlas.region = Rect2(8, 0, 8, 8)  # Half
 		else:
-			print("empty")
 			atlas.region = Rect2(16, 0, 8, 8) # Empty
