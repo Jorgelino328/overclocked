@@ -1,8 +1,282 @@
 [gd_scene format=3 uid="uid://olv0hyvd27bt"]
 
 [ext_resource type="Script" uid="uid://bmcb464rdgcd5" path="res://ui/settings/settings.gd" id="1_bjc66"]
+[ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_hrs25"]
+
+[sub_resource type="Gradient" id="Gradient_fayoa"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.0980392, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.0980392)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gweul"]
+gradient = SubResource("Gradient_fayoa")
+height = 10
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_y7dpk"]
+offsets = PackedFloat32Array(0, 0.171946, 0.339367, 0.574661, 0.701357)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.235294, 0.313726, 0.945098, 0.282353, 0.0980392, 0, 0, 0, 0, 0, 0.0451197, 0, 0.784314, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5at5d"]
+gradient = SubResource("Gradient_y7dpk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1.5, 0.5)
 
 [node name="Settings" type="Control" unique_id=1405700474]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hrs25")
 script = ExtResource("1_bjc66")
+music = null
+
+[node name="ScreenEffect" type="Control" parent="." unique_id=1659437936]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="DarkBackground" type="ColorRect" parent="ScreenEffect" unique_id=76420265]
+layout_mode = 0
+offset_right = 1198.0
+offset_bottom = 682.0
+color = Color(0, 0, 0, 1)
+
+[node name="CrtEffect" type="TextureRect" parent="ScreenEffect" unique_id=384582325]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 650.0
+texture = SubResource("GradientTexture2D_gweul")
+stretch_mode = 1
+
+[node name="ScreenGlow" type="TextureRect" parent="ScreenEffect" unique_id=1059453341]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 649.0
+texture = SubResource("GradientTexture2D_5at5d")
+
+[node name="Options" type="Control" parent="." unique_id=1963148940]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options" unique_id=321996705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Video" type="Button" parent="Options/VBoxContainer" unique_id=437077693]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "[ VIDEO ]"
+
+[node name="Audio" type="Button" parent="Options/VBoxContainer" unique_id=1256729419]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "[ AUDIO ]
+"
+
+[node name="BacktoMenu" type="Button" parent="Options/VBoxContainer" unique_id=1507857236]
+visible = false
+custom_minimum_size = Vector2(0, 49)
+layout_mode = 2
+text = "> Voltar ao Menu"
+
+[node name="QuitGame" type="Button" parent="Options/VBoxContainer" unique_id=1150185282]
+visible = false
+custom_minimum_size = Vector2(0, 49)
+layout_mode = 2
+text = "> Sair do Jogo
+"
+
+[node name="BackFromOptions" type="Button" parent="Options" unique_id=1095632520]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = 104.0
+offset_right = 116.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "> Voltar
+"
+
+[node name="Video" type="Control" parent="." unique_id=1198541274]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Video" unique_id=374577063]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -82.0
+offset_right = 167.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Checks" type="VBoxContainer" parent="Video/HBoxContainer" unique_id=1658504856]
+custom_minimum_size = Vector2(326, 0)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+metadata/_edit_lock_ = true
+
+[node name="FullScreen" type="CheckBox" parent="Video/HBoxContainer/Checks" unique_id=1651142322]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Fullscreen  "
+icon_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="Bordeless" type="CheckBox" parent="Video/HBoxContainer/Checks" unique_id=2104769213]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Borderless  "
+metadata/_edit_lock_ = true
+
+[node name="VSync" type="CheckBox" parent="Video/HBoxContainer/Checks" unique_id=277368763]
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Vsync  "
+metadata/_edit_lock_ = true
+
+[node name="BackFromVideo" type="Button" parent="Video" unique_id=346307892]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -80.0
+offset_right = 117.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back
+"
+
+[node name="Audio" type="Control" parent="." unique_id=503565143]
+visible = false
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Audio" unique_id=1280283261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.5
+offset_top = -180.0
+offset_right = 159.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Labels" type="VBoxContainer" parent="Audio/HBoxContainer" unique_id=327026063]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Master" type="Label" parent="Audio/HBoxContainer/Labels" unique_id=894547808]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Master "
+
+[node name="Music" type="Label" parent="Audio/HBoxContainer/Labels" unique_id=195195336]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music"
+
+[node name="Sound FX" type="Label" parent="Audio/HBoxContainer/Labels" unique_id=257491469]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sound FX"
+
+[node name="Slider" type="VBoxContainer" parent="Audio/HBoxContainer" unique_id=242730467]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_group_ = true
+
+[node name="Master" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=434761268]
+layout_mode = 2
+size_flags_vertical = 10
+max_value = 1.0
+step = 0.01
+ticks_on_borders = true
+
+[node name="Music" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=70161685]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.4
+max_value = 1.0
+step = 0.01
+ticks_on_borders = true
+
+[node name="Sound FX" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=491290727]
+layout_mode = 2
+size_flags_vertical = 2
+max_value = 1.0
+step = 0.01
+ticks_on_borders = true
+
+[node name="BackFromAudio" type="Button" parent="Audio" unique_id=389160137]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.976
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.5
+offset_top = -120.448
+offset_right = 111.5
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back
+"

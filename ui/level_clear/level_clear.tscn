@@ -3,6 +3,26 @@
 [ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_cfe3l"]
 [ext_resource type="Script" uid="uid://dt6gtsca6xe4o" path="res://ui/level_clear/level_clear.gd" id="2_beln3"]
 
+[sub_resource type="Gradient" id="Gradient_i5wg5"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.0980392, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.0980392)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_beln3"]
+gradient = SubResource("Gradient_i5wg5")
+height = 10
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3c04x"]
+offsets = PackedFloat32Array(0, 0.171946, 0.339367, 0.574661, 0.701357)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.235294, 0.313726, 0.945098, 0.282353, 0.0980392, 0, 0, 0, 0, 0, 0.0451197, 0, 0.784314, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_du4uq"]
+gradient = SubResource("Gradient_3c04x")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1.5, 0.5)
+
 [node name="LevelClear" type="Control" unique_id=896810955]
 layout_mode = 3
 anchors_preset = 15
@@ -13,11 +33,31 @@ grow_vertical = 2
 theme = ExtResource("1_cfe3l")
 script = ExtResource("2_beln3")
 
-[node name="GOBackground" type="ColorRect" parent="." unique_id=931829000]
+[node name="ScreenEffect" type="Control" parent="." unique_id=1176171727]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DarkBackground" type="ColorRect" parent="ScreenEffect" unique_id=2034789054]
 layout_mode = 0
-offset_right = 1184.0
-offset_bottom = 668.0
+offset_right = 1198.0
+offset_bottom = 682.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="CrtEffect" type="TextureRect" parent="ScreenEffect" unique_id=1943317114]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 650.0
+texture = SubResource("GradientTexture2D_beln3")
+stretch_mode = 1
+
+[node name="ScreenGlow" type="TextureRect" parent="ScreenEffect" unique_id=1484108403]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 649.0
+texture = SubResource("GradientTexture2D_du4uq")
+metadata/_edit_lock_ = true
 
 [node name="LevelClear" type="Label" parent="." unique_id=628276663]
 layout_mode = 0
@@ -28,21 +68,21 @@ offset_bottom = 335.0
 theme_override_font_sizes/font_size = 64
 text = "NÍVEL CONCLUÍDO!"
 
-[node name="Back" type="Button" parent="." unique_id=444336456]
-layout_mode = 0
-offset_left = 442.0
-offset_top = 365.0
-offset_right = 743.0
-offset_bottom = 405.0
-text = "> Back to menu"
-
 [node name="ContinueButton" type="Button" parent="." unique_id=225727612]
 layout_mode = 0
 offset_left = 439.0
 offset_top = 331.0
 offset_right = 740.0
 offset_bottom = 371.0
-text = "> Continue"
+text = "> Continuar"
+
+[node name="Back" type="Button" parent="." unique_id=444336456]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 365.0
+offset_right = 743.0
+offset_bottom = 405.0
+text = "> Voltar ao Menu"
 
 [node name="QuitButton" type="Button" parent="." unique_id=724500819]
 layout_mode = 0
@@ -50,8 +90,8 @@ offset_left = 437.0
 offset_top = 396.0
 offset_right = 738.0
 offset_bottom = 436.0
-text = "> Quit"
+text = "> Sair do Jogo"
 
-[connection signal="pressed" from="Back" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="ContinueButton" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_pressed"]

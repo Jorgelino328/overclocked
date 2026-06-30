@@ -15,7 +15,6 @@ func setup_connections(controller: Node) -> void:
 
 # TODO: Criar os eventos para cada botão e emitir os sinais apropriados
 func _on_next_pressed() -> void:
-	print("Carregando próxima fase: ", level_path)
 	emit_signal("next_level", level_path)
 
 func _on_menu_pressed() -> void:
