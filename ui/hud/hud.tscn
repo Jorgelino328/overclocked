@@ -1,13 +1,32 @@
 [gd_scene format=3 uid="uid://dndli1awf74nm"]
 
-[ext_resource type="Script" uid="uid://ca02iintf4s5k" path="res://ui/hud/hud.gd" id="1_4d6w6"]
+[ext_resource type="Script" uid="uid://d4d4c754375s8" path="res://ui/hud/heart_containers.gd" id="2_4d6w6"]
+[ext_resource type="Script" uid="uid://dfoae2fkmhgjm" path="res://ui/hud/battery_charges.gd" id="2_e0nub"]
+[ext_resource type="Texture2D" uid="uid://b127ifyk3opg6" path="res://assets/sprites/battery.png" id="3_e0nub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w75iv"]
+atlas = ExtResource("3_e0nub")
+region = Rect2(72, 0, 18, 8)
 
 [node name="Hud" type="CanvasLayer" unique_id=1337000759]
-script = ExtResource("1_4d6w6")
 
-[node name="HeartContainers" type="HBoxContainer" parent="." unique_id=1666370096]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1813130093]
 texture_filter = 1
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_right = 28.0
+offset_bottom = 28.0
 scale = Vector2(5, 5)
-pivot_offset = Vector2(-5, -5)
+
+[node name="HeartContainers" type="HBoxContainer" parent="VBoxContainer" unique_id=1666370096]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+script = ExtResource("2_4d6w6")
+
+[node name="BatteryCharges" type="HBoxContainer" parent="VBoxContainer" unique_id=1059351231]
+texture_filter = 1
+layout_mode = 2
+script = ExtResource("2_e0nub")
+
+[node name="Battery" type="TextureRect" parent="VBoxContainer/BatteryCharges" unique_id=826864913]
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75iv")

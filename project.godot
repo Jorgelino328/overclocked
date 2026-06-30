@@ -79,6 +79,7 @@ shoot={
 2d_physics/layer_3="Wall/Floor"
 2d_physics/layer_4="Items"
 2d_physics/layer_5="EnemyDoor"
+2d_physics/layer_6="Projectiles"
 
 [physics]
 

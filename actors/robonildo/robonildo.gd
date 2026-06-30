@@ -11,8 +11,8 @@ signal morreu
 @export var max_hp := 10
 @export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
 @export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
-@export var energy: int = 100
-@export var shoot_cost: int = 10
+@export var energy: int = 4
+@export var shoot_cost: int = 1
 
 # Variáveis definidas ao inicializar Node
 @onready var current_speed := speed_walk
@@ -24,10 +24,12 @@ signal morreu
 @onready var heal_sfx = $SFX/HealSFX
 @onready var gun_arm = $GunArm
 @onready var gun_timer = $GunTimer
+@onready var battery_timer = $BatteryTimer
 @onready var muzzle = $GunArm/Muzzle
 
+
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, SHOOTING, DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -47,6 +49,7 @@ var is_invincible = false
 var ray_scene = load("res://objects/projectiles/ray.tscn")
 
 signal health_changed(new_hp, max_hp)
+signal battery_changed(charge)
 
 
 func _ready():
@@ -87,8 +90,12 @@ func _physics_process(delta):
 		# Vira o sprite da arma de cabeça para baixo caso esteja apontando pra trás
 		gun_arm.flip_v = aiming_left
 
-	# Se o personagem estiver vivo e NÃO estiver atirando, decide o estado atual de movimento
-	if anim_state != State.DYING and anim_state != State.SHOOTING:
+	# LÓGICA DE TIRO (Separada do movimento para permitir atirar andando)
+	if Input.is_action_just_pressed("shoot") and has_psu and energy >= shoot_cost and anim_state != State.DYING:
+		shoot_logic()
+
+	# Define o estado atual de movimento
+	if anim_state != State.DYING:
 		
 		# Se está no ar 
 		if not is_on_floor():
@@ -102,15 +109,9 @@ func _physics_process(delta):
 		
 		# Se está olhando pra cima ou pra baixo
 		elif Input.is_action_pressed("look_up") or Input.is_action_pressed("look_down"):
-			if not Input.is_action_pressed("walk_left") or Input.is_action_pressed("walk_right"): 
+			if not Input.is_action_pressed("walk_left") and not Input.is_action_pressed("walk_right"): 
 				anim_state = State.LOOKING
 		
-		# Se tentou atirar
-		elif Input.is_action_just_pressed("shoot") and has_psu:
-			if anim_state != State.SHOOTING:
-				anim_state = State.SHOOTING
-				shoot_logic()
-				
 		# Se está se movendo no chão
 		elif direction:
 			sideways = true
@@ -125,9 +126,8 @@ func _physics_process(delta):
 	
 	# Se o personagem estiver vivo, aplica o movimento
 	if anim_state != State.DYING:
-		# Aplica a velocidade x usando o "current_speed" atualizado pelo handler
-		# Se estiver atirando, trava a velocidade horizontal para não deslizar
-		if direction and anim_state != State.SHOOTING:
+		# Aplica a velocidade x (Sem travar se estiver atirando!)
+		if direction:
 			velocity.x = direction * current_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
@@ -153,23 +153,24 @@ func animation_handler(direction, delta):
 	# Define animação baseado no estado
 	match anim_state:
 		State.IDLE:
-			# Quando acaba de parar (Frame 0).
-			if time_idle == 0.0:
-				if sideways and time_running == 0.0:
-					animation_player.play("RESET_side") # Fica congelado virado de lado.
-				elif sideways:
-					animation_player.play("run_stop") # Para de correr e permanece de lado.
-				elif !sideways:
-					animation_player.play("RESET") # Fica congelado virado de frente.
-
-			# Após 1 segundo parado
-			if time_idle < 1.0 and (time_idle + delta) >= 1.0:
-				
-				# NOVA LÓGICA: Se a arma estiver de fora, segura o tempo pra não virar
-				if gun_arm.visible:
-					time_idle -= delta 
-					
-				else:
+			# Se a arma está de fora enquanto parado, FORÇA a ficar de lado
+			if gun_arm.visible:
+				if animation_player.current_animation != "run_stop" and animation_player.current_animation != "RESET_side":
+					animation_player.play("RESET_side")
+				# Reseta o tempo para que ele não tente virar para a frente
+				time_idle = 0.0 
+			else:
+				# Quando acaba de parar (Frame 0).
+				if time_idle == 0.0:
+					if sideways and time_running == 0.0:
+						animation_player.play("RESET_side") # Fica congelado virado de lado.
+					elif sideways:
+						animation_player.play("run_stop") # Para de correr e permanece de lado.
+					elif !sideways:
+						animation_player.play("RESET") # Fica congelado virado de frente.
+	
+				# Após 1 segundo parado
+				if time_idle < 1.0 and (time_idle + delta) >= 1.0:
 					# Se estiver de lado, se vira e toca animação idle.
 					if sideways:
 						animation_player.play("turn_front")
@@ -179,11 +180,13 @@ func animation_handler(direction, delta):
 					# Se estiver de frente, toca animação idle imediatamente.
 					else:
 						animation_player.play("idle")
-					
-			# Atualiza os timers.
+						
+				# Só avança o timer de ficar parado se a arma estiver guardada
+				time_idle += delta
+				
+			# Atualiza os outros timers
 			time_walking = 0.0
 			time_running = 0.0
-			time_idle += delta
 			
 		State.WALKING:
 			# Se vira (caso já não esteja de lado) e começa a andar .
@@ -264,20 +267,7 @@ func animation_handler(direction, delta):
 			time_walking = 0.0
 			time_running = 0.0
 			time_idle = 0.0
-			
-		State.SHOOTING:
-			# Mantém virado de lado enquanto atira
-			if !sideways: 
-				animation_player.play("turn_side")
-				animation_player.queue("shooting")
-				sideways = true
-			else:
-				animation_player.play("shooting")
 				
-			# Libera o jogador para mover-se novamente quando a animação concluir
-			if !animation_player.is_playing() or animation_player.current_animation != "shooting":
-				anim_state = State.IDLE
-
 		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:
@@ -322,6 +312,7 @@ func spawn_projectile():
 	
 func shoot_logic():
 	energy -= shoot_cost
+	emit_signal("battery_changed", energy)
 	gun_arm.visible = true
 	spawn_projectile()
 	# Reinicia o timer toda vez que atiramos
@@ -333,3 +324,8 @@ func _gerenciar_sequencia_morte():
 
 func _on_gun_timer_timeout() -> void:
 	gun_arm.visible = false
+
+func _on_battery_timer_timeout() -> void:
+	energy = clamp(energy + 1, 0, 4)
+	emit_signal("battery_changed", energy)
+	battery_timer.start()

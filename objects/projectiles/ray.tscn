@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://xcmdkpu2thh7" path="res://objects/projectiles/ray.gd" id="1_36kae"]
 [ext_resource type="Texture2D" uid="uid://ceotx5vsj5k7n" path="res://assets/sprites/ray.png" id="2_nvqnu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36kae"]
+size = Vector2(10, 7)
+
 [sub_resource type="Animation" id="Animation_lvhmj"]
 length = 0.001
 tracks/0/type = "value"
@@ -61,6 +64,8 @@ _data = {
 
 [node name="Ray" type="Area2D" unique_id=2068613443]
 texture_filter = 1
+collision_layer = 32
+collision_mask = 6
 script = ExtResource("1_36kae")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2035867908]
@@ -68,6 +73,10 @@ texture = ExtResource("2_nvqnu")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744178036]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_36kae")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650448264]
 libraries/ = SubResource("AnimationLibrary_f1k34")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

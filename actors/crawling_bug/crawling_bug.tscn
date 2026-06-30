@@ -120,7 +120,7 @@ _data = {
 [node name="CrawlingBug" type="CharacterBody2D" unique_id=1428627728]
 texture_filter = 1
 collision_layer = 2
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1_h1wry")
 
 [node name="WallCheck" type="RayCast2D" parent="." unique_id=930583644]

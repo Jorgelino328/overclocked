@@ -1,5 +1,8 @@
 extends Area2D
 
+@onready var animation = $AnimationPlayer
+@onready var collider = $CollisionShape2D
+
 var direction = Vector2.RIGHT
 @export var speed: float = 600.0
 @export var damage: int = 10
@@ -12,8 +15,8 @@ func _on_body_entered(body):
 		body.take_damage(damage)
 	
 	speed = 0
-	$AnimatedSprite2D.play("hit")
-	$CollisionShape2D.set_deferred("disabled", true)
+	animation.play("hit")
+	collider.set_deferred("disabled", true)
 	
-	await $AnimatedSprite2D.animation_finished
+	await animation.animation_finished
 	queue_free()
