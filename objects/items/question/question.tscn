@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://buh5ic7vl5w2j"]
 
-[ext_resource type="Script" uid="uid://btw560tqkm7ms" path="res://objects/items/question.gd" id="1_lnspa"]
+[ext_resource type="Script" uid="uid://btw560tqkm7ms" path="res://objects/items/question/question.gd" id="1_lnspa"]
 [ext_resource type="Texture2D" uid="uid://b3y21alqnhqli" path="res://assets/dialogue/question.png" id="2_lnspa"]
 
 [sub_resource type="Animation" id="Animation_lnspa"]

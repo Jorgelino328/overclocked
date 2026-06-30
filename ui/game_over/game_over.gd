@@ -11,7 +11,7 @@ signal quit()
 func setup_connections(controller: Node) -> void:
 	continue_game.connect(controller._on_continue_game)
 	restart_level.connect(controller._on_next_level)
-	menu.connect(controller._on_menu)
+	menu.connect(controller._on_menu) 
 	quit.connect(controller._on_quit)
 
 # ==========================================

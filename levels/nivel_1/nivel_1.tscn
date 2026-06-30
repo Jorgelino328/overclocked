@@ -29,14 +29,13 @@ layer_2/tile_data = PackedInt32Array(2293761, 393224, 12, 2359297, 393224, 13, 2
 texture_filter = 0
 position = Vector2(194, 516)
 scale = Vector2(0.5, 0.5)
-speed_walk = null
-speed_run = null
-jump_velocity = null
-i_frames = null
-i_frame_dur = null
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
 position = Vector2(77, -141)
+limit_left = -300
+limit_top = -400
+limit_right = 9900
+limit_bottom = 900
 
 [node name="Cooler" parent="." unique_id=747921168 instance=ExtResource("5_gdn87")]
 position = Vector2(2128, 476)

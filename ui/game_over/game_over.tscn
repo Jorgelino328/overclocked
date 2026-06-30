@@ -74,7 +74,7 @@ offset_left = 442.0
 offset_top = 365.0
 offset_right = 743.0
 offset_bottom = 405.0
-text = "> Tentar Novanmente"
+text = "> Tentar Novamente"
 
 [node name="Back" type="Button" parent="." unique_id=225727612]
 layout_mode = 0
@@ -92,7 +92,7 @@ offset_right = 741.0
 offset_bottom = 479.0
 text = "> Sair do Jogo"
 
-[connection signal="pressed" from="Restart" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Back" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
