@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3cwt2lr8tsge"
-path="res://.godot/imported/Menino de Camisa VerdeCalm.png-2ba9c8c865d0e7a999d0a24aabbc17ce.ctex"
+uid="uid://bp8u1ll2vhqun"
+path="res://.godot/imported/MeninodeÓculosCalm.png-b0919198904d3d8970fa63b82d7bba48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dialogue/Menino de Camisa VerdeCalm.png"
-dest_files=["res://.godot/imported/Menino de Camisa VerdeCalm.png-2ba9c8c865d0e7a999d0a24aabbc17ce.ctex"]
+source_file="res://assets/dialogue/MeninodeÓculosCalm.png"
+dest_files=["res://.godot/imported/MeninodeÓculosCalm.png-b0919198904d3d8970fa63b82d7bba48.ctex"]
 
 [params]
 

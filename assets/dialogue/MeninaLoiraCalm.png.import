@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxj8wrfjdbaf2"
-path="res://.godot/imported/TUTORIAL.png-21308b668c6fc00278cc2036c9964f17.ctex"
+uid="uid://btu7eiay6hgxr"
+path="res://.godot/imported/MeninaLoiraCalm.png-c9f0a60946104766704feea896cee829.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dialogue/TUTORIAL.png"
-dest_files=["res://.godot/imported/TUTORIAL.png-21308b668c6fc00278cc2036c9964f17.ctex"]
+source_file="res://assets/dialogue/MeninaLoiraCalm.png"
+dest_files=["res://.godot/imported/MeninaLoiraCalm.png-c9f0a60946104766704feea896cee829.ctex"]
 
 [params]
 

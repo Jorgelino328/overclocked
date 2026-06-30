@@ -1,10 +1,15 @@
 extends CanvasLayer
 @export var dialoguePath = "res://assets/dialogue/tutorial.json"	
 @export var textSpeed := 0.05
-var dialogue
 
+@onready var portrait = $VBoxContainer/Panel/Portrait
+@onready var char_name = $VBoxContainer/Panel/Name
+@onready var textbox = $VBoxContainer/Panel/Text
+
+var dialogue
 var phraseNum = 0 
 var finished = false
+var default_img = "res://assets/dialogue/question.png"
 
 
 func _ready():
@@ -18,7 +23,7 @@ func _process(_delta):
 		if finished:
 			nextPhrase()
 		else:
-			$VBoxContainer/Panel/Text.visible_characters = len($VBoxContainer/Panel/Text.text)
+			textbox.visible_characters = len(textbox.text)
 
 func getDialogue():
 	
@@ -39,20 +44,25 @@ func nextPhrase():
 		
 	finished = false
 	
-	$VBoxContainer/Panel/Name.bbcode_text = dialogue[phraseNum]["Name"]
-	$VBoxContainer/Panel/Text.bbcode_text = dialogue[phraseNum]["Text"]
+	char_name.bbcode_text = dialogue[phraseNum]["Name"]
+	textbox.bbcode_text = dialogue[phraseNum]["Text"]
 	
-	$VBoxContainer/Panel/Text.visible_characters = 0
+	textbox.visible_characters = 0
 
 	FileAccess.open(dialoguePath,FileAccess.READ)
-	var img = "res://assets/dialogue/" + dialogue[phraseNum]["Name"] + dialogue[phraseNum]["Emotion"] + ".png" 
+	
+	var safe_name = dialogue[phraseNum]["Name"].replace(" ", "")
+	var img = "res://assets/dialogue/" + safe_name + dialogue[phraseNum]["Emotion"] + ".png"
+	
 	if FileAccess.file_exists(img):
-		$VBoxContainer/Panel/Portrait.texture =  load(img)
+		portrait.texture =  load(img)
+		portrait.scale = Vector2(10,10)
 	else:
-		$VBoxContainer/Panel/Portrait.texture =  null
+		portrait.texture =  load(default_img)
+		portrait.scale = Vector2(5,5)
 		
-	while $VBoxContainer/Panel/Text.visible_characters < len($VBoxContainer/Panel/Text.text):
-		$VBoxContainer/Panel/Text.visible_characters += 1 
+	while textbox.visible_characters < len(textbox.text):
+		textbox.visible_characters += 1 
 		if(randi_range(0,100)*textSpeed > 1):
 			$dialogueTick.play()
 		$Timer.start()

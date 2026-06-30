@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgh2xj7t7dje3" path="res://actors/gabriel/gabriel.gd" id="1_napme"]
 [ext_resource type="Texture2D" uid="uid://bvmh3bb6d22my" path="res://assets/sprites/Gabriel.png" id="2_62b83"]
+[ext_resource type="PackedScene" uid="uid://buh5ic7vl5w2j" path="res://objects/items/question.tscn" id="3_ovcga"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ovcga"]
 atlas = ExtResource("2_62b83")
@@ -31,6 +32,7 @@ size = Vector2(64, 140)
 [node name="Gabriel" type="Area2D" unique_id=383317222]
 texture_filter = 1
 script = ExtResource("1_napme")
+metadata/_edit_group_ = true
 
 [node name="GabrielSprite" type="AnimatedSprite2D" parent="." unique_id=464535642]
 position = Vector2(1.9073486e-06, 1.9073486e-06)
@@ -42,4 +44,8 @@ frame_progress = 0.3956519
 [node name="GabrielArea" type="CollisionShape2D" parent="." unique_id=621151535]
 shape = SubResource("RectangleShape2D_62b83")
 
+[node name="Question" parent="." unique_id=409925021 instance=ExtResource("3_ovcga")]
+position = Vector2(28, -63)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,4 +1,6 @@
 [
-{"Name":"TUTORIAL", "Emotion":"", "Text":"Use as teclas W A S D para se mover"},
-{"Name":"TUTORIAL", "Emotion":"", "Text":"E a tecla ESPAÇO para se pular"},
+{"Name":"TUTORIAL", "Emotion":" ", "Text":"Bem vindo a Overclocked! Os controles são muito simples:"},
+{"Name":"TUTORIAL", "Emotion":" ", "Text":"Use as teclas 'W A S D' para se mover"},
+{"Name":"TUTORIAL", "Emotion":" ", "Text":"Pressione a tecla 'ESPAÇO' para se pular"},
+{"Name":"TUTORIAL", "Emotion":" ", "Text":"Aperte a tecla 'E' para interagir com NPCs."},
 ]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt466wfk1b346" path="res://actors/olivia/olivia.gd" id="1_r6rck"]
 [ext_resource type="Texture2D" uid="uid://chtmeqewjpd70" path="res://assets/sprites/Olivia.png" id="2_untpu"]
+[ext_resource type="PackedScene" uid="uid://buh5ic7vl5w2j" path="res://objects/items/question.tscn" id="3_uqbmu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqbmu"]
 atlas = ExtResource("2_untpu")
@@ -42,4 +43,8 @@ frame_progress = 0.22690302
 [node name="OliviaArea" type="CollisionShape2D" parent="." unique_id=1355816628]
 shape = SubResource("RectangleShape2D_6rbqh")
 
+[node name="Question" parent="." unique_id=409925021 instance=ExtResource("3_uqbmu")]
+position = Vector2(28, -69)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

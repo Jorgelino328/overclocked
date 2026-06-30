@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://buh5ic7vl5w2j"]
+
+[ext_resource type="Script" uid="uid://btw560tqkm7ms" path="res://objects/items/question.gd" id="1_lnspa"]
+[ext_resource type="Texture2D" uid="uid://b3y21alqnhqli" path="res://assets/dialogue/question.png" id="2_lnspa"]
+
+[sub_resource type="Animation" id="Animation_lnspa"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuestionSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+
+[sub_resource type="Animation" id="Animation_qwpgh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuestionSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uduxh"]
+_data = {
+&"Idle": SubResource("Animation_lnspa"),
+&"RESET": SubResource("Animation_qwpgh")
+}
+
+[node name="Question" type="Node2D" unique_id=409925021]
+texture_filter = 1
+script = ExtResource("1_lnspa")
+
+[node name="QuestionSprite" type="Sprite2D" parent="." unique_id=975436322]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_lnspa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1191548602]
+libraries/ = SubResource("AnimationLibrary_uduxh")

@@ -1,6 +1,20 @@
 extends Level
 
-enum DialogueState { START, WAKEUP_1, WAKEUP_2, INTRO, TUTORIAL_1, TUTORIAL_2, TUTORIAL_3, END }
+enum DialogueState 
+{ 
+	START, 
+	WAKEUP_1, 
+	WAKEUP_2, 
+	INTRO, 
+	T_BASIC, 
+	T_MEC_1, 
+	T_MEC_2, 
+	T_PARTES_1, 
+	T_PARTES_2,
+	T_UFRN_1, 
+	T_UFRN_2,  
+	END 
+}
 
 @onready var dialogue_box = $DialogueUI
 @onready var dark_screen = $DarkScreen
@@ -28,8 +42,7 @@ var awake = false
 @onready var oli = $NPCs/Olivia
 
 func _ready() -> void:
-	#connect_signals()
-	pass
+	connect_signals()
 	
 func _process(_delta):
 	# Por algum motivo, o personagem sempre começava o jogo pulando,
@@ -55,16 +68,33 @@ func _process(_delta):
 				DialogueState.INTRO:
 					if awake:
 						play_scene(intro_dialogue)
-						curr_dialogue = DialogueState.END
+						curr_dialogue = DialogueState.T_BASIC
 					elif !animation.is_playing():
 						animation.play("wake_up")
-						
-				DialogueState.TUTORIAL_1:
-					pass
-				DialogueState.TUTORIAL_2:
-					pass
-				DialogueState.TUTORIAL_3:
-					pass
+				DialogueState.T_BASIC:
+					play_scene(tutorial_basic)
+					gab.has_dialogue = true
+					wil.has_dialogue = true
+					oli.has_dialogue = true
+					curr_dialogue = DialogueState.END
+				DialogueState.T_MEC_1:
+					play_scene(tutorial_mec_1)
+					curr_dialogue = DialogueState.END
+				DialogueState.T_MEC_2:
+					play_scene(tutorial_mec_2)
+					curr_dialogue = DialogueState.END
+				DialogueState.T_PARTES_1:
+					play_scene(tutorial_partes_1)
+					curr_dialogue = DialogueState.END
+				DialogueState.T_PARTES_2:
+					play_scene(tutorial_partes_2)
+					curr_dialogue = DialogueState.END
+				DialogueState.T_UFRN_1:
+					play_scene(tutorial_ufrn_1)
+					curr_dialogue = DialogueState.END
+				DialogueState.T_UFRN_2:
+					play_scene(tutorial_ufrn_2)
+					curr_dialogue = DialogueState.END
 				DialogueState.END:
 					if dialogue_box:
 						dialogue_box.queue_free()
@@ -73,8 +103,11 @@ func _process(_delta):
 
 func connect_signals():
 	gab.tutorial_mec_1.connect(play_scene.bind(tutorial_mec_1))
+	gab.tutorial_mec_2.connect(play_scene.bind(tutorial_mec_2))
 	wil.tutorial_partes_1.connect(play_scene.bind(tutorial_partes_1))
+	wil.tutorial_partes_2.connect(play_scene.bind(tutorial_partes_2))
 	oli.tutorial_ufrn_1.connect(play_scene.bind(tutorial_ufrn_1))
+	oli.tutorial_ufrn_2.connect(play_scene.bind(tutorial_ufrn_2))
 
 
 func play_scene(scene):

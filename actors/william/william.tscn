@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byp05o88aqc2x" path="res://actors/william/william.gd" id="1_lx2ea"]
 [ext_resource type="Texture2D" uid="uid://bq7nxfpuc0tft" path="res://assets/sprites/William.png" id="2_8yhfm"]
+[ext_resource type="PackedScene" uid="uid://buh5ic7vl5w2j" path="res://objects/items/question.tscn" id="3_fvs6p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvs6p"]
 atlas = ExtResource("2_8yhfm")
@@ -42,4 +43,8 @@ frame_progress = 0.66686076
 [node name="WilliamArea" type="CollisionShape2D" parent="." unique_id=482112346]
 shape = SubResource("RectangleShape2D_ub80a")
 
+[node name="Question" parent="." unique_id=409925021 instance=ExtResource("3_fvs6p")]
+position = Vector2(25, -67)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
