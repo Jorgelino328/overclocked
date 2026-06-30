@@ -1,7 +1,6 @@
 extends Level
 
-@onready var level_path = "res://levels/testing/level_prototype.tscn"
-@export var proxima_fase = "res://levels/nivel_2/nivel_2.tscn"
+@export var proxima_fase = "/home/jorgelino/Documents/Godot_Projects/overclocked/ui/end_game/end_game.tscn"
 @export var music = preload("res://assets/audio/music/lab.ogg")
 
 var psu_dialogue = "res://assets/dialogue/psu_dialogue.json"
