@@ -7,9 +7,10 @@ const id = 1
 
 @onready var c_bug_animator = $CBugAnimator
 @onready var wall_check = $WallCheck
+@onready var hurt_sfx = $HurtSFX
 @onready var death_sfx = $DeathSFX
 @onready var anim_state := State.WALKING
-
+@onready var sprite = $CBugSprite
 
 var move := Vector2.RIGHT
 var turn_speed := 15.0
@@ -64,3 +65,14 @@ func animation_handler():
 func _on_c_bug_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
 		queue_free()
+		
+func take_damage(dmg):
+	hurt_sfx.play()
+	hp -= dmg
+	
+	var tween_alpha = create_tween()
+	
+	tween_alpha.tween_property(sprite, "self_modulate:a", 0.2, 0.0)
+	tween_alpha.tween_property(sprite, "self_modulate:a", 1.0, 2)
+	
+	await get_tree().create_timer(2).timeout

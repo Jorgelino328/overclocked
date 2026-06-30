@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dl5v2h0jpfil6" path="res://assets/sprites/platformer-bugs/crawler_0.png" id="1_n6yih"]
 [ext_resource type="AudioStream" uid="uid://cie06c8twb21d" path="res://assets/audio/sfx/explosion.ogg" id="3_rbvva"]
 [ext_resource type="AudioStream" uid="uid://dmcd4st37xax7" path="res://assets/audio/sfx/bug_walk_1.ogg" id="4_7xuhm"]
+[ext_resource type="AudioStream" uid="uid://dd14e61fcdum8" path="res://assets/audio/sfx/hit_enemy.ogg" id="4_rkbky"]
 [ext_resource type="AudioStream" uid="uid://13cdoti1jpyq" path="res://assets/audio/sfx/bug_walk_2.ogg" id="5_rkbky"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h1wry"]
@@ -151,6 +152,10 @@ metadata/_edit_lock_ = true
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2135050321]
 stream = ExtResource("3_rbvva")
+bus = &"SFX"
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=2000711689]
+stream = ExtResource("4_rkbky")
 bus = &"SFX"
 
 [node name="WalkSFX1" type="AudioStreamPlayer2D" parent="." unique_id=1183912486]

@@ -11,6 +11,8 @@ signal morreu
 @export var max_hp := 10
 @export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
 @export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
+@export var energy: int = 100
+@export var shoot_cost: int = 10
 
 # Variáveis definidas ao inicializar Node
 @onready var current_speed := speed_walk
@@ -20,9 +22,12 @@ signal morreu
 @onready var jump_sfx = $SFX/JumpSFX
 @onready var rocket_sfx = $SFX/RocketSFX
 @onready var heal_sfx = $SFX/HealSFX
+@onready var gun_arm = $GunArm
+@onready var gun_timer = $GunTimer
+@onready var muzzle = $GunArm/Muzzle
 
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, SHOOTING, DYING}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -38,9 +43,15 @@ var sideways := false
 var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
-var has_psu = false
+@export var has_psu = false
+var ray_scene = load("res://objects/projectiles/ray.tscn")
 
 signal health_changed(new_hp, max_hp)
+
+
+func _ready():
+	gun_arm.visible = false
+	gun_timer.wait_time = 0.5
 
 func _physics_process(delta):
 	# Adiciona gravidade caso esteja fora do chão.
@@ -54,9 +65,30 @@ func _physics_process(delta):
 		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
+	
+	# Lógica da arma visível (rastrear mouse, virar corpo e inverter ombro)
+	if gun_arm.visible and anim_state != State.DYING:
+		var mouse_pos = get_global_mouse_position()
+		gun_arm.look_at(mouse_pos)
+		
+		var aiming_left = mouse_pos.x < global_position.x
+		sprite.flip_h = aiming_left
+		sideways = true
+		
+		# Pega a distância base do braço (offset X)
+		var arm_offset_x = abs(gun_arm.position.x)
+		
+		# Inverte a posição do braço para simular a troca de ombro
+		if aiming_left:
+			gun_arm.position.x = -arm_offset_x
+		else:
+			gun_arm.position.x = arm_offset_x
+			
+		# Vira o sprite da arma de cabeça para baixo caso esteja apontando pra trás
+		gun_arm.flip_v = aiming_left
 
-	# Se o personagem estiver vivo, decide o estado atual
-	if anim_state != State.DYING:
+	# Se o personagem estiver vivo e NÃO estiver atirando, decide o estado atual de movimento
+	if anim_state != State.DYING and anim_state != State.SHOOTING:
 		
 		# Se está no ar 
 		if not is_on_floor():
@@ -69,16 +101,22 @@ func _physics_process(delta):
 			velocity.y = jump_velocity
 		
 		# Se está olhando pra cima ou pra baixo
-		elif Input.is_action_pressed("look_up") or Input.is_action_pressed("look_down") :
+		elif Input.is_action_pressed("look_up") or Input.is_action_pressed("look_down"):
 			if not Input.is_action_pressed("walk_left") or Input.is_action_pressed("walk_right"): 
 				anim_state = State.LOOKING
-			
+		
+		# Se tentou atirar
+		elif Input.is_action_just_pressed("shoot") and has_psu:
+			if anim_state != State.SHOOTING:
+				anim_state = State.SHOOTING
+				shoot_logic()
+				
 		# Se está se movendo no chão
 		elif direction:
 			sideways = true
 			anim_state = State.WALKING if anim_state != State.RUNNING else State.RUNNING
 			
-		# Se  está parado no chão
+		# Se está parado no chão
 		elif anim_state != State.LOOKING:
 			anim_state = State.IDLE
 			
@@ -88,7 +126,8 @@ func _physics_process(delta):
 	# Se o personagem estiver vivo, aplica o movimento
 	if anim_state != State.DYING:
 		# Aplica a velocidade x usando o "current_speed" atualizado pelo handler
-		if direction:
+		# Se estiver atirando, trava a velocidade horizontal para não deslizar
+		if direction and anim_state != State.SHOOTING:
 			velocity.x = direction * current_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
@@ -99,13 +138,12 @@ func _physics_process(delta):
 		# Garante que a velocidade seja zerada ao morrer
 		velocity.x = 0.0
 		
-	# Função de movimento padrão do Godot com colisão simples 
-	# onde um corpo "desliza" do outro ao colidir.
+	# Função de movimento padrão do Godot
 	move_and_slide()
 
-func animation_handler(direction,delta):
-	# Vira o sprite caso esteja indo pra esquerda.
-	if direction != 0 and anim_state != State.DYING:
+func animation_handler(direction, delta):
+	# Vira o sprite caso esteja indo pra esquerda E a arma não esteja forçando a direção
+	if direction != 0 and anim_state != State.DYING and not gun_arm.visible:
 		sprite.flip_h = (direction < 0)
 	
 	# Para o loop de foguete ao parar de correr
@@ -126,15 +164,21 @@ func animation_handler(direction,delta):
 
 			# Após 1 segundo parado
 			if time_idle < 1.0 and (time_idle + delta) >= 1.0:
-				# Se estiver de lado, se vira e toca animação idle.
-				if sideways:
-					animation_player.play("turn_front")
-					animation_player.queue("idle") 
-					sideways = false # Reseta o estado para os próximos movimentos.
 				
-				# Se estiver de frente, toca animação idle imediatamente.
+				# NOVA LÓGICA: Se a arma estiver de fora, segura o tempo pra não virar
+				if gun_arm.visible:
+					time_idle -= delta 
+					
 				else:
-					animation_player.play("idle")
+					# Se estiver de lado, se vira e toca animação idle.
+					if sideways:
+						animation_player.play("turn_front")
+						animation_player.queue("idle") 
+						sideways = false # Reseta o estado para os próximos movimentos.
+					
+					# Se estiver de frente, toca animação idle imediatamente.
+					else:
+						animation_player.play("idle")
 					
 			# Atualiza os timers.
 			time_walking = 0.0
@@ -180,7 +224,7 @@ func animation_handler(direction,delta):
 			time_idle = 0.0
 			
 		State.JUMPING:
-			# Se vira e começa a correr.
+			# Se vira e começa a pular.
 			if just_jumped:
 				jump_sfx.play()
 				if sideways:
@@ -221,6 +265,19 @@ func animation_handler(direction,delta):
 			time_running = 0.0
 			time_idle = 0.0
 			
+		State.SHOOTING:
+			# Mantém virado de lado enquanto atira
+			if !sideways: 
+				animation_player.play("turn_side")
+				animation_player.queue("shooting")
+				sideways = true
+			else:
+				animation_player.play("shooting")
+				
+			# Libera o jogador para mover-se novamente quando a animação concluir
+			if !animation_player.is_playing() or animation_player.current_animation != "shooting":
+				anim_state = State.IDLE
+
 		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:
@@ -249,19 +306,30 @@ func take_damage(dmg):
 	emit_signal("health_changed", hp, max_hp)
 	
 	var tween_alpha = create_tween()
-	
 	var flash_count: int = int(i_frames / i_frame_dur)
-	
 	tween_alpha.set_loops(flash_count)
-	
 	tween_alpha.tween_property(sprite, "self_modulate:a", 0.2, 0.0)
 	tween_alpha.tween_property(sprite, "self_modulate:a", 1.0, i_frame_dur)
 	
 	await get_tree().create_timer(i_frames).timeout
 	is_invincible = false
 
+func spawn_projectile():
+	var projectile = ray_scene.instantiate()
+	projectile.global_position = muzzle.global_position
+	projectile.rotation = gun_arm.rotation
+	get_tree().current_scene.add_child(projectile)
+	
+func shoot_logic():
+	energy -= shoot_cost
+	gun_arm.visible = true
+	spawn_projectile()
+	# Reinicia o timer toda vez que atiramos
+	gun_timer.start()
+
 func _gerenciar_sequencia_morte():
-	
 	await get_tree().create_timer(1.5).timeout
-	
 	emit_signal("morreu")
+
+func _on_gun_timer_timeout() -> void:
+	gun_arm.visible = false
