@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdywlydvo52x0" path="res://objects/platforms/cooler/cooler.gd" id="1_afqsa"]
 [ext_resource type="Texture2D" uid="uid://dg2jpknvf6san" path="res://assets/sprites/cooler/First part.png" id="2_ji5ci"]
 [ext_resource type="Texture2D" uid="uid://bx41e6a0aus06" path="res://assets/sprites/cooler/Second part.png" id="3_1qd37"]
+[ext_resource type="AudioStream" uid="uid://daapn3bqh0l3h" path="res://assets/audio/sfx/wind.ogg" id="4_n4w21"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrgjd"]
 size = Vector2(64, 72)
@@ -46,7 +47,6 @@ scale = Vector2(2.0000012, -2.218751)
 texture = ExtResource("2_ji5ci")
 
 [node name="HelicesCooler" type="Sprite2D" parent="." unique_id=755001511]
-rotation = 3.4291978
 scale = Vector2(2.0000012, -2.2187512)
 texture = ExtResource("3_1qd37")
 
@@ -60,6 +60,10 @@ libraries/ = SubResource("AnimationLibrary_gkyo3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WindArea" unique_id=1648499910]
 polygon = PackedVector2Array(-245, -125, -30, -35, -30, 35, -245, 100)
+
+[node name="WindSfx" type="AudioStreamPlayer2D" parent="." unique_id=1717819027]
+stream = ExtResource("4_n4w21")
+autoplay = true
 
 [connection signal="body_entered" from="WindArea" to="." method="_on_wind_area_body_entered"]
 [connection signal="body_exited" from="WindArea" to="." method="_on_wind_area_body_exited"]

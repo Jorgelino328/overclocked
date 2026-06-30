@@ -187,8 +187,22 @@ metadata/_edit_lock_ = true
 [node name="Cooler2" parent="." unique_id=339558088 instance=ExtResource("5_gdn87")]
 position = Vector2(7199, 268)
 
-[node name="RepairKit" parent="." unique_id=999173511 instance=ExtResource("6_qolb2")]
-position = Vector2(427, 394)
+[node name="RepairKits" type="Node2D" parent="." unique_id=404652437]
+
+[node name="RepairKit" parent="RepairKits" unique_id=999173511 instance=ExtResource("6_qolb2")]
+position = Vector2(8759, 363)
+
+[node name="RepairKit2" parent="RepairKits" unique_id=1884737364 instance=ExtResource("6_qolb2")]
+position = Vector2(3162, 280)
+
+[node name="RepairKit3" parent="RepairKits" unique_id=2042298623 instance=ExtResource("6_qolb2")]
+position = Vector2(6649, -73)
+
+[node name="RepairKit4" parent="RepairKits" unique_id=534014297 instance=ExtResource("6_qolb2")]
+position = Vector2(1196, 137)
+
+[node name="RepairKit5" parent="RepairKits" unique_id=351877746 instance=ExtResource("6_qolb2")]
+position = Vector2(9630, 26)
 
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
 [connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]

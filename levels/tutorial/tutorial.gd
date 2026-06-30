@@ -20,6 +20,7 @@ enum DialogueState
 @onready var dark_screen = $DarkScreen
 @onready var animation = $AnimationPlayer
 @onready var level_path = "res://levels/nivel_1/nivel_1.tscn"
+@export var music = preload("res://assets/audio/music/overworld.ogg")
 
 var curr_dialogue = DialogueState.START
 var wakeup_dialogue_1 = "res://assets/dialogue/wakeup_1.json"
@@ -42,6 +43,7 @@ var awake = false
 @onready var oli = $NPCs/Olivia
 
 func _ready() -> void:
+	player.visible = false
 	connect_signals()
 	
 func _process(_delta):
@@ -70,6 +72,7 @@ func _process(_delta):
 						play_scene(intro_dialogue)
 						curr_dialogue = DialogueState.T_BASIC
 					elif !animation.is_playing():
+						player.visible = true
 						animation.play("wake_up")
 				DialogueState.T_BASIC:
 					play_scene(tutorial_basic)

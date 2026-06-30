@@ -1,0 +1,16 @@
+Description:
+
+    This wind audio was originally created by InspectorJ. I modified it into a loop.
+
+Formats:
+
+    96k 44100Hz stereo OGG/Vorbis
+    lossless 44100Hz stereo FLAC
+
+Licensing:
+
+    Creative Commons Attribution (CC BY) version 3.0
+
+Canonical link: https://opengameart.org/node/101110
+Copyright/Attribution Notice: 
+Created by Jonathan Shaw (InspectorJ): https://freesound.org/people/InspectorJ/sounds/376415/

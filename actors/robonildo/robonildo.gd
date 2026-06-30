@@ -38,6 +38,7 @@ var sideways := false
 var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
+var has_psu = false
 
 signal health_changed(new_hp, max_hp)
 

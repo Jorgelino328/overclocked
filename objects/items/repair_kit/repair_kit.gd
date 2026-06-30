@@ -8,7 +8,6 @@ func _ready() -> void:
 	animation.play("Idle")
 
 func _on_body_entered(body: Node2D) -> void:
-	print("oi")
 	if body is Player:
 		var curr_hp = body.hp
 		if curr_hp <= body.max_hp:
