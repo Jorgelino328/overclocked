@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://dndli1awf74nm"]
 
-[node name="Hud" type="Node2D" unique_id=1950101507]
+[ext_resource type="Script" uid="uid://ca02iintf4s5k" path="res://ui/hud/hud.gd" id="1_4d6w6"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1337000759]
+script = ExtResource("1_4d6w6")
+
+[node name="HeartContainers" type="HBoxContainer" parent="." unique_id=1666370096]
+texture_filter = 1
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(5, 5)
+pivot_offset = Vector2(-5, -5)

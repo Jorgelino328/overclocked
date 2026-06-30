@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cuq1cwd8b2cu1" path="res://assets/audio/sfx/walk_1.ogg" id="5_t0paf"]
 [ext_resource type="AudioStream" uid="uid://cx2ml7mucpdbn" path="res://assets/audio/sfx/walk_2.ogg" id="6_cng7l"]
 [ext_resource type="AudioStream" uid="uid://jc4pcrrvmb4g" path="res://assets/audio/sfx/rocket.ogg" id="7_t0paf"]
+[ext_resource type="PackedScene" uid="uid://dndli1awf74nm" path="res://ui/hud/hud.tscn" id="8_cng7l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18luw"]
 size = Vector2(64, 140)
@@ -726,6 +727,8 @@ metadata/_edit_lock_ = true
 
 [node name="RobonildoAnimator" type="AnimationPlayer" parent="." unique_id=427934955]
 libraries/ = SubResource("AnimationLibrary_f15kf")
+
+[node name="Hud" parent="." unique_id=1337000759 instance=ExtResource("8_cng7l")]
 
 [node name="SFX" type="Node2D" parent="." unique_id=159177037]
 

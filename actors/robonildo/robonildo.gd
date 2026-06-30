@@ -8,6 +8,7 @@ signal morreu
 @export var speed_run := 600.0
 @export var jump_velocity := -350.0
 @export var hp := 10
+@export var max_hp := 10
 @export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
 @export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
 
@@ -36,6 +37,8 @@ var sideways := false
 var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
+
+signal health_changed(new_hp, max_hp)
 
 func _physics_process(delta):
 	# Adiciona gravidade caso esteja fora do chão.
@@ -228,7 +231,7 @@ func animation_handler(direction,delta):
 				else:
 					animation_player.play("death_front")
 				dead_anim = true # Evita que animação toque novamente
-
+				
 func take_damage(dmg):
 	if is_invincible:
 		return
@@ -236,6 +239,8 @@ func take_damage(dmg):
 	hurt_sfx.play()
 	hp -= dmg
 	is_invincible = true
+	emit_signal("health_changed", hp, max_hp)
+	
 	var tween_alpha = create_tween()
 	
 	var flash_count: int = int(i_frames / i_frame_dur)
@@ -247,7 +252,6 @@ func take_damage(dmg):
 	
 	await get_tree().create_timer(i_frames).timeout
 	is_invincible = false
-
 
 func _gerenciar_sequencia_morte():
 	
