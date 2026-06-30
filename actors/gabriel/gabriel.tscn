@@ -1,14 +1,43 @@
 [gd_scene format=3 uid="uid://cupmkta0aira1"]
 
 [ext_resource type="Script" uid="uid://bgh2xj7t7dje3" path="res://actors/gabriel/gabriel.gd" id="1_napme"]
+[ext_resource type="Texture2D" uid="uid://bvmh3bb6d22my" path="res://assets/sprites/Gabriel.png" id="2_62b83"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovcga"]
+atlas = ExtResource("2_62b83")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kgid"]
+atlas = ExtResource("2_62b83")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dp1ys"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ovcga")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_3kgid")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62b83"]
 size = Vector2(64, 140)
 
 [node name="Gabriel" type="Area2D" unique_id=383317222]
+texture_filter = 1
 script = ExtResource("1_napme")
 
 [node name="GabrielSprite" type="AnimatedSprite2D" parent="." unique_id=464535642]
+position = Vector2(1.9073486e-06, 1.9073486e-06)
+scale = Vector2(3.1875002, 4.375)
+sprite_frames = SubResource("SpriteFrames_dp1ys")
+animation = &"Idle"
+frame_progress = 0.3956519
 
 [node name="GabrielArea" type="CollisionShape2D" parent="." unique_id=621151535]
 shape = SubResource("RectangleShape2D_62b83")

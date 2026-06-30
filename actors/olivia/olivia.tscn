@@ -1,14 +1,43 @@
 [gd_scene format=3 uid="uid://dpgx2gej78uvh"]
 
 [ext_resource type="Script" uid="uid://dt466wfk1b346" path="res://actors/olivia/olivia.gd" id="1_r6rck"]
+[ext_resource type="Texture2D" uid="uid://chtmeqewjpd70" path="res://assets/sprites/Olivia.png" id="2_untpu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqbmu"]
+atlas = ExtResource("2_untpu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va4lq"]
+atlas = ExtResource("2_untpu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsaxe"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_uqbmu")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_va4lq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rbqh"]
 size = Vector2(64, 140)
 
 [node name="Olivia" type="Area2D" unique_id=1459887797]
+texture_filter = 1
 script = ExtResource("1_r6rck")
 
 [node name="OliviaSprite" type="AnimatedSprite2D" parent="." unique_id=1492730220]
+position = Vector2(-0.5000007, 1.9073486e-06)
+scale = Vector2(3.21875, 4.375)
+sprite_frames = SubResource("SpriteFrames_nsaxe")
+animation = &"Idle"
+frame_progress = 0.22690302
 
 [node name="OliviaArea" type="CollisionShape2D" parent="." unique_id=1355816628]
 shape = SubResource("RectangleShape2D_6rbqh")

@@ -1,14 +1,43 @@
 [gd_scene format=3 uid="uid://tdj5mcoq8s5m"]
 
 [ext_resource type="Script" uid="uid://byp05o88aqc2x" path="res://actors/william/william.gd" id="1_lx2ea"]
+[ext_resource type="Texture2D" uid="uid://bq7nxfpuc0tft" path="res://assets/sprites/William.png" id="2_8yhfm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvs6p"]
+atlas = ExtResource("2_8yhfm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib38f"]
+atlas = ExtResource("2_8yhfm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5k7pa"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fvs6p")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ib38f")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub80a"]
 size = Vector2(64, 140)
 
 [node name="William" type="Area2D" unique_id=1928850773]
+texture_filter = 1
 script = ExtResource("1_lx2ea")
 
 [node name="WilliamSprite" type="AnimatedSprite2D" parent="." unique_id=496375814]
+position = Vector2(-7.1525574e-07, -1.4305115e-06)
+scale = Vector2(3.1875, 4.375)
+sprite_frames = SubResource("SpriteFrames_5k7pa")
+animation = &"Idle"
+frame_progress = 0.66686076
 
 [node name="WilliamArea" type="CollisionShape2D" parent="." unique_id=482112346]
 shape = SubResource("RectangleShape2D_ub80a")

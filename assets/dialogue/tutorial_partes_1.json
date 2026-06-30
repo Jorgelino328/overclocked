@@ -1,10 +1,10 @@
 [
 {"Name":"William", "Emotion":"Calm", "Text":"Ah, pelo visto o apagão fritou seu gerador. Sua bateria está em estado de emergência! Você não vai chegar muito longe desse jeito..."},
 {"Name":"William", "Emotion":"Calm", "Text":"Você precisa encontrar uma fonte de alimentação pra poder se reabastecer da rede elétrica da UFRN."},
-{"Name":"William", "Emotion":"Calm", "Text":"A fonte de alimentação vai transformar a corrente elétrica da rede, que chega em uma voltagem alta, para uma voltagem menor, que é a indicada para o seu hardware"}
-{"Name":"William", "Emotion":"Calm", "Text":"Ela também converte a corrente alternada (CA), em corrente contínua (CC). A CC flui em um único sentido constante, enquanto a CA inverte sua direção e polaridade periodicamente."}
-{"Name":"William", "Emotion":"Calm", "Text":" A primeira é ideal para armazenar e alimentar eletrônicos, e a segunda é eficiente para transporte em longas distância"}
-{"Name":"William", "Emotion":"Happy", "Text":"Mas não se preocupe, deve ter uma fonte compatível na sala de computadores!"}
+{"Name":"William", "Emotion":"Calm", "Text":"A fonte de alimentação vai transformar a energia elétrica da rede de Corrente Alternada (CA), para Corrente Contínua (CC) regulada de baixa tensão, que pode ser usada pelos seus componentes internos."},
+{"Name":"William", "Emotion":"Calm", "Text":"Na CC, os elétrons se movem em um único sentido, do pólo negativo para o positivo, resultando em uma corrente constante e unidirecional. Já na CA, o fluxo de elétrons inverte sua direção periodicamente, facilitando a conversão para voltagens maiores ou menores."},
+{"Name":"William", "Emotion":"Calm", "Text":"Isso significa que a corrente alternada tem uma vantagem significativa em longas distâncias, pois pode ser transportada em altas tensões e baixas correntes para uma menor perda de energia, enquanto que a corrente contínua, é ideal para circuitos e placas eletrônicas sensíveis, pois mantém uma fluxo mais estável e previsível."},
+{"Name":"William", "Emotion":"Happy", "Text":"Mas não se preocupe, deve ter uma fonte compatível na sala de computadores!"},
 {"Name":"William", "Emotion":"Calm", "Text":"O que é uma ótima notícia, porque eu não acho que vamos conseguir outro reator de urânio enriquecido..."},
 {"Name":"William", "Emotion":"Happy", "Text":"Bom, deixa pra lá! Boa sorte procurando a fonte   ...Só tente não fazer muitos movimentos bruscos, ok? Só por precaução..."},
 ]
