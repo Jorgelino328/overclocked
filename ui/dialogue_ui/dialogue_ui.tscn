@@ -24,9 +24,9 @@ layout_mode = 2
 
 [node name="Continue" type="Label" parent="VBoxContainer/Panel" unique_id=449791674]
 layout_mode = 0
-offset_left = 833.0
+offset_left = 728.0
 offset_top = 147.0
-offset_right = 1141.0
+offset_right = 1135.0
 offset_bottom = 181.0
 theme_override_colors/font_color = Color(1, 0.94509804, 0.28235295, 1)
 theme_override_font_sizes/font_size = 18

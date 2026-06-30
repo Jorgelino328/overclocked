@@ -36,7 +36,6 @@ var sideways := false
 var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
-var gravity_on = true
 
 func _physics_process(delta):
 	# Adiciona gravidade caso esteja fora do chão.

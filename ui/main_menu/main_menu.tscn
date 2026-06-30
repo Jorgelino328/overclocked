@@ -5,22 +5,22 @@
 [ext_resource type="AudioStream" uid="uid://b5bemh0fqkmj8" path="res://assets/audio/sfx/keyboard.ogg" id="3_i5wg5"]
 [ext_resource type="AudioStream" uid="uid://b1oeekfae2ehi" path="res://assets/audio/sfx/button_hover.ogg" id="4_3c04x"]
 
-[sub_resource type="Gradient" id="Gradient_gw13q"]
+[sub_resource type="Gradient" id="Gradient_i5wg5"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
 colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.0980392, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.0980392)
 metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lv1wm"]
-gradient = SubResource("Gradient_gw13q")
+gradient = SubResource("Gradient_i5wg5")
 height = 10
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_albvm"]
+[sub_resource type="Gradient" id="Gradient_3c04x"]
 offsets = PackedFloat32Array(0, 0.171946, 0.339367, 0.574661, 0.701357)
 colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.235294, 0.313726, 0.945098, 0.282353, 0.0980392, 0, 0, 0, 0, 0, 0.0451197, 0, 0.784314, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rf6vh"]
-gradient = SubResource("Gradient_albvm")
+gradient = SubResource("Gradient_3c04x")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1.5, 0.5)
