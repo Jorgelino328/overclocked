@@ -79,4 +79,5 @@ shape = SubResource("RectangleShape2D_36kae")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650448264]
 libraries/ = SubResource("AnimationLibrary_f1k34")
 
+[connection signal="area_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

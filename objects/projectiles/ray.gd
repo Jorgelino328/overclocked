@@ -5,7 +5,7 @@ extends Area2D
 
 var direction = Vector2.RIGHT
 @export var speed: float = 600.0
-@export var damage: int = 10
+@export var damage: int = 5
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
