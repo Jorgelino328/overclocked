@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b7rehd2fooj1j" path="res://actors/crawling_bug/crawling_bug.tscn" id="3_1phht"]
 [ext_resource type="PackedScene" uid="uid://dhw4p4prgabpl" path="res://objects/platforms/test_platform/test_platform.tscn" id="3_13kkt"]
 [ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="5_kwye7"]
+[ext_resource type="PackedScene" uid="uid://ctdgy7cxaexgs" path="res://objects/items/lever/lever.tscn" id="6_h6t6w"]
 
 [node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")
@@ -37,3 +38,7 @@ position = Vector2(318, 337)
 [node name="GlitchWall" parent="." unique_id=1307216441 instance=ExtResource("5_kwye7")]
 position = Vector2(899, 225)
 active = false
+
+[node name="Lever" parent="." unique_id=1284841264 node_paths=PackedStringArray("device") instance=ExtResource("6_h6t6w")]
+position = Vector2(682, 368)
+device = NodePath("../GlitchWall")

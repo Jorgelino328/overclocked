@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ctdgy7cxaexgs"]
+
+[ext_resource type="Texture2D" uid="uid://obnijmtbtcdi" path="res://assets/sprites/lever.png" id="1_6s26v"]
+[ext_resource type="Script" uid="uid://bmpd3j1w1fk2o" path="res://objects/items/lever/lever.gd" id="1_kryl0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al2ef"]
+size = Vector2(26, 12)
+
+[node name="Lever" type="Area2D" unique_id=1284841264]
+scale = Vector2(3, 3)
+script = ExtResource("1_kryl0")
+
+[node name="LeverSprite" type="Sprite2D" parent="." unique_id=1315779307]
+texture_filter = 1
+texture = ExtResource("1_6s26v")
+hframes = 2
+
+[node name="LeverCollider" type="CollisionShape2D" parent="." unique_id=1187982164]
+shape = SubResource("RectangleShape2D_al2ef")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
