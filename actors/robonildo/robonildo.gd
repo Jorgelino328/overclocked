@@ -50,6 +50,9 @@ var is_invincible = false
 var is_pushing = false
 
 @export var has_psu = false
+@export var has_hdd = false
+
+var h_updated = false
 
 var ray_scene = load("res://objects/projectiles/ray/ray.tscn")
 
@@ -70,7 +73,12 @@ func _physics_process(delta):
 	if hp <= 0 and anim_state != State.DYING:
 		anim_state = State.DYING
 		_gerenciar_sequencia_morte()
-		
+	
+	if has_hdd and not h_updated:
+		max_hp *= 3 
+		hp = max_hp
+		emit_signal("health_changed", hp, max_hp)
+		h_updated = true
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
 	# Lógica da arma visível (rastrear mouse, virar corpo e inverter ombro)

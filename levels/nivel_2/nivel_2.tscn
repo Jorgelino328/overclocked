@@ -33,9 +33,10 @@ layer_2/name = "Foreground"
 
 [node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("3_ee5l5")]
 texture_filter = 0
-position = Vector2(-38, 598)
+position = Vector2(93, 604)
 scale = Vector2(0.5, 0.5)
 has_psu = true
+has_hdd = true
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
 position = Vector2(77, -141)
