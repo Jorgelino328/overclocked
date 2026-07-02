@@ -46,7 +46,7 @@ var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
 @export var has_psu = false
-var ray_scene = load("res://objects/projectiles/ray.tscn")
+var ray_scene = load("res://objects/projectiles/ray/ray.tscn")
 
 signal health_changed(new_hp, max_hp)
 signal battery_changed(charge)

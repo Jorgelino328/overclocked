@@ -40,6 +40,9 @@ func _on_hit_box_body_exited(body: Node2D) -> void:
 	if body is Player:
 		body.knockback = Vector2.ZERO
 	
+
+## O inimigo não despawna automaticamente ao chegar a 0 hp
+## para dar tempo de tocar animações ou ativar outros comportamentos
 func despawn():
 	queue_free()
 	

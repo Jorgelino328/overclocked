@@ -10,7 +10,7 @@ var direction = Vector2.RIGHT
 func _physics_process(delta):
 	position += transform.x * speed * delta
 
-func _on_body_entered(body):
+func _on_body_or_area_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 	

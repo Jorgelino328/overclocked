@@ -4,11 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dq0gp3c05f8rd" path="res://assets/tilesets/lab_decors_tileset/lab_tileset.svg" id="2_0luxg"]
 [ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="3_ee5l5"]
 [ext_resource type="Texture2D" uid="uid://dhwfrrr8mnu6d" path="res://assets/tilesets/lab_decors_tileset/warning_signs.svg" id="3_ty07x"]
-[ext_resource type="PackedScene" uid="uid://dd8rq3c33rptc" path="res://objects/platforms/cooler/cooler.tscn" id="4_ckd68"]
 [ext_resource type="Texture2D" uid="uid://c715xbctg2y5e" path="res://assets/tilesets/shadows.png" id="4_r6555"]
-[ext_resource type="PackedScene" uid="uid://b7rehd2fooj1j" path="res://actors/crawling_bug/crawling_bug.tscn" id="5_qxh1l"]
-[ext_resource type="PackedScene" uid="uid://biutu7t33lrp1" path="res://objects/items/repair_kit/repair_kit.tscn" id="6_788u1"]
-[ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="7_sslv5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qjjsa"]
 texture = ExtResource("2_0luxg")
@@ -1057,135 +1053,7 @@ limit_top = -400
 limit_right = 9900
 limit_bottom = 900
 
-[node name="Cooler" parent="." unique_id=747921168 instance=ExtResource("4_ckd68")]
-position = Vector2(2128, 476)
-knockback_strength = 250.0
-
 [node name="Enemies" type="Node2D" parent="." unique_id=182560956]
-
-[node name="Cluster1" type="Node2D" parent="Enemies" unique_id=642153463]
-
-[node name="CrawlingBug2" parent="Enemies/Cluster1" unique_id=1059528612 instance=ExtResource("5_qxh1l")]
-position = Vector2(927, 547)
-
-[node name="CrawlingBug27" parent="Enemies/Cluster1" unique_id=1428627728 instance=ExtResource("5_qxh1l")]
-position = Vector2(1421, 548)
-
-[node name="CrawlingBug15" parent="Enemies/Cluster1" unique_id=916334055 instance=ExtResource("5_qxh1l")]
-position = Vector2(1679, 551)
-
-[node name="CrawlingBug16" parent="Enemies/Cluster1" unique_id=1541810694 instance=ExtResource("5_qxh1l")]
-position = Vector2(1043, 358)
-
-[node name="CrawlingBug11" parent="Enemies/Cluster1" unique_id=581581731 instance=ExtResource("5_qxh1l")]
-position = Vector2(1285, 150)
-
-[node name="Cluster2" type="Node2D" parent="Enemies" unique_id=148033981]
-
-[node name="CrawlingBug10" parent="Enemies/Cluster2" unique_id=774806395 instance=ExtResource("5_qxh1l")]
-position = Vector2(1767, 54)
-
-[node name="CrawlingBug12" parent="Enemies/Cluster2" unique_id=1792930330 instance=ExtResource("5_qxh1l")]
-position = Vector2(2113, -10)
-
-[node name="CrawlingBug3" parent="Enemies/Cluster2" unique_id=1017219914 instance=ExtResource("5_qxh1l")]
-position = Vector2(2680, 339)
-
-[node name="Cluster3" type="Node2D" parent="Enemies" unique_id=1977738740]
-
-[node name="CrawlingBug13" parent="Enemies/Cluster3" unique_id=270321976 instance=ExtResource("5_qxh1l")]
-position = Vector2(3392, 341)
-
-[node name="CrawlingBug14" parent="Enemies/Cluster3" unique_id=1623019354 instance=ExtResource("5_qxh1l")]
-position = Vector2(3300, 547)
-
-[node name="CrawlingBug5" parent="Enemies/Cluster3" unique_id=1854056585 instance=ExtResource("5_qxh1l")]
-position = Vector2(3631, 548)
-
-[node name="CrawlingBug7" parent="Enemies/Cluster3" unique_id=1206305917 instance=ExtResource("5_qxh1l")]
-position = Vector2(3935, 355)
-
-[node name="CrawlingBug" parent="Enemies/Cluster3" unique_id=1043892446 instance=ExtResource("5_qxh1l")]
-position = Vector2(4145, 150)
-
-[node name="CrawlingBug9" parent="Enemies/Cluster3" unique_id=1107840250 instance=ExtResource("5_qxh1l")]
-position = Vector2(4081, 356)
-
-[node name="Cluster4" type="Node2D" parent="Enemies" unique_id=1778743477]
-
-[node name="CrawlingBug29" parent="Enemies/Cluster4" unique_id=2144961819 instance=ExtResource("5_qxh1l")]
-position = Vector2(5221, 246)
-
-[node name="CrawlingBug30" parent="Enemies/Cluster4" unique_id=465122215 instance=ExtResource("5_qxh1l")]
-position = Vector2(5362, 246)
-
-[node name="CrawlingBug6" parent="Enemies/Cluster4" unique_id=1014096545 instance=ExtResource("5_qxh1l")]
-position = Vector2(5505, 245)
-
-[node name="CrawlingBug28" parent="Enemies/Cluster4" unique_id=1147445504 instance=ExtResource("5_qxh1l")]
-position = Vector2(5503, 549)
-
-[node name="CrawlingBug18" parent="Enemies/Cluster4" unique_id=629269446 instance=ExtResource("5_qxh1l")]
-position = Vector2(6098, 150)
-
-[node name="CrawlingBug23" parent="Enemies/Cluster4" unique_id=15238000 instance=ExtResource("5_qxh1l")]
-position = Vector2(6230, 150)
-
-[node name="CrawlingBug4" parent="Enemies/Cluster4" unique_id=115347098 instance=ExtResource("5_qxh1l")]
-position = Vector2(6902, 339)
-
-[node name="CrawlingBug31" parent="Enemies/Cluster4" unique_id=1391626942 instance=ExtResource("5_qxh1l")]
-position = Vector2(5347, 438)
-
-[node name="CrawlingBug32" parent="Enemies/Cluster4" unique_id=294939628 instance=ExtResource("5_qxh1l")]
-position = Vector2(5276, 550)
-
-[node name="CrawlingBug33" parent="Enemies/Cluster4" unique_id=1558753300 instance=ExtResource("5_qxh1l")]
-position = Vector2(6448, 550)
-
-[node name="CrawlingBug34" parent="Enemies/Cluster4" unique_id=1890992780 instance=ExtResource("5_qxh1l")]
-position = Vector2(5811, 549)
-
-[node name="CrawlingBug35" parent="Enemies/Cluster4" unique_id=1673730268 instance=ExtResource("5_qxh1l")]
-position = Vector2(6050, 550)
-
-[node name="CrawlingBug36" parent="Enemies/Cluster4" unique_id=1126537016 instance=ExtResource("5_qxh1l")]
-position = Vector2(6206, 549)
-
-[node name="CrawlingBug37" parent="Enemies/Cluster4" unique_id=314442080 instance=ExtResource("5_qxh1l")]
-position = Vector2(6798, 549)
-
-[node name="CrawlingBug38" parent="Enemies/Cluster4" unique_id=190121744 instance=ExtResource("5_qxh1l")]
-position = Vector2(6961, 550)
-
-[node name="Cluster5" type="Node2D" parent="Enemies" unique_id=1382893461]
-
-[node name="CrawlingBug24" parent="Enemies/Cluster5" unique_id=1597104317 instance=ExtResource("5_qxh1l")]
-position = Vector2(8239, 246)
-
-[node name="CrawlingBug25" parent="Enemies/Cluster5" unique_id=1823854869 instance=ExtResource("5_qxh1l")]
-position = Vector2(8000, 550)
-
-[node name="CrawlingBug26" parent="Enemies/Cluster5" unique_id=661508324 instance=ExtResource("5_qxh1l")]
-position = Vector2(8284, 550)
-
-[node name="CrawlingBug20" parent="Enemies/Cluster5" unique_id=590481507 instance=ExtResource("5_qxh1l")]
-position = Vector2(8554, 547)
-
-[node name="CrawlingBug8" parent="Enemies/Cluster5" unique_id=99220406 instance=ExtResource("5_qxh1l")]
-position = Vector2(8434, 116)
-
-[node name="CrawlingBug17" parent="Enemies/Cluster5" unique_id=597203136 instance=ExtResource("5_qxh1l")]
-position = Vector2(8560, 53)
-
-[node name="CrawlingBug21" parent="Enemies/Cluster5" unique_id=1276216819 instance=ExtResource("5_qxh1l")]
-position = Vector2(8681, 118)
-
-[node name="CrawlingBug19" parent="Enemies/Cluster5" unique_id=1007301806 instance=ExtResource("5_qxh1l")]
-position = Vector2(8916, 180)
-
-[node name="CrawlingBug22" parent="Enemies/Cluster5" unique_id=3693254 instance=ExtResource("5_qxh1l")]
-position = Vector2(9121, 310)
 
 [node name="Goal" type="Area2D" parent="." unique_id=1727586547]
 position = Vector2(9857, 24)
@@ -1194,33 +1062,6 @@ position = Vector2(9857, 24)
 shape = SubResource("RectangleShape2D_gsxql")
 metadata/_edit_lock_ = true
 
-[node name="Death" type="Area2D" parent="." unique_id=1630365328]
-position = Vector2(1974, 640)
-
-[node name="DeathCollision" type="CollisionShape2D" parent="Death" unique_id=547800351]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_gsxql")
-metadata/_edit_lock_ = true
-
-[node name="Cooler2" parent="." unique_id=339558088 instance=ExtResource("4_ckd68")]
-position = Vector2(7199, 268)
-
 [node name="RepairKits" type="Node2D" parent="." unique_id=404652437]
 
-[node name="RepairKit" parent="RepairKits" unique_id=999173511 instance=ExtResource("6_788u1")]
-position = Vector2(8759, 363)
-
-[node name="RepairKit2" parent="RepairKits" unique_id=1884737364 instance=ExtResource("6_788u1")]
-position = Vector2(3162, 280)
-
-[node name="RepairKit3" parent="RepairKits" unique_id=2042298623 instance=ExtResource("6_788u1")]
-position = Vector2(6649, -73)
-
-[node name="RepairKit4" parent="RepairKits" unique_id=534014297 instance=ExtResource("6_788u1")]
-position = Vector2(1196, 137)
-
-[node name="GlitchWall" parent="." unique_id=1307216441 instance=ExtResource("7_sslv5")]
-position = Vector2(271, 399)
-
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
-[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]

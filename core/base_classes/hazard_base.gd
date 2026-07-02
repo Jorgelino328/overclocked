@@ -24,7 +24,9 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body is Player:
 		body.knockback = Vector2.ZERO
-	
+
+## O Hazard não despawna automaticamente ao chegar a 0 hp
+## para dar tempo de tocar animações ou ativar outros comportamentos
 func despawn():
 	queue_free()
 	

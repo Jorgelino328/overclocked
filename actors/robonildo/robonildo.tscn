@@ -786,7 +786,7 @@ stream = ExtResource("9_5bygv")
 volume_db = 10.0
 
 [node name="GunTimer" type="Timer" parent="." unique_id=1226888575]
-wait_time = 0.5
+wait_time = 2.0
 
 [node name="BatteryTimer" type="Timer" parent="." unique_id=1097923722]
 wait_time = 2.0

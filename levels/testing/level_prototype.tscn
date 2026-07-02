@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="1_qm64n"]
 [ext_resource type="PackedScene" uid="uid://b7rehd2fooj1j" path="res://actors/crawling_bug/crawling_bug.tscn" id="3_1phht"]
 [ext_resource type="PackedScene" uid="uid://dhw4p4prgabpl" path="res://objects/platforms/test_platform/test_platform.tscn" id="3_13kkt"]
+[ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="5_kwye7"]
 
 [node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")
@@ -19,15 +20,20 @@ metadata/_edit_lock_ = true
 
 [node name="Robonildo" parent="." unique_id=345648955 instance=ExtResource("1_qm64n")]
 position = Vector2(596, 321)
+has_psu = true
 
 [node name="TestPlatform" parent="." unique_id=371593943 instance=ExtResource("3_13kkt")]
-position = Vector2(345, 257)
+position = Vector2(301, 366)
 
 [node name="TestPlatform2" parent="." unique_id=30131207 instance=ExtResource("3_13kkt")]
 position = Vector2(597, 407)
 
 [node name="TestPlatform3" parent="." unique_id=39150343 instance=ExtResource("3_13kkt")]
-position = Vector2(950, 261)
+position = Vector2(906, 370)
 
 [node name="CrawlingBug" parent="." unique_id=596403267 instance=ExtResource("3_1phht")]
-position = Vector2(362, 228)
+position = Vector2(318, 337)
+
+[node name="GlitchWall" parent="." unique_id=1307216441 instance=ExtResource("5_kwye7")]
+position = Vector2(899, 225)
+active = false

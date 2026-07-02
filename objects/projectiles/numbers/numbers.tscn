@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://b337uaq8gvqun"]
+
+[ext_resource type="Texture2D" uid="uid://bijdohasa8lia" path="res://assets/sprites/glitch_wall.png" id="1_5kbdl"]
+[ext_resource type="Script" uid="uid://dr4swc5tak32o" path="res://objects/projectiles/numbers/numbers.gd" id="2_f2ff8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjlbd"]
+size = Vector2(6, 8)
+
+[sub_resource type="Animation" id="Animation_gjlbd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NumberSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_py3e2"]
+resource_name = "disappear"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NumberSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xa0ub"]
+resource_name = "disappear"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NumberSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_da0rp"]
+resource_name = "spawn"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NumberSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_khpyx"]
+resource_name = "spawn"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NumberSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_da0rp"]
+_data = {
+&"RESET": SubResource("Animation_gjlbd"),
+&"disappear_g": SubResource("Animation_py3e2"),
+&"disappear_r": SubResource("Animation_xa0ub"),
+&"spawn_g": SubResource("Animation_da0rp"),
+&"spawn_r": SubResource("Animation_khpyx")
+}
+
+[node name="Numbers" type="Area2D" unique_id=325492629]
+visible = false
+scale = Vector2(2, 2)
+script = ExtResource("2_f2ff8")
+
+[node name="NumberSprite" type="Sprite2D" parent="." unique_id=684719167]
+texture_filter = 1
+texture = ExtResource("1_5kbdl")
+hframes = 2
+
+[node name="NumberCollider" type="CollisionShape2D" parent="." unique_id=1682981517]
+visible = false
+shape = SubResource("RectangleShape2D_gjlbd")
+
+[node name="NumberAnimation" type="AnimationPlayer" parent="." unique_id=175970990]
+libraries/ = SubResource("AnimationLibrary_da0rp")
+
+[connection signal="animation_finished" from="NumberAnimation" to="." method="_on_animation_finished"]

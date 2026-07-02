@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cptn84gj53npk"]
 
-[ext_resource type="Script" uid="uid://xcmdkpu2thh7" path="res://objects/projectiles/ray.gd" id="1_36kae"]
+[ext_resource type="Script" uid="uid://xcmdkpu2thh7" path="res://objects/projectiles/ray/ray.gd" id="1_36kae"]
 [ext_resource type="Texture2D" uid="uid://ceotx5vsj5k7n" path="res://assets/sprites/ray.png" id="2_nvqnu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36kae"]
@@ -79,5 +79,5 @@ shape = SubResource("RectangleShape2D_36kae")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650448264]
 libraries/ = SubResource("AnimationLibrary_f1k34")
 
-[connection signal="area_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_body_or_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_or_area_entered"]
