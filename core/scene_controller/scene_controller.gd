@@ -40,17 +40,15 @@ func change_scene(next_scene):
 ## Troca música da cena.
 func change_track():
 	var scene_music = current_scene.get("music")
-	
-	if scene_music != current_track:
-		current_track = scene_music
-		bgm_player.stream = current_track
-		
-		# Toca a nova música, ou para o áudio se a cena não tiver música (null)
-		if current_track != null:
+	if scene_music != null:
+		if scene_music.resource_path != current_track.resource_path:
+			current_track = scene_music
+			bgm_player.stream = current_track
 			bgm_player.play()
-		else:
-			bgm_player.stop()
-
+	else:
+		bgm_player.stop()
+		current_track = null
+	
 ## Toca SFX global.
 func play_sfx(sfx):
 	sfx_player.stream = sfx

@@ -13,6 +13,10 @@ var id = 2
 @onready var borderless = $Video/HBoxContainer/Checks/Bordeless
 @onready var vsync = $Video/HBoxContainer/Checks/VSync
 
+@onready var hover_sfx = $HoverSfx
+
+@export var music = preload("res://assets/audio/music/menu_music.ogg")
+
 var settingsData = SettingsData.new()
 var save_file_path = "user://save/"
 var save_file_name = "SettingsSave.tres"
@@ -70,50 +74,29 @@ func _on_audio_pressed():
 	show_and_hide(Audio,opt)
 	
 func _on_back_from_options_pressed():
-	if(get_parent().name == "CanvasLayer"):
-		get_parent().get_parent().paused = false
-		get_tree().paused = false
-		queue_free()
-	else:
-		get_tree().paused = false
-		emit_signal("back_menu")
+	emit_signal("back_menu")
 
 # Video Menu
-func check_it(checkbox):
-	checkbox.get_child(0).check_it(checkbox.button_pressed)
 	
-func init_video_state(checkbox):
-	checkbox.get_child(0).set_initial_state(checkbox.button_pressed)
-
 func _on_full_screen_toggled(button_pressed):
-	init_video_state(fscreen)
 	if(button_pressed):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	
-func _on_full_screen_pressed():
-	check_it(fscreen)
 	
 func _on_bordeless_toggled(button_pressed):
-	init_video_state(borderless)
 	if(button_pressed):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-func _on_bordeless_pressed():
-	check_it(borderless)
-
 func _on_v_sync_toggled(button_pressed):
-	init_video_state(vsync)
 	if(button_pressed):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-func _on_v_sync_pressed():
-	check_it(vsync)
 
 func _on_back_from_video_pressed():
 	settingsData.save_data(fscreen.button_pressed,borderless.button_pressed,vsync.button_pressed,linear_to_db(v_master.value),linear_to_db(v_music.value),linear_to_db(v_sfx.value))	
@@ -151,3 +134,7 @@ func _on_back_to_menu_pressed():
 func _on_quit_game_pressed():
 	get_tree().paused = false
 	emit_signal("quit")
+
+
+func _on_mouse_entered() -> void:
+	hover_sfx.play()

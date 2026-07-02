@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmcb464rdgcd5" path="res://ui/settings/settings.gd" id="1_bjc66"]
 [ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_hrs25"]
+[ext_resource type="AudioStream" uid="uid://b1oeekfae2ehi" path="res://assets/audio/sfx/button_hover.ogg" id="3_fayoa"]
 
 [sub_resource type="Gradient" id="Gradient_fayoa"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
@@ -32,7 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hrs25")
 script = ExtResource("1_bjc66")
-music = null
 
 [node name="ScreenEffect" type="Control" parent="." unique_id=1659437936]
 anchors_preset = 0
@@ -61,6 +61,7 @@ offset_bottom = 649.0
 texture = SubResource("GradientTexture2D_5at5d")
 
 [node name="Options" type="Control" parent="." unique_id=1963148940]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -196,7 +197,6 @@ text = "Back
 "
 
 [node name="Audio" type="Control" parent="." unique_id=503565143]
-visible = false
 anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 648.0
@@ -244,25 +244,31 @@ size_flags_horizontal = 3
 metadata/_edit_group_ = true
 
 [node name="Master" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=434761268]
+layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 10
 max_value = 1.0
 step = 0.01
+value = 1.0
 ticks_on_borders = true
 
 [node name="Music" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=70161685]
+layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.4
 max_value = 1.0
 step = 0.01
+value = 1.0
 ticks_on_borders = true
 
 [node name="Sound FX" type="HSlider" parent="Audio/HBoxContainer/Slider" unique_id=491290727]
+layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 2
 max_value = 1.0
 step = 0.01
+value = 1.0
 ticks_on_borders = true
 
 [node name="BackFromAudio" type="Button" parent="Audio" unique_id=389160137]
@@ -280,3 +286,35 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back
 "
+
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1053019683]
+stream = ExtResource("3_fayoa")
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="Options/VBoxContainer/Video" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Options/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="mouse_entered" from="Options/VBoxContainer/Audio" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Options/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="mouse_entered" from="Options/VBoxContainer/BacktoMenu" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Options/VBoxContainer/BacktoMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="mouse_entered" from="Options/VBoxContainer/QuitGame" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Options/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="mouse_entered" from="Options/BackFromOptions" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Options/BackFromOptions" to="." method="_on_back_from_options_pressed"]
+[connection signal="mouse_entered" from="Video/HBoxContainer/Checks/FullScreen" to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="Video/HBoxContainer/Checks/FullScreen" to="." method="_on_full_screen_toggled"]
+[connection signal="mouse_entered" from="Video/HBoxContainer/Checks/Bordeless" to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="Video/HBoxContainer/Checks/Bordeless" to="." method="_on_bordeless_toggled"]
+[connection signal="mouse_entered" from="Video/HBoxContainer/Checks/VSync" to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="Video/HBoxContainer/Checks/VSync" to="." method="_on_v_sync_toggled"]
+[connection signal="mouse_entered" from="Video/BackFromVideo" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Video/BackFromVideo" to="." method="_on_back_from_video_pressed"]
+[connection signal="mouse_entered" from="Audio/HBoxContainer/Slider/Master" to="." method="_on_mouse_entered"]
+[connection signal="value_changed" from="Audio/HBoxContainer/Slider/Master" to="." method="_on_master_value_changed"]
+[connection signal="mouse_entered" from="Audio/HBoxContainer/Slider/Music" to="." method="_on_mouse_entered"]
+[connection signal="value_changed" from="Audio/HBoxContainer/Slider/Music" to="." method="_on_music_value_changed"]
+[connection signal="mouse_entered" from="Audio/HBoxContainer/Slider/Sound FX" to="." method="_on_mouse_entered"]
+[connection signal="value_changed" from="Audio/HBoxContainer/Slider/Sound FX" to="." method="_on_sound_fx_value_changed"]
+[connection signal="mouse_entered" from="Audio/BackFromAudio" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Audio/BackFromAudio" to="." method="_on_back_from_audio_pressed"]

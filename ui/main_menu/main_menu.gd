@@ -1,7 +1,12 @@
 extends Control
 
-#var start_level = "res://levels/tutorial/tutorial.tscn"
-var start_level = "res://levels/nivel_1/nivel_1.tscn"
+var start_level = "res://levels/tutorial/tutorial.tscn"
+#var start_level = "res://levels/nivel_1/nivel_1.tscn"
+
+@onready var hover_sfx = $HoverSfx
+@onready var animator = $TitleAnimator
+
+@export var music = preload("res://assets/audio/music/menu_music.ogg")
 
 # Define sinais da cena
 signal new_game(level: String)
@@ -10,7 +15,7 @@ signal settings()
 signal quit()
 
 func _ready():
-	$TitleAnimator.play("show_title")
+	animator.play("show_title")
 
 func setup_connections(controller: Node) -> void:
 	new_game.connect(controller._on_next_level)
@@ -19,11 +24,11 @@ func setup_connections(controller: Node) -> void:
 	quit.connect(controller._on_quit)
 
 func _on_title_animator_animation_finished():
-	$TitleAnimator.play("idle")
+	animator.play("idle")
 
 
 func _on_mouse_entered() -> void:
-	$HoverSfx.play()
+	hover_sfx.play()
 
 
 func _on_play_pressed():
