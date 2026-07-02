@@ -31,21 +31,23 @@ func setup_connections(controller: Node):
 # Config
 func _ready():
 	verify_save_directory(save_file_path)
-	if(ResourceLoader.exists(save_file_path + save_file_name)):
+	
+	if ResourceLoader.exists(save_file_path + save_file_name):
 		settingsData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-
-		v_master.value = db_to_linear(settingsData.volume_master)
-		v_music.value = db_to_linear(settingsData.volume_music)
-		v_sfx.value = db_to_linear(settingsData.volume_sfx)
-		init_volume()
-		
-		fscreen.button_pressed = settingsData.fullscreen
-		borderless.button_pressed = settingsData.borderless
-		vsync.button_pressed = settingsData.vsync
-	else:
-		v_master.value = db_to_linear(AudioServer.get_bus_volume_db(0))
-		v_music.value = db_to_linear(AudioServer.get_bus_volume_db(1))
-		v_sfx.value = db_to_linear(AudioServer.get_bus_volume_db(2))
+	
+	v_master.value = db_to_linear(settingsData.volume_master)
+	v_music.value = db_to_linear(settingsData.volume_music)
+	v_sfx.value = db_to_linear(settingsData.volume_sfx)
+	
+	fscreen.button_pressed = settingsData.fullscreen
+	borderless.button_pressed = settingsData.borderless
+	vsync.button_pressed = settingsData.vsync
+	
+	init_volume()
+	
+	_on_full_screen_toggled(settingsData.fullscreen)
+	_on_bordeless_toggled(settingsData.borderless)
+	_on_v_sync_toggled(settingsData.vsync)
 
 func verify_save_directory(path : String):
 	DirAccess.make_dir_absolute(path)
@@ -83,20 +85,21 @@ func _on_full_screen_toggled(button_pressed):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	
+	settingsData.fullscreen = button_pressed
 	
 func _on_bordeless_toggled(button_pressed):
 	if(button_pressed):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-
+	settingsData.borderless = button_pressed
+	
 func _on_v_sync_toggled(button_pressed):
 	if(button_pressed):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-
+	settingsData.vsync = button_pressed
 
 func _on_back_from_video_pressed():
 	settingsData.save_data(fscreen.button_pressed,borderless.button_pressed,vsync.button_pressed,linear_to_db(v_master.value),linear_to_db(v_music.value),linear_to_db(v_sfx.value))	

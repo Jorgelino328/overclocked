@@ -18,6 +18,7 @@ const GAME_OVER = preload("res://ui/game_over/game_over.tscn")
 func _ready() -> void:
 	bgm_player.stream = current_track
 	connect_signals()
+	load_and_apply_settings()
 
 ## Pede para a cena atual conectar seus sinais ao controlador.
 func connect_signals():
@@ -102,3 +103,34 @@ func _on_continue_game():
 func _on_timer_timeout() -> void:
 	if current_track != null:
 		bgm_player.play()
+
+
+func load_and_apply_settings():
+	var save_file_path = "user://save/"
+	var save_file_name = "SettingsSave.tres"
+	
+	if ResourceLoader.exists(save_file_path + save_file_name):
+		var data = ResourceLoader.load(save_file_path + save_file_name)
+		
+		# 1. Apply Volumes
+		AudioServer.set_bus_volume_db(0, data.volume_master)
+		AudioServer.set_bus_volume_db(1, data.volume_music)
+		AudioServer.set_bus_volume_db(2, data.volume_sfx)
+		
+		# 2. Apply Window Settings
+		# Fullscreen / Windowed
+		if data.fullscreen:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			
+		# Borderless
+		if data.borderless:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		
+		# VSync
+		if data.vsync:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		else:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		
