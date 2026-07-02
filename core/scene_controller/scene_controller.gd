@@ -72,14 +72,13 @@ func _on_settings():
 func _on_level_clear(proxima_fase_path: String):
 	
 	var next_scene = LEVEL_CLEAR.instantiate()
-	
-	# Injeta a string da próxima fase dentro da tela de Level Clear
 	next_scene.level_path = proxima_fase_path 
 	
 	change_scene(next_scene)
 	
 func _on_game_over():
 	await play_sfx(death_sfx)
+	print("haya")
 	var next_scene = GAME_OVER.instantiate()
 	next_scene.level_path = current_scene.scene_file_path
 	change_scene(next_scene)

@@ -49,50 +49,55 @@ func _process(_delta):
 	# então adicionei uma espera de 0.1s antes de começar as cutscenes
 	# pra dar tempo dele pisar no chão
 	if !wait:
-		match curr_dialogue:
-				DialogueState.WAKEUP_1:
-					play_scene(wakeup_dialogue_1)
-					curr_dialogue = DialogueState.WAKEUP_2
-				DialogueState.WAKEUP_2:
-					if surged:
-						play_scene(wakeup_dialogue_2)
-						curr_dialogue = DialogueState.INTRO
-					elif !animation.is_playing():
-						animation.play("surge")
-				DialogueState.INTRO:
-					if awake:
-						play_scene(intro_dialogue)
-						curr_dialogue = DialogueState.T_BASIC
-					elif !animation.is_playing():
-						player.visible = true
-						animation.play("wake_up")
-				DialogueState.T_BASIC:
-					play_scene(tutorial_basic)
-					gab.has_dialogue = true
-					wil.has_dialogue = true
-					oli.has_dialogue = true
-					curr_dialogue = DialogueState.END
-				DialogueState.T_MEC_1:
-					play_scene(tutorial_mec_1)
-					curr_dialogue = DialogueState.END
-				DialogueState.T_MEC_2:
-					play_scene(tutorial_mec_2)
-					curr_dialogue = DialogueState.END
-				DialogueState.T_PARTES_1:
-					play_scene(tutorial_partes_1)
-					curr_dialogue = DialogueState.END
-				DialogueState.T_PARTES_2:
-					play_scene(tutorial_partes_2)
-					curr_dialogue = DialogueState.END
-				DialogueState.T_UFRN_1:
-					play_scene(tutorial_ufrn_1)
-					curr_dialogue = DialogueState.END
-				DialogueState.T_UFRN_2:
-					play_scene(tutorial_ufrn_2)
-					curr_dialogue = DialogueState.END
-				DialogueState.END:
-					if dialogue_box:
-						dialogue_box.queue_free()
+		if(!has_node("DialogueUI")):
+			if awake:
+				unfreeze_chars()
+			match curr_dialogue:
+					DialogueState.WAKEUP_1:
+						play_scene(wakeup_dialogue_1)
+						curr_dialogue = DialogueState.WAKEUP_2
+					DialogueState.WAKEUP_2:
+						if surged:
+							play_scene(wakeup_dialogue_2)
+							curr_dialogue = DialogueState.INTRO
+						elif !animation.is_playing():
+							animation.play("surge")
+					DialogueState.INTRO:
+						if awake:
+							play_scene(intro_dialogue)
+							curr_dialogue = DialogueState.T_BASIC
+						elif !animation.is_playing():
+							player.visible = true
+							animation.play("wake_up")
+					DialogueState.T_BASIC:
+						play_scene(tutorial_basic)
+						gab.has_dialogue = true
+						wil.has_dialogue = true
+						oli.has_dialogue = true
+						curr_dialogue = DialogueState.END
+					DialogueState.T_MEC_1:
+						play_scene(tutorial_mec_1)
+						curr_dialogue = DialogueState.END
+					DialogueState.T_MEC_2:
+						play_scene(tutorial_mec_2)
+						curr_dialogue = DialogueState.END
+					DialogueState.T_PARTES_1:
+						play_scene(tutorial_partes_1)
+						curr_dialogue = DialogueState.END
+					DialogueState.T_PARTES_2:
+						play_scene(tutorial_partes_2)
+						curr_dialogue = DialogueState.END
+					DialogueState.T_UFRN_1:
+						play_scene(tutorial_ufrn_1)
+						curr_dialogue = DialogueState.END
+					DialogueState.T_UFRN_2:
+						play_scene(tutorial_ufrn_2)
+						curr_dialogue = DialogueState.END
+					DialogueState.END:
+						if dialogue_box:
+							dialogue_box.queue_free()
+		else:
+			freeze_chars()
 
 func connect_signals():
 	gab.tutorial_mec_1.connect(play_scene.bind(tutorial_mec_1))

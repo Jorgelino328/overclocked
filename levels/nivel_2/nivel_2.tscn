@@ -132,10 +132,14 @@ metadata/_edit_lock_ = true
 [node name="Death" parent="." unique_id=1851116974 instance=ExtResource("4_u8kn6")]
 position = Vector2(168, 760.00006)
 scale = Vector2(0.4406718, 0.5987985)
+collision_layer = 4
+collision_mask = 3
 
 [node name="Death2" parent="." unique_id=175194533 instance=ExtResource("4_u8kn6")]
 position = Vector2(1928.0001, 715)
 scale = Vector2(2.0779724, 0.44375294)
+collision_layer = 4
+collision_mask = 3
 
 [node name="RepairKits" type="Node2D" parent="." unique_id=404652437]
 metadata/_edit_lock_ = true
@@ -147,10 +151,8 @@ position = Vector2(685, 137)
 position = Vector2(1525, 614)
 
 [node name="Glitches" type="Node2D" parent="." unique_id=598805738]
-metadata/_edit_lock_ = true
 
 [node name="Glitch1" type="Node2D" parent="Glitches" unique_id=1180354139]
-metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="GlitchWall" parent="Glitches/Glitch1" unique_id=138778785 instance=ExtResource("4_ad6gy")]
@@ -158,10 +160,10 @@ position = Vector2(472.00003, 577)
 scale = Vector2(0.75, 0.75)
 active = false
 
-[node name="Lever" parent="Glitches/Glitch1" unique_id=1284841264 node_paths=PackedStringArray("device") instance=ExtResource("5_e5q11")]
+[node name="Lever" parent="Glitches/Glitch1" unique_id=1284841264 node_paths=PackedStringArray("devices") instance=ExtResource("5_e5q11")]
 position = Vector2(322, 628)
 scale = Vector2(2, 2)
-device = NodePath("../GlitchWall")
+devices = [NodePath("../GlitchWall")]
 
 [node name="Glitch2" type="Node2D" parent="Glitches" unique_id=1031924433]
 
@@ -175,11 +177,10 @@ position = Vector2(1298, 254)
 scale = Vector2(0.5, 0.5)
 active = false
 
-[node name="Lever" parent="Glitches/Glitch2" unique_id=454468674 node_paths=PackedStringArray("device", "device2") instance=ExtResource("5_e5q11")]
+[node name="Lever" parent="Glitches/Glitch2" unique_id=454468674 node_paths=PackedStringArray("devices") instance=ExtResource("5_e5q11")]
 position = Vector2(1381, 292)
 scale = Vector2(2, 2)
-device = NodePath("../GlitchWall")
-device2 = NodePath("../GlitchWall2")
+devices = [NodePath("../GlitchWall"), NodePath("../GlitchWall2")]
 
 [node name="Glitch3" type="Node2D" parent="Glitches" unique_id=1528081407]
 
@@ -218,3 +219,5 @@ position = Vector2(1264, 515)
 position = Vector2(1335, 286)
 
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
+[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Death2" to="." method="_on_death_body_entered"]

@@ -21,7 +21,7 @@ color = Color(0.0392157, 0, 0.109804, 1)
 metadata/_edit_lock_ = true
 
 [node name="Robonildo" parent="." unique_id=345648955 instance=ExtResource("1_qm64n")]
-position = Vector2(139, 525)
+position = Vector2(838, 287)
 has_psu = true
 
 [node name="TestPlatform" parent="." unique_id=371593943 instance=ExtResource("3_13kkt")]
@@ -41,9 +41,9 @@ position = Vector2(129, 334)
 position = Vector2(969, 231)
 active = false
 
-[node name="Lever" parent="." unique_id=1284841264 node_paths=PackedStringArray("device") instance=ExtResource("6_h6t6w")]
+[node name="Lever" parent="." unique_id=1284841264 node_paths=PackedStringArray("devices") instance=ExtResource("6_h6t6w")]
 position = Vector2(824, 331)
-device = NodePath("../GlitchWall")
+devices = [NodePath("../GlitchWall")]
 
 [node name="MoveableBox" parent="." unique_id=1250028024 instance=ExtResource("7_774u3")]
 position = Vector2(350, 528)

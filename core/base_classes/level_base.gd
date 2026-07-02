@@ -6,9 +6,7 @@ class_name Level extends Node2D
 
 # Importa UI de diálogo
 var dialogueUI = preload("res://ui/dialogue_ui/dialogue_ui.tscn")
-
-var freeze = true
-
+var freeze = false
 
 # Define sinais da cena
 signal next_level(level: String)
@@ -42,20 +40,28 @@ func _on_player_morreu() -> void:
 	emit_signal("game_over")
 
 func freeze_chars():
-	if not get_tree().paused:
-		get_tree().paused = true
+	freeze = true
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	if has_node("NPCs"):
+		for e in get_node("NPCs").get_children():
+			e.process_mode = Node.PROCESS_MODE_DISABLED
 
 func unfreeze_chars():
-	if get_tree().paused:
-		get_tree().paused = false
+	freeze = false
+	player.process_mode = Node.PROCESS_MODE_INHERIT
+	if has_node("NPCs"):
+		print()
+		for e in get_node("NPCs").get_children():
+			e.process_mode = Node.PROCESS_MODE_INHERIT
 		
+
 func play_scene(scene):
 	var dialogue_instance = dialogueUI.instantiate()
 	dialogue_instance.dialoguePath = scene
-	dialogue_instance.process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().paused = true
-	dialogue_instance.dialogue_finished.connect(_on_dialogue_finished)
 	add_child(dialogue_instance)
-
-func _on_dialogue_finished():
-	get_tree().paused = false
+	
+### Se o jogador morre, troca para tela de game over
+### WARNING: Lembre de adicionar super._process(delta) na classe filha caso for adicionar um novo _process
+func _process(_delta) -> void:
+	if player.hp <= 0:
+		emit_signal("game_over")

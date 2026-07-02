@@ -1,6 +1,7 @@
 extends Control
 
-var start_level = "res://levels/tutorial/tutorial.tscn"
+#var start_level = "res://levels/tutorial/tutorial.tscn"
+var start_level = "res://levels/nivel_1/nivel_1.tscn"
 
 # Define sinais da cena
 signal new_game(level: String)

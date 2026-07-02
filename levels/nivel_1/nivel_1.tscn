@@ -30,7 +30,7 @@ layer_2/tile_data = PackedInt32Array(2293761, 393224, 12, 2359297, 393224, 13, 2
 
 [node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("4_4crvb")]
 texture_filter = 0
-position = Vector2(59, 522)
+position = Vector2(9470, 16)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
@@ -179,6 +179,8 @@ metadata/_edit_lock_ = true
 
 [node name="Death" parent="." unique_id=1851116974 instance=ExtResource("6_wfchn")]
 position = Vector2(1976, 800)
+collision_layer = 4
+collision_mask = 3
 
 [node name="Cooler2" parent="." unique_id=339558088 instance=ExtResource("5_gdn87")]
 position = Vector2(7199, 268)
