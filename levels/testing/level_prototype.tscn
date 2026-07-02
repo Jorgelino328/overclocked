@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dhw4p4prgabpl" path="res://objects/platforms/test_platform/test_platform.tscn" id="3_13kkt"]
 [ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="5_kwye7"]
 [ext_resource type="PackedScene" uid="uid://ctdgy7cxaexgs" path="res://objects/items/lever/lever.tscn" id="6_h6t6w"]
+[ext_resource type="PackedScene" uid="uid://5fir6qm2yekr" path="res://objects/items/moveable_box/moveable_box.tscn" id="7_774u3"]
 
 [node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")
@@ -20,25 +21,29 @@ color = Color(0.0392157, 0, 0.109804, 1)
 metadata/_edit_lock_ = true
 
 [node name="Robonildo" parent="." unique_id=345648955 instance=ExtResource("1_qm64n")]
-position = Vector2(596, 321)
+position = Vector2(139, 525)
 has_psu = true
 
 [node name="TestPlatform" parent="." unique_id=371593943 instance=ExtResource("3_13kkt")]
-position = Vector2(301, 366)
+position = Vector2(112, 363)
 
 [node name="TestPlatform2" parent="." unique_id=30131207 instance=ExtResource("3_13kkt")]
-position = Vector2(597, 407)
+position = Vector2(396, 629)
+scale = Vector2(5.52, 1)
 
 [node name="TestPlatform3" parent="." unique_id=39150343 instance=ExtResource("3_13kkt")]
 position = Vector2(906, 370)
 
 [node name="CrawlingBug" parent="." unique_id=596403267 instance=ExtResource("3_1phht")]
-position = Vector2(318, 337)
+position = Vector2(129, 334)
 
 [node name="GlitchWall" parent="." unique_id=1307216441 instance=ExtResource("5_kwye7")]
-position = Vector2(899, 225)
+position = Vector2(969, 231)
 active = false
 
 [node name="Lever" parent="." unique_id=1284841264 node_paths=PackedStringArray("device") instance=ExtResource("6_h6t6w")]
-position = Vector2(682, 368)
+position = Vector2(824, 331)
 device = NodePath("../GlitchWall")
+
+[node name="MoveableBox" parent="." unique_id=1250028024 instance=ExtResource("7_774u3")]
+position = Vector2(350, 528)

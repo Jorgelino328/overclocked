@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://5fir6qm2yekr"]
+
+[ext_resource type="Script" uid="uid://c4bv1tw0g33as" path="res://objects/items/moveable_box/moveable_box.gd" id="1_ndffi"]
+[ext_resource type="Texture2D" uid="uid://d0scoe7cx5pc8" path="res://assets/sprites/box.png" id="1_wocj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndffi"]
+size = Vector2(160, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ua2v"]
+size = Vector2(72, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wocj7"]
+size = Vector2(72, 160)
+
+[node name="MoveableBox" type="RigidBody2D" unique_id=1401156695]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 39
+script = ExtResource("1_ndffi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1283565132]
+scale = Vector2(5, 5)
+texture = ExtResource("1_wocj7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1710245187]
+shape = SubResource("RectangleShape2D_ndffi")
+
+[node name="MoveBoxLeft" type="Area2D" parent="." unique_id=2086566125]
+collision_layer = 4
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="MoveBoxLeft" unique_id=1654044560]
+position = Vector2(-116, 0)
+shape = SubResource("RectangleShape2D_5ua2v")
+
+[node name="MoveBoxRight" type="Area2D" parent="." unique_id=195442378]
+collision_layer = 4
+
+[node name="CollisionRight" type="CollisionShape2D" parent="MoveBoxRight" unique_id=1756418996]
+position = Vector2(116, 0)
+shape = SubResource("RectangleShape2D_wocj7")
+
+[connection signal="body_entered" from="MoveBoxLeft" to="." method="_on_move_box_left_body_entered"]
+[connection signal="body_exited" from="MoveBoxLeft" to="." method="_on_move_box_left_body_exited"]
+[connection signal="body_entered" from="MoveBoxRight" to="." method="_on_move_box_right_body_entered"]
+[connection signal="body_exited" from="MoveBoxRight" to="." method="_on_move_box_right_body_exited"]

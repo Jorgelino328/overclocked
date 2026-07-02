@@ -4,6 +4,7 @@ class_name Player extends CharacterBody2D
 signal morreu
 
 # Variáveis costumizáveis no Inspector do Godot 
+@export var speed_slow := 50.0
 @export var speed_walk := 300.0
 @export var speed_run := 600.0
 @export var jump_velocity := -350.0
@@ -29,7 +30,7 @@ signal morreu
 
 
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DYING}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -40,12 +41,16 @@ var anim_state := State.IDLE
 var time_walking := 0.0
 var time_running := 0.0
 var time_idle := 0.0
+var time_pushing := 0.0
 var just_jumped := false
 var sideways := false
 var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
+var is_pushing = false
+
 @export var has_psu = false
+
 var ray_scene = load("res://objects/projectiles/ray/ray.tscn")
 
 signal health_changed(new_hp, max_hp)
@@ -101,6 +106,8 @@ func _physics_process(delta):
 		if not is_on_floor():
 			anim_state = State.JUMPING
 		
+		elif is_pushing:
+			anim_state = State.PUSHING
 		# Se acabou de pular
 		elif Input.is_action_just_pressed("jump"):
 			just_jumped = true
@@ -145,6 +152,13 @@ func animation_handler(direction, delta):
 	# Vira o sprite caso esteja indo pra esquerda E a arma não esteja forçando a direção
 	if direction != 0 and anim_state != State.DYING and not gun_arm.visible:
 		sprite.flip_h = (direction < 0)
+		if is_pushing and (direction < 0):
+			sprite.position.x = 33
+		elif is_pushing and (direction > 0):
+			sprite.position.x = -33
+		else:
+			sprite.position.x = 0
+			
 	
 	# Para o loop de foguete ao parar de correr
 	if time_running <= 0:
@@ -187,6 +201,7 @@ func animation_handler(direction, delta):
 			# Atualiza os outros timers
 			time_walking = 0.0
 			time_running = 0.0
+			time_pushing = 0.0
 			
 		State.WALKING:
 			# Se vira (caso já não esteja de lado) e começa a andar .
@@ -205,6 +220,7 @@ func animation_handler(direction, delta):
 			time_walking += delta
 			time_running = 0.0
 			time_idle = 0.0
+			time_pushing = 0.0
 			
 			# Após 2 segundos andando, começa a correr.
 			if time_walking >= 2.0:
@@ -225,6 +241,7 @@ func animation_handler(direction, delta):
 			time_walking = 0.0
 			time_running += delta 
 			time_idle = 0.0
+			time_pushing = 0.0
 			
 		State.JUMPING:
 			# Se vira e começa a pular.
@@ -248,7 +265,8 @@ func animation_handler(direction, delta):
 			time_walking = 0.0
 			time_running = 0.0
 			time_idle = 0.0
-		
+			time_pushing = 0.0
+			
 		State.LOOKING:
 			# Toca a animação apropriada dependendo da orientação (de lado/frente).
 			if Input.is_action_pressed("look_up"):
@@ -267,7 +285,33 @@ func animation_handler(direction, delta):
 			time_walking = 0.0
 			time_running = 0.0
 			time_idle = 0.0
+			time_pushing = 0.0
+		
+		State.PUSHING:
+			# Se vira (caso já não esteja de lado) e começa a empurrar .
+			if time_pushing == 0.0:
+				if !sideways: 
+					animation_player.play("turn_side")
+					animation_player.queue("push_start")
+					animation_player.queue("push")
+					rocket_sfx.play()
+				else:
+					animation_player.play("push_start")
+					animation_player.queue("push")
+					rocket_sfx.play()
+					
+			# Anda mais devagar quando está empurrando
+			if animation_player.current_animation == "push":
+				current_speed = speed_slow
+			else:
+				current_speed = 0
 				
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+			time_pushing += delta 
+				
+		
 		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:

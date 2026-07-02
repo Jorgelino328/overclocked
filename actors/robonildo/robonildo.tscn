@@ -88,6 +88,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RobonildoSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_lp60f"]
 resource_name = "RESET_side"
@@ -444,6 +456,64 @@ tracks/0/keys = {
 "values": [41]
 }
 
+[sub_resource type="Animation" id="Animation_c2q2u"]
+resource_name = "push"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [69, 70]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RobonildoSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-5.0]
+}
+
+[sub_resource type="Animation" id="Animation_htxba"]
+resource_name = "push_start"
+length = 0.15
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285713),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [67, 68]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RobonildoSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.14285713),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-5.0]
+}
+
 [sub_resource type="Animation" id="Animation_73y8d"]
 resource_name = "run"
 length = 0.5
@@ -719,6 +789,8 @@ _data = {
 &"look_front_up": SubResource("Animation_xjabv"),
 &"look_side_down": SubResource("Animation_bhs5k"),
 &"look_side_up": SubResource("Animation_rjjp4"),
+&"push": SubResource("Animation_c2q2u"),
+&"push_start": SubResource("Animation_htxba"),
 &"run": SubResource("Animation_73y8d"),
 &"run_start": SubResource("Animation_auqjj"),
 &"run_stop": SubResource("Animation_tidxy"),
@@ -738,13 +810,12 @@ script = ExtResource("1_vnl3t")
 shape = SubResource("RectangleShape2D_18luw")
 
 [node name="RobonildoSprite" type="Sprite2D" parent="." unique_id=1565838249]
-position = Vector2(-4.7683716e-07, -9.536743e-07)
 scale = Vector2(5, 5)
 texture = ExtResource("2_maejr")
-hframes = 67
-metadata/_edit_lock_ = true
+hframes = 71
 
 [node name="GunArm" type="Sprite2D" parent="." unique_id=365195994]
+visible = false
 show_behind_parent = true
 position = Vector2(23, -17)
 scale = Vector2(5, 5)
