@@ -35,10 +35,6 @@ func setup_connections(controller) -> void:
 	menu.connect(controller._on_menu)
 	quit.connect(controller._on_quit)
 
-# Função acionada assim que o Robonildo termina a animação de morte
-func _on_player_morreu() -> void:
-	emit_signal("game_over")
-
 func freeze_chars():
 	freeze = true
 	player.process_mode = Node.PROCESS_MODE_DISABLED
@@ -59,9 +55,6 @@ func play_scene(scene):
 	var dialogue_instance = dialogueUI.instantiate()
 	dialogue_instance.dialoguePath = scene
 	add_child(dialogue_instance)
-	
-### Se o jogador morre, troca para tela de game over
-### WARNING: Lembre de adicionar super._process(delta) na classe filha caso for adicionar um novo _process
-func _process(_delta) -> void:
-	if player.hp <= 0:
-		emit_signal("game_over")
+
+func _on_player_morreu() -> void:
+	emit_signal("game_over")

@@ -30,7 +30,7 @@ layer_2/tile_data = PackedInt32Array(2293761, 393224, 12, 2359297, 393224, 13, 2
 
 [node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("4_4crvb")]
 texture_filter = 0
-position = Vector2(9470, 16)
+position = Vector2(89, 521)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
@@ -202,5 +202,6 @@ position = Vector2(1196, 137)
 [node name="Fonte" parent="." unique_id=1244120216 instance=ExtResource("7_nakes")]
 position = Vector2(9644, 36)
 
+[connection signal="morreu" from="Robonildo" to="." method="_on_player_morreu"]
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
 [connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]

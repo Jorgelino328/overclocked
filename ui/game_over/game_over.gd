@@ -17,6 +17,8 @@ func setup_connections(controller: Node) -> void:
 # ==========================================
 # EVENTOS DOS BOTÕES
 # ==========================================
+func _ready() -> void:
+	print (level_path)
 
 func _on_restart_pressed() -> void:
 	emit_signal("restart_level", level_path)

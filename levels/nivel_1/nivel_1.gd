@@ -12,7 +12,6 @@ func _ready() -> void:
 	fonte.found_psu.connect(play_scene.bind(psu_dialogue_1))
 
 func _process(_delta) -> void:
-	super._process(_delta)
 	if(!has_node("DialogueUI")):
 		unfreeze_chars()
 	else:
@@ -31,3 +30,6 @@ func _on_goal_body_entered(body: Node2D) -> void:
 func _on_death_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.hp = 0
+		
+func _on_player_morreu() -> void:
+	emit_signal("game_over")

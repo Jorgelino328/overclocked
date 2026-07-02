@@ -5,15 +5,15 @@ extends Level
 @export var proxima_fase = "res://ui/end_game/end_game.tscn"
 @export var music = preload("res://assets/audio/music/ice.ogg")
 
+var wall_dialogue = "res://assets/dialogue/wall_dialogue.json"
 var hdd_dialogue_1 = "res://assets/dialogue/hdd_dialogue_1.json"
 var hdd_dialogue_2 = "res://assets/dialogue/hdd_dialogue_2.json"
 
 func _ready() -> void:
 	hdd.found_hdd.connect(play_scene.bind(hdd_dialogue_1))
-
+	play_scene(wall_dialogue)
 
 func _process(_delta) -> void:
-	super._process(_delta)
 	if(!has_node("DialogueUI")):
 		unfreeze_chars()
 	else:
@@ -32,3 +32,6 @@ func _on_goal_body_entered(body: Node2D) -> void:
 func _on_death_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.hp = 0
+		
+func _on_player_morreu() -> void:
+	emit_signal("game_over")

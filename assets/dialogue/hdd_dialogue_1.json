@@ -1,10 +1,10 @@
 [
-{"Name":"Você", "Emotion":"Calm", "Text":"Peça 'HDD (Hard Disk Drive)' encontrada'"},
+{"Name":"Você", "Emotion":"Calm", "Text":"Peça HDD (Hard Disk Drive) encontrada"},
 {"Name":"Você", "Emotion":"Calm", "Text":"Instalando..."},
 {"Name":"Você", "Emotion":"Calm", "Text":"Memória interna expandida."},
 {"Name":"Você", "Emotion":"Calm", "Text":"Abrindo LeiaMe.txt..."},
 {"Name":"Você", "Emotion":"Calm", "Text":"'O disco rígido usa um prato magnético para armazenar os dados. Esses pratos são divididos em vários setores e trilhas que guardam os inúmeros bytes que compõem nossos arquivos.'"},
-,{"Name":"Você", "Emotion":"Calm", "Text":"'Um braço mecânico percorre toda a área do disco magnético lendo os arquivos que são solicitados pelo usuário ou sistema operacional.'"}
+{"Name":"Você", "Emotion":"Calm", "Text":"'Um braço mecânico percorre toda a área do disco magnético lendo os arquivos que são solicitados pelo usuário ou sistema operacional.'"},
 {"Name":"Você", "Emotion":"Calm", "Text":"Informação nova salva em memória. A expansão no armazenamento de dados me permitirá armazenar mais scripts de manutenção."},
 {"Name":"Você", "Emotion":"Calm", "Text":"Saúde do sistema expandida para 3/3 engrenagens"},
 ]

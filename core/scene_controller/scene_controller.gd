@@ -78,7 +78,6 @@ func _on_level_clear(proxima_fase_path: String):
 	
 func _on_game_over():
 	await play_sfx(death_sfx)
-	print("haya")
 	var next_scene = GAME_OVER.instantiate()
 	next_scene.level_path = current_scene.scene_file_path
 	change_scene(next_scene)
@@ -91,6 +90,7 @@ func _on_quit():
 
 ## Carrega próximo nível
 func _on_next_level(level_path : String):
+	print("next is ", level_path)
 	if level_path != "":
 		await play_sfx(select_sfx)
 		var next_level = load(level_path)
