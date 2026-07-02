@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dmwigv7chxaes"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsxql"]
+size = Vector2(241, 228.25)
+
+[node name="Death" type="Area2D" unique_id=1851116974]
+metadata/_edit_group_ = true
+
+[node name="DeathCollision" type="CollisionShape2D" parent="." unique_id=2096203974]
+shape = SubResource("RectangleShape2D_gsxql")

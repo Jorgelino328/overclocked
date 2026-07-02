@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dhw4p4prgabpl" path="res://objects/platforms/test_platform/test_platform.tscn" id="3_13kkt"]
 [ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="5_kwye7"]
 [ext_resource type="PackedScene" uid="uid://ctdgy7cxaexgs" path="res://objects/items/lever/lever.tscn" id="6_h6t6w"]
-[ext_resource type="PackedScene" uid="uid://5fir6qm2yekr" path="res://objects/items/moveable_box/moveable_box.tscn" id="7_774u3"]
+[ext_resource type="PackedScene" uid="uid://5fir6qm2yekr" path="res://objects/platforms/moveable_box/moveable_box.tscn" id="7_774u3"]
 
 [node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")

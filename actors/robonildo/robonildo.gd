@@ -73,7 +73,6 @@ func _physics_process(delta):
 		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
-	
 	# Lógica da arma visível (rastrear mouse, virar corpo e inverter ombro)
 	if gun_arm.visible and anim_state != State.DYING:
 		var mouse_pos = get_global_mouse_position()

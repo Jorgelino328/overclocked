@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dx72mnx6iscnu" path="res://assets/audio/sfx/notHurt.ogg" id="3_hjluf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rptx7"]
-size = Vector2(80, 200)
+size = Vector2(80, 152)
 
 [sub_resource type="Animation" id="Animation_1q2si"]
 length = 0.001
@@ -55,6 +55,7 @@ collision_mask = 33
 script = ExtResource("1_rptx7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1604306628]
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_rptx7")
 metadata/_edit_lock_ = true
 
@@ -83,6 +84,7 @@ collision_mask = 35
 [node name="BarrierCollider" type="CollisionShape2D" parent="Barrier" unique_id=929678247]
 shape = SubResource("RectangleShape2D_1q2si")
 
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
