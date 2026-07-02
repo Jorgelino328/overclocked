@@ -7,6 +7,9 @@ class_name Level extends Node2D
 # Importa UI de diálogo
 var dialogueUI = preload("res://ui/dialogue_ui/dialogue_ui.tscn")
 
+var freeze = true
+
+
 # Define sinais da cena
 signal next_level(level: String)
 signal level_cleared(proxima_fase_path: String)
@@ -38,11 +41,21 @@ func setup_connections(controller) -> void:
 func _on_player_morreu() -> void:
 	emit_signal("game_over")
 
-### Se o jogador morre, troca para tela de game over
-### WARNING: Lembre de adicionar super._process(delta) na classe filha caso for adicionar um novo _process
-#func _process(delta):
-	#if player.hp <= 0:
-		#emit_signal("next_level", get_parent().GAME_OVER)
+func freeze_chars():
+	if not get_tree().paused:
+		get_tree().paused = true
 
+func unfreeze_chars():
+	if get_tree().paused:
+		get_tree().paused = false
+		
+func play_scene(scene):
+	var dialogue_instance = dialogueUI.instantiate()
+	dialogue_instance.dialoguePath = scene
+	dialogue_instance.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
+	dialogue_instance.dialogue_finished.connect(_on_dialogue_finished)
+	add_child(dialogue_instance)
 
-# TODO: Criar os eventos para cada botão e emitir os sinais apropriados
+func _on_dialogue_finished():
+	get_tree().paused = false

@@ -1,22 +1,25 @@
 extends Level
 
-@export var proxima_fase = "/home/jorgelino/Documents/Godot_Projects/overclocked/ui/end_game/end_game.tscn"
+@onready var fonte = $Fonte
+
+@export var proxima_fase = "res://levels/nivel_2/nivel_2.tscn"
 @export var music = preload("res://assets/audio/music/lab.ogg")
 
-var psu_dialogue = "res://assets/dialogue/psu_dialogue.json"
+var psu_dialogue_1 = "res://assets/dialogue/psu_dialogue_1.json"
+var psu_dialogue_2 = "res://assets/dialogue/psu_dialogue_2.json"
+
+func _ready() -> void:
+	fonte.found_psu.connect(play_scene.bind(psu_dialogue_1))
 
 func level_finish():
 	emit_signal("level_cleared", proxima_fase)
-
 
 func _on_goal_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if body.has_psu:
 			level_finish()
 		else:
-			var dialogue_instance = dialogueUI.instantiate()
-			dialogue_instance.dialoguePath = psu_dialogue
-			add_child(dialogue_instance)
+			play_scene(psu_dialogue_2)
 
 
 func _on_death_body_entered(body: Node2D) -> void:

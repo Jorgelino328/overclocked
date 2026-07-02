@@ -11,6 +11,7 @@ var phraseNum = 0
 var finished = false
 var default_img = "res://assets/dialogue/question.png"
 
+signal dialogue_finished
 
 func _ready():
 	$Timer.wait_time = textSpeed
@@ -72,3 +73,6 @@ func nextPhrase():
 	phraseNum += 1
 	return 
 	
+func close_dialogue():
+	emit_signal("dialogue_finished")
+	queue_free()

@@ -2,7 +2,6 @@ extends Level
 
 enum DialogueState 
 { 
-	START, 
 	WAKEUP_1, 
 	WAKEUP_2, 
 	INTRO, 
@@ -22,7 +21,7 @@ enum DialogueState
 @onready var level_path = "res://levels/nivel_1/nivel_1.tscn"
 @export var music = preload("res://assets/audio/music/overworld.ogg")
 
-var curr_dialogue = DialogueState.START
+var curr_dialogue = DialogueState.WAKEUP_1
 var wakeup_dialogue_1 = "res://assets/dialogue/wakeup_1.json"
 var wakeup_dialogue_2 = "res://assets/dialogue/wakeup_2.json"
 var intro_dialogue = "res://assets/dialogue/intro.json"
@@ -34,7 +33,6 @@ var tutorial_partes_2 = "res://assets/dialogue/tutorial_partes_2.json"
 var tutorial_ufrn_1 = "res://assets/dialogue/tutorial_ufrn_1.json"
 var tutorial_ufrn_2 = "res://assets/dialogue/tutorial_ufrn_2.json"
 var wait = true
-var freeze = true
 var surged = false
 var awake = false
 
@@ -51,13 +49,7 @@ func _process(_delta):
 	# então adicionei uma espera de 0.1s antes de começar as cutscenes
 	# pra dar tempo dele pisar no chão
 	if !wait:
-		if(!has_node("DialogueUI")):
-			if awake:
-				unfreeze_chars()
-			match curr_dialogue:
-				DialogueState.START:
-					play_scene(wakeup_dialogue_1)
-					curr_dialogue = DialogueState.WAKEUP_1
+		match curr_dialogue:
 				DialogueState.WAKEUP_1:
 					play_scene(wakeup_dialogue_1)
 					curr_dialogue = DialogueState.WAKEUP_2
@@ -101,8 +93,6 @@ func _process(_delta):
 				DialogueState.END:
 					if dialogue_box:
 						dialogue_box.queue_free()
-		else:
-			freeze_chars()
 
 func connect_signals():
 	gab.tutorial_mec_1.connect(play_scene.bind(tutorial_mec_1))
@@ -111,24 +101,6 @@ func connect_signals():
 	wil.tutorial_partes_2.connect(play_scene.bind(tutorial_partes_2))
 	oli.tutorial_ufrn_1.connect(play_scene.bind(tutorial_ufrn_1))
 	oli.tutorial_ufrn_2.connect(play_scene.bind(tutorial_ufrn_2))
-
-
-func play_scene(scene):
-	var dialogue_instance = dialogueUI.instantiate()
-	dialogue_instance.dialoguePath = scene
-	add_child(dialogue_instance)
-	
-func freeze_chars():
-	freeze = true
-	$Robonildo.process_mode = Node.PROCESS_MODE_DISABLED
-	for e in $NPCs.get_children():
-		e.process_mode = Node.PROCESS_MODE_DISABLED
-
-func unfreeze_chars():
-	freeze = false
-	$Robonildo.process_mode = Node.PROCESS_MODE_INHERIT
-	for e in $NPCs.get_children():
-		e.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_goal_body_entered(body: Node2D) -> void:

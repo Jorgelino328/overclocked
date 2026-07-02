@@ -1,9 +1,16 @@
 # extends Level
 extends "res://core/base_classes/level_base.gd" 
 
-@onready var level_path = "res://levels/testing/level_prototype.tscn"
-@export var proxima_fase = "res://levels/nivel_2/nivel_2.tscn"
+@onready var hdd = $Hdd 
+
+@export var proxima_fase = "res://ui/end_game/end_game.tscn"
 @export var music = preload("res://assets/audio/music/lab.ogg")
+
+var hdd_dialogue_1 = "res://assets/dialogue/hdd_dialogue_1.json"
+var hdd_dialogue_2 = "res://assets/dialogue/hdd_dialogue_2.json"
+
+func _ready() -> void:
+	hdd.found_hdd.connect(play_scene.bind(hdd_dialogue_1))
 
 func level_finish():
 	emit_signal("level_cleared", proxima_fase)
@@ -11,7 +18,10 @@ func level_finish():
 
 func _on_goal_body_entered(body: Node2D) -> void:
 	if body is Player:
-		level_finish()
+		if body.has_hdd:
+			level_finish()
+		else:
+			play_scene(hdd_dialogue_2)
 
 
 func _on_death_body_entered(body: Node2D) -> void:

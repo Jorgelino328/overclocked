@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://5fir6qm2yekr" path="res://objects/platforms/moveable_box/moveable_box.tscn" id="7_sslv5"]
 [ext_resource type="PackedScene" uid="uid://biutu7t33lrp1" path="res://objects/items/repair_kit/repair_kit.tscn" id="9_0luxg"]
 [ext_resource type="PackedScene" uid="uid://vgoh8i2klotu" path="res://objects/platforms/physics_box/physics_box.tscn" id="11_r6555"]
+[ext_resource type="PackedScene" uid="uid://tua6hpyjyam7" path="res://objects/items/hdd/hdd.tscn" id="12_qjjsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsxql"]
 size = Vector2(241, 80)
@@ -175,7 +176,7 @@ scale = Vector2(0.5, 0.5)
 active = false
 
 [node name="Lever" parent="Glitches/Glitch2" unique_id=454468674 node_paths=PackedStringArray("device", "device2") instance=ExtResource("5_e5q11")]
-position = Vector2(1374, 292)
+position = Vector2(1381, 292)
 scale = Vector2(2, 2)
 device = NodePath("../GlitchWall")
 device2 = NodePath("../GlitchWall2")
@@ -212,5 +213,8 @@ position = Vector2(1272, 589)
 
 [node name="PhysicsBox2" parent="Boxes" unique_id=200249107 instance=ExtResource("11_r6555")]
 position = Vector2(1264, 515)
+
+[node name="Hdd" parent="." unique_id=1167511678 instance=ExtResource("12_qjjsa")]
+position = Vector2(1335, 286)
 
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
