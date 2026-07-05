@@ -1,7 +1,7 @@
 extends Control
 
 var start_level = "res://levels/tutorial/tutorial.tscn"
-#var start_level = "res://levels/nivel_1/nivel_1.tscn"
+#var start_level = "res://levels/level_1/level_1.tscn"
 
 @onready var hover_sfx = $HoverSfx
 @onready var animator = $TitleAnimator

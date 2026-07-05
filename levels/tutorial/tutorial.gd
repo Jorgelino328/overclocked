@@ -18,7 +18,7 @@ enum DialogueState
 @onready var dialogue_box = $DialogueUI
 @onready var dark_screen = $DarkScreen
 @onready var animation = $AnimationPlayer
-@onready var level_path = "res://levels/nivel_1/nivel_1.tscn"
+@onready var level_path = "res://levels/level_1/level_1.tscn"
 @export var music = preload("res://assets/audio/music/overworld.ogg")
 
 var curr_dialogue = DialogueState.WAKEUP_1

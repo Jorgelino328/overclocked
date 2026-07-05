@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxqjcaigiag1n"]
 
-[ext_resource type="Script" uid="uid://cxxlcwqmgmd0i" path="res://levels/nivel_2/nivel_2.gd" id="1_3wpe8"]
+[ext_resource type="Script" uid="uid://cxxlcwqmgmd0i" path="res://levels/level_2/level_2.gd" id="1_3wpe8"]
 [ext_resource type="TileSet" uid="uid://bwr1b0skyyjqr" path="res://assets/tilesets/presets/lab_tileset.tres" id="2_fb3qm"]
 [ext_resource type="PackedScene" uid="uid://b664d6vuql7i8" path="res://actors/robonildo/robonildo.tscn" id="3_ee5l5"]
 [ext_resource type="PackedScene" uid="uid://b7rehd2fooj1j" path="res://actors/crawling_bug/crawling_bug.tscn" id="4_1133x"]
@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsxql"]
 size = Vector2(241, 80)
 
-[node name="Nivel2" type="Node2D" unique_id=1708044034 node_paths=PackedStringArray("player")]
+[node name="Level2" type="Node2D" unique_id=1708044034 node_paths=PackedStringArray("player")]
 texture_filter = 1
 script = ExtResource("1_3wpe8")
 player = NodePath("Robonildo")

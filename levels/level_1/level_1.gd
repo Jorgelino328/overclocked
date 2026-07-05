@@ -2,7 +2,7 @@ extends Level
 
 @onready var fonte = $Fonte
 
-@export var proxima_fase = "res://levels/nivel_2/nivel_2.tscn"
+@export var proxima_fase = "res://levels/level_2/level_2.tscn"
 @export var music = preload("res://assets/audio/music/lab.ogg")
 
 var psu_dialogue_1 = "res://assets/dialogue/psu_dialogue_1.json"
