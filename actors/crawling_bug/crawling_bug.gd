@@ -14,18 +14,17 @@ const id = 1
 
 var move := Vector2.RIGHT
 var turn_speed := 15.0
+var knockback := Vector2.ZERO
 
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("debug_button"):
-		hp = 0
-		
 	if(is_dead):
 		anim_state = State.DYING
 	else:
 		## Se move e checa colisões 
-		var col := move_and_collide(move * speed * delta)
+		var col := move_and_collide((move * speed * delta) + knockback) 
+		
 	
 		## Se encontrar parede, gira 90 graus pra cima
 		if col and col.get_normal().rotated(PI / 2).dot(move) < 0.5:

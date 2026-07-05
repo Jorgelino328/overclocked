@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://jngxg7k88yfm"]
+
+[ext_resource type="Script" uid="uid://b7gr77eso5p6j" path="res://actors/MAD/phase_1.gd" id="1_hp56b"]
+[ext_resource type="Texture2D" uid="uid://3gsjn41l1lv" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/HEAD_06.png" id="2_602e6"]
+[ext_resource type="Texture2D" uid="uid://b8g3htaiuuxmm" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_02.png" id="3_hyfqt"]
+[ext_resource type="Texture2D" uid="uid://semt11cuxo1e" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/SIDEATTACH_02a.png" id="4_v15pv"]
+[ext_resource type="Texture2D" uid="uid://skps0e10mxtc" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/HEAD_05.png" id="5_j86en"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbnb"]
+size = Vector2(6, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p56jn"]
+size = Vector2(6, 23)
+
+[node name="Phase1" type="StaticBody2D" unique_id=323613499]
+texture_filter = 1
+script = ExtResource("1_hp56b")
+shoot_strength = 25
+
+[node name="Head1" type="Sprite2D" parent="." unique_id=1647453087]
+position = Vector2(-15, -16)
+texture = ExtResource("2_602e6")
+
+[node name="Body2" type="Sprite2D" parent="." unique_id=1456277281]
+position = Vector2(-12, -16)
+texture = ExtResource("3_hyfqt")
+
+[node name="SideArm3" type="Sprite2D" parent="." unique_id=993830908]
+position = Vector2(10, 9)
+texture = ExtResource("4_v15pv")
+
+[node name="Head2" type="Sprite2D" parent="." unique_id=110307855]
+position = Vector2(3, 13)
+rotation = 1.5707964
+texture = ExtResource("5_j86en")
+flip_h = true
+
+[node name="Head3" type="Sprite2D" parent="." unique_id=870700791]
+position = Vector2(-5, -10)
+rotation = 1.5707964
+texture = ExtResource("5_j86en")
+flip_h = true
+
+[node name="SideArm" type="Sprite2D" parent="." unique_id=960599789]
+position = Vector2(-24, -13)
+texture = ExtResource("4_v15pv")
+
+[node name="SideArm6" type="Sprite2D" parent="." unique_id=1521435745]
+position = Vector2(-24, -13)
+texture = ExtResource("4_v15pv")
+
+[node name="SideArm5" type="Sprite2D" parent="." unique_id=1743705523]
+position = Vector2(-6, -13)
+texture = ExtResource("4_v15pv")
+
+[node name="SideArm2" type="Sprite2D" parent="." unique_id=705805753]
+position = Vector2(-24, 9)
+texture = ExtResource("4_v15pv")
+
+[node name="SideArm4" type="Sprite2D" parent="." unique_id=526445198]
+position = Vector2(-7, 9)
+texture = ExtResource("4_v15pv")
+
+[node name="CollisionFull" type="CollisionPolygon2D" parent="." unique_id=841317576]
+position = Vector2(-23.056824, -18.54608)
+polygon = PackedVector2Array(29.056824, -2.4539204, 34.056824, -2.4539204, 34.056824, -3.4539204, 33.056824, -3.4539204, 33.056824, -4.4539204, 32.056824, -4.4539204, 32.056824, -6.4539204, 31.056824, -6.4539204, 31.056824, -7.4539204, 29.056824, -7.4539204, 29.056824, -8.45392, 26.056824, -8.45392, 26.056824, -9.45392, 20.056824, -9.45392, 20.056824, -15.45392, 19.056824, -15.45392, 19.056824, -16.45392, 14.056824, -16.45392, 14.056824, -17.45392, 13.056824, -17.45392, 13.056824, -18.45392, 9.056824, -18.45392, 9.056824, -19.45392, 6.0568237, -19.45392, 6.0568237, -18.45392, 2.0568237, -18.45392, 2.0568237, -17.45392, 1.0568237, -17.45392, 1.0568237, -16.45392, -3.9431763, -16.45392, -4.9431763, -15.45392, -4.9431763, -12.45392, -34.943176, -12.45392, -34.943176, -11.45392, -35.943176, -11.45392, -35.943176, -10.45392, -36.943176, -10.45392, -36.943176, -9.45392, -37.943176, -9.45392, -37.943176, -7.4539204, -38.943176, -7.4539204, -38.943176, 1.5460796, -39.943176, 1.5460796, -39.943176, 3.5460796, -40.943176, 3.5460796, -40.943176, 6.5460796, -39.943176, 6.5460796, -39.943176, 8.54608, -38.943176, 8.54608, -38.943176, 15.54608, -41.943176, 15.54608, -41.943176, 16.54608, -42.943176, 16.54608, -42.943176, 17.54608, -43.943176, 17.54608, -43.943176, 19.54608, -44.943176, 19.54608, -44.943176, 28.54608, -45.943176, 28.54608, -45.943176, 30.54608, -46.943176, 30.54608, -46.943176, 33.54608, -45.943176, 33.54608, -45.943176, 42.54608, -44.943176, 42.54608, -44.943176, 47.54608, 37.056824, 47.54608, 37.056824, 20.54608, 29.056824, 20.54608)
+
+[node name="HitBox1" type="Area2D" parent="." unique_id=167814674]
+position = Vector2(10, -9)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox1" unique_id=526080372]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_rgbnb")
+
+[node name="HitBox2" type="Area2D" parent="." unique_id=299951584]
+position = Vector2(18, 9)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2" unique_id=550954144]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_p56jn")
+
+[node name="Spawn1" type="Marker2D" parent="." unique_id=816113665]
+position = Vector2(21, 8)
+
+[node name="Spawn2" type="Marker2D" parent="." unique_id=1176913698]
+position = Vector2(13, -10)
+
+[node name="Spawn1Timer" type="Timer" parent="." unique_id=636005586]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Spawn1Timer" to="." method="_on_spawn_1_timer_timeout"]

@@ -1,3 +1,15 @@
 [gd_scene format=3 uid="uid://cwk1iqp1m5i3p"]
 
-[node name="Mad" type="Node2D" unique_id=531560035]
+[ext_resource type="PackedScene" uid="uid://dymudr31wo0gn" path="res://actors/MAD/phase_3.tscn" id="1_or3ba"]
+[ext_resource type="PackedScene" uid="uid://d4bfr04hse6he" path="res://actors/MAD/phase_2.tscn" id="2_hdpep"]
+[ext_resource type="PackedScene" uid="uid://jngxg7k88yfm" path="res://actors/MAD/phase_1.tscn" id="3_rontk"]
+
+[node name="Mad" type="Node2D" unique_id=1623589940]
+texture_filter = 1
+
+[node name="Phase3" parent="." unique_id=552305390 instance=ExtResource("1_or3ba")]
+
+[node name="Phase2" parent="." unique_id=1329339716 instance=ExtResource("2_hdpep")]
+
+[node name="Phase1" parent="." unique_id=323613499 instance=ExtResource("3_rontk")]
+position = Vector2(11, 3)

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://rydi37bt4fl1"]
+
+[ext_resource type="Texture2D" uid="uid://b45gdmlwcjoju" path="res://assets/sprites/Furniture-Glitch/SpaceshipWallPanel.svg" id="1_i7dc6"]
+[ext_resource type="Script" uid="uid://sk41ulc6hslu" path="res://objects/platforms/bug_platform/bug_area.gd" id="2_encsx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_encsx"]
+size = Vector2(180, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ip3rb"]
+size = Vector2(209.8125, 70.25)
+
+[node name="BugPlatform" type="StaticBody2D" unique_id=134040117]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 99
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=318927843]
+position = Vector2(-7.6293945e-06, -4.5474735e-13)
+rotation = 1.5707964
+scale = Vector2(0.5, 1)
+texture = ExtResource("1_i7dc6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1900105719]
+shape = SubResource("RectangleShape2D_encsx")
+
+[node name="BugArea" type="Area2D" parent="." unique_id=560301800]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_encsx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BugArea" unique_id=1877892003]
+shape = SubResource("RectangleShape2D_ip3rb")

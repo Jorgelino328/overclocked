@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://d4bfr04hse6he"]
+
+[ext_resource type="Texture2D" uid="uid://cp7dvv00k3tbm" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_03.png" id="1_ddytf"]
+[ext_resource type="Texture2D" uid="uid://ct77df6r5c3g7" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_01a.png" id="2_cjelk"]
+[ext_resource type="Texture2D" uid="uid://cdgrl8wo046j0" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_05.png" id="3_difua"]
+[ext_resource type="Texture2D" uid="uid://cm8qpjtdnath2" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/SIDEATTACH_01.png" id="4_nui6v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j335s"]
+radius = 13.0
+
+[node name="Phase2" type="StaticBody2D" unique_id=1329339716]
+metadata/_edit_lock_ = true
+
+[node name="Body1" type="Sprite2D" parent="." unique_id=872362422]
+position = Vector2(-32, -16)
+texture = ExtResource("1_ddytf")
+flip_h = true
+metadata/_edit_lock_ = true
+
+[node name="Body3" type="Sprite2D" parent="." unique_id=982262238]
+position = Vector2(-35, 11)
+texture = ExtResource("2_cjelk")
+flip_h = true
+metadata/_edit_lock_ = true
+
+[node name="Body4" type="Sprite2D" parent="." unique_id=1464420621]
+position = Vector2(8, 11)
+texture = ExtResource("3_difua")
+metadata/_edit_lock_ = true
+
+[node name="SideArm" type="Sprite2D" parent="." unique_id=1024082430]
+position = Vector2(-13, -1)
+texture = ExtResource("4_nui6v")
+metadata/_edit_lock_ = true
+
+[node name="CollisionBody" type="CollisionPolygon2D" parent="." unique_id=1166542978]
+position = Vector2(-6.402706, 3.2163048)
+polygon = PackedVector2Array(-10.597294, -31.216305, -40.597294, -31.216305, -40.597294, -30.216305, -41.597294, -30.216305, -41.597294, -29.216305, -42.597294, -29.216305, -42.597294, -28.216305, -43.597294, -28.216305, -43.597294, -26.216305, -44.597294, -26.216305, -44.597294, -17.216305, -45.597294, -17.216305, -45.597294, -15.216305, -46.597294, -15.216305, -46.597294, -12.216305, -45.597294, -12.216305, -45.597294, -10.216305, -44.597294, -10.216305, -44.597294, -3.2163048, -47.597294, -3.2163048, -47.597294, -2.2163048, -48.597294, -2.2163048, -48.597294, -1.2163048, -49.597294, -1.2163048, -49.597294, 0.7836952, -50.597294, 0.7836952, -50.597294, 9.783695, -51.597294, 9.783695, -51.597294, 11.783697, -52.597294, 11.783697, -52.597294, 14.783697, -51.597294, 14.783697, -51.597294, 23.783697, -50.597294, 23.783697, -50.597294, 28.783697, 26.402706, 28.783695, 26.402706, 17.783695, 19.402706, 11.783695, 26.402706, 4.783695, 26.402706, 3.7836952, 25.402706, 3.7836952, 25.402706, 0.7836952, 26.402706, 0.7836952, 26.402706, -1.2163048, 25.402706, -1.2163048, 25.402706, -4.216305, 26.402706, -4.216305, 26.402706, -6.216305, 25.402706, -6.216305, 25.402706, -10.216305, 24.402706, -10.216305, 24.402706, -12.216305, 23.402706, -12.216305, 23.402706, -13.216305, 22.402706, -13.216305, 22.402706, -14.216305, 21.402706, -14.216305, -9.597294, -14.216305, -9.597294, -30.216305, -10.597294, -30.216305)
+
+[node name="HitBox2" type="Area2D" parent="." unique_id=665773433]
+position = Vector2(0, -11)
+
+[node name="CollisionHead" type="CollisionShape2D" parent="HitBox2" unique_id=131793368]
+shape = SubResource("CircleShape2D_j335s")
+
+[node name="HitBox1" type="Area2D" parent="." unique_id=241106304]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBox1" unique_id=1171748685]
+position = Vector2(29, 16)
+polygon = PackedVector2Array(-6, -11, -3, -11, -2, -10, -2, -3, -1, -3, 0, -1, 0, 2, -1, 4, -2, 4, -2, 11, 1, 11, 2, 12, 2, 16, -9, 16, -9, 5, -16, -1)
