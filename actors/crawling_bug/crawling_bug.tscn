@@ -152,6 +152,7 @@ metadata/_edit_lock_ = true
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2135050321]
 stream = ExtResource("3_rbvva")
+volume_db = -80.0
 bus = &"SFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=2000711689]
@@ -160,12 +161,12 @@ bus = &"SFX"
 
 [node name="WalkSFX1" type="AudioStreamPlayer2D" parent="." unique_id=1183912486]
 stream = ExtResource("4_7xuhm")
-volume_db = -25.0
+volume_db = -50.0
 bus = &"SFX"
 
 [node name="WalkSFX2" type="AudioStreamPlayer2D" parent="." unique_id=1518291656]
 stream = ExtResource("5_rkbky")
-volume_db = -25.0
+volume_db = -50.0
 bus = &"SFX"
 
 [node name="CBugAnimator" type="AnimationPlayer" parent="." unique_id=1017653521]
