@@ -4,36 +4,54 @@ class_name RangedEnemy extends Enemy
 @export var shoot_interval := 2.0
 @export var projectile_scene: PackedScene
 @onready var head = $Head 
+@onready var arms = $SideArms
 @onready var muzzle = $Head/Muzzle
+@onready var muzzle2 = $SideArms/Muzzle2
+@onready var hurt_sfx = $HurtSFX
+@onready var animation = $AnimationPlayer
+@export var min_turn := -PI/4
+@export var max_turn := PI/4
 
+@export var player_ref : Player
 var shoot_timer := 0.0
-var player_ref: Player
+
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 
 func _ready() -> void:
-	hp = 15
+	hp = 25
 	speed = 80.0
+	knockback_strength = 250.0
 	
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		player_ref = players[0]
+	if player_ref == null:
+		player_ref = get_parent().player
 
 func _physics_process(delta: float) -> void:
+	
+	if is_dead && animation.current_animation != "destroy":
+		animation.play("destroy")
+		
+	
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		
 	if not is_active or is_dead:
-		velocity = Vector2.ZERO
+		velocity.x = 0
+		move_and_slide()
 		return
 		
 	# Se o jogador foi encontrado, persegue e atira
 	if player_ref:
 		_chase_player()
-		_aim_head()
+		_aim_head_and_arms()
 		_handle_shooting(delta)
 		
 	move_and_slide()
 
 func _chase_player() -> void:
-	# Calcula a direção apontando para o jogador e aplica a velocidade
-	var direction = global_position.direction_to(player_ref.global_position)
-	velocity = direction * speed
+	# Mantém a correção anterior para focar apenas no eixo X
+	var direction_x = sign(player_ref.global_position.x - global_position.x)
+	velocity.x = direction_x * speed
 
 func _handle_shooting(delta: float) -> void:
 	shoot_timer += delta
@@ -41,12 +59,31 @@ func _handle_shooting(delta: float) -> void:
 		shoot_timer = 0.0
 		_shoot()
 
-func _aim_head() -> void:
+func _aim_head_and_arms() -> void:
 	# Mira a cabeça na direção do jogador
 	head.look_at(player_ref.global_position)
+	arms.look_at(player_ref.global_position)
+	
+	# Limita movimento da cabeça
+	head.rotation = clamp(head.rotation, min_turn, max_turn)
+	arms.rotation = clamp(head.rotation, min_turn, max_turn)
 
 func _shoot() -> void:
-	var projectile = projectile_scene.instantiate()
-	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = muzzle.global_position
-	projectile.rotation = head.global_rotation
+	var projectile1 = projectile_scene.instantiate()
+	get_tree().current_scene.add_child(projectile1)
+	projectile1.global_position = muzzle.global_position
+	projectile1.rotation = head.global_rotation
+	
+	var projectile2 = projectile_scene.instantiate()
+	get_tree().current_scene.add_child(projectile2)
+	projectile2.global_position = muzzle2.global_position
+	projectile2.rotation = arms.global_rotation
+
+func take_damage(dmg):
+	hurt_sfx.play()
+	hp -= dmg
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "destroy":
+		queue_free()

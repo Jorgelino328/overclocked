@@ -9,14 +9,14 @@ var direction = Vector2.RIGHT
 @export var damage: int = 5
 
 func _ready() -> void:
-	var r_sfx = shoot_sfx.pick_Random()
+	var r_sfx = shoot_sfx.pick_random()
 	r_sfx.play()
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
 
-func _on_body_or_area_entered(body):
-	if body.has_method("take_damage"):
+func _on_body_entered(body):
+	if body is Player:
 		body.take_damage(damage)
 	
 	speed = 0

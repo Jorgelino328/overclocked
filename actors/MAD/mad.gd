@@ -3,6 +3,8 @@ extends Node2D
 @onready var phase_1 = $Phase1
 @onready var phase_2 = $Phase2
 
+@export var player : Player
+
 var is_active = false
 
 func _ready() -> void:

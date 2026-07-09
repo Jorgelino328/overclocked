@@ -73,7 +73,6 @@ func animation_handler():
 					if body is Player:
 						body.take_damage(10)
 					
-
 func _on_c_bug_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
 		queue_free()

@@ -18,6 +18,7 @@ region = Rect2(72, 0, 18, 8)
 [node name="Hud" type="CanvasLayer" unique_id=1337000759]
 
 [node name="CanDash" type="TextureRect" parent="." unique_id=1125544859]
+visible = false
 offset_left = 136.0
 offset_top = 104.0
 offset_right = 252.0

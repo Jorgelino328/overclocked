@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ceotx5vsj5k7n" path="res://assets/sprites/ray.png" id="2_nvqnu"]
 [ext_resource type="AudioStream" uid="uid://cosymes00jvw8" path="res://assets/audio/sfx/shoot_ray1.ogg" id="3_npq13"]
 [ext_resource type="AudioStream" uid="uid://dpk0frxwx4nr7" path="res://assets/audio/sfx/shoot_ray2.ogg" id="4_t6tqb"]
+[ext_resource type="AudioStream" uid="uid://dx72mnx6iscnu" path="res://assets/audio/sfx/notHurt.ogg" id="5_t6tqb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36kae"]
 size = Vector2(10, 7)
@@ -86,6 +87,9 @@ stream = ExtResource("3_npq13")
 
 [node name="ShootSFX2" type="AudioStreamPlayer2D" parent="." unique_id=814813964]
 stream = ExtResource("4_t6tqb")
+
+[node name="NotHurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=555360792]
+stream = ExtResource("5_t6tqb")
 
 [connection signal="area_entered" from="." to="." method="_on_body_or_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_or_area_entered"]
