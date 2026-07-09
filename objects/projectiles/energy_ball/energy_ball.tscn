@@ -188,3 +188,5 @@ libraries/ = SubResource("AnimationLibrary_l1bk3")
 position = Vector2(11, 8)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_ottrt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

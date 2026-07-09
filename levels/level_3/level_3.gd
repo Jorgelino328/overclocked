@@ -9,11 +9,12 @@ enum DialogueState
 	RAM_TIP,
 	FIND_CPU, 
 	LEVEL_CLEAR, 
-	END 
+	END
 }
 
 @onready var ram = $RamStick
 @onready var cpu = $Cpu
+@onready var mad = $Mad
 @onready var fight_trigger = $FightTrigger
 
 @export var proxima_fase = "res://ui/end_game/end_game.tscn"
@@ -29,13 +30,18 @@ var find_cpu_dialogue = "res://assets/dialogue/l3_find_cpu.json"
 var battle_start_dialogue = "res://assets/dialogue/l3_battle_start.json"
 var battle_end_dialogue = "res://assets/dialogue/l3_battle_end.json"
 var level_clear_dialogue = "res://assets/dialogue/l3_level_clear.json"
-
+var phase_2_started = false
 
 func _ready() -> void:
 	ram.item_found.connect(play_scene.bind(find_ram_dialogue))
 	cpu.item_found.connect(play_scene.bind(find_cpu_dialogue))
-
+	
 func _process(_delta) -> void:
+	if mad.phase_2.is_active and not phase_2_started:
+		player.anim_state = player.State.TRANSITION
+		is_active = false
+		phase_2_started = true
+	
 	if(!has_node("DialogueUI")):
 		unfreeze_chars()
 		match curr_dialogue:

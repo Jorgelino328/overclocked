@@ -18,15 +18,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v15pv"]
 size = Vector2(70, 107)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbnb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p56jn"]
 size = Vector2(10, 46)
 
-[sub_resource type="Animation" id="Animation_kbyjk"]
+[sub_resource type="Animation" id="Animation_0mdos"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox1/Head3:self_modulate")
+tracks/0/path = NodePath("HitBox1/Head2:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -72,7 +72,7 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_qqjw3"]
+[sub_resource type="Animation" id="Animation_0ifni"]
 resource_name = "destroy"
 length = 0.6
 step = 0.1
@@ -113,14 +113,14 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_mc5lw"]
+[sub_resource type="Animation" id="Animation_xc3fl"]
 resource_name = "hurt"
 length = 0.6
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox1/Head3:self_modulate")
+tracks/0/path = NodePath("HitBox1/Head2:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -130,22 +130,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1.6852883, 0, 0, 1), Color(1, 1, 1, 1), Color(1.6852883, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mdos"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqjw3"]
 _data = {
-&"RESET": SubResource("Animation_kbyjk"),
-&"destroy": SubResource("Animation_qqjw3"),
-&"hurt": SubResource("Animation_mc5lw")
+&"RESET": SubResource("Animation_0mdos"),
+&"destroy": SubResource("Animation_0ifni"),
+&"hurt": SubResource("Animation_xc3fl")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p56jn"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbnb"]
 size = Vector2(10, 46)
 
-[sub_resource type="Animation" id="Animation_0mdos"]
+[sub_resource type="Animation" id="Animation_kbyjk"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox2/Head2:self_modulate")
+tracks/0/path = NodePath("HitBox2/Head3:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -191,7 +191,7 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_0ifni"]
+[sub_resource type="Animation" id="Animation_qqjw3"]
 resource_name = "destroy"
 length = 0.6
 step = 0.1
@@ -232,14 +232,14 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_xc3fl"]
+[sub_resource type="Animation" id="Animation_mc5lw"]
 resource_name = "hurt"
 length = 0.6
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox2/Head2:self_modulate")
+tracks/0/path = NodePath("HitBox2/Head3:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -249,11 +249,11 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1.6852883, 0, 0, 1), Color(1, 1, 1, 1), Color(1.6852883, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqjw3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mdos"]
 _data = {
-&"RESET": SubResource("Animation_0mdos"),
-&"destroy": SubResource("Animation_0ifni"),
-&"hurt": SubResource("Animation_xc3fl")
+&"RESET": SubResource("Animation_kbyjk"),
+&"destroy": SubResource("Animation_qqjw3"),
+&"hurt": SubResource("Animation_mc5lw")
 }
 
 [sub_resource type="Animation" id="Animation_qbi3a"]
@@ -261,7 +261,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox2/Head2:position")
+tracks/0/path = NodePath("HitBox1/Head2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -297,7 +297,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox1/Head3:position")
+tracks/3/path = NodePath("HitBox2/Head3:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -415,7 +415,7 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox2/Head2:position")
+tracks/0/path = NodePath("HitBox1/Head2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -451,7 +451,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox1/Head3:position")
+tracks/3/path = NodePath("HitBox2/Head3:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -525,52 +525,14 @@ texture = ExtResource("4_v15pv")
 position = Vector2(-18, -15.5)
 shape = SubResource("RectangleShape2D_v15pv")
 
-[node name="HitBox1" type="Area2D" parent="." unique_id=167814674]
-position = Vector2(22, -33)
-collision_layer = 2
-collision_mask = 32
-script = ExtResource("6_kbyjk")
-
-[node name="Head3" type="Sprite2D" parent="HitBox1" unique_id=870700791]
-position = Vector2(-29, -1)
-rotation = 1.5707964
-scale = Vector2(2, 2)
-texture = ExtResource("5_j86en")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox1" unique_id=526080372]
-shape = SubResource("RectangleShape2D_rgbnb")
-metadata/_edit_lock_ = true
-
-[node name="GunAnimator1" type="AnimationPlayer" parent="HitBox1" unique_id=1771529825]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_0mdos")
-
-[node name="HurtSFX" type="AudioStreamPlayer2D" parent="HitBox1" unique_id=1683568759]
-position = Vector2(-22, 33)
-stream = ExtResource("7_0mdos")
-metadata/_edit_lock_ = true
-
-[node name="DeathSFX" type="AudioStreamPlayer2D" parent="HitBox1" unique_id=1269846110]
-stream = ExtResource("8_qqjw3")
-bus = &"SFX"
-
-[node name="ExplosionSprite" type="Sprite2D" parent="HitBox1" unique_id=1777271281]
-visible = false
-texture_filter = 1
-position = Vector2(5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_xc3fl")
-hframes = 8
-
-[node name="HitBox2" type="Area2D" parent="." unique_id=299951584]
+[node name="HitBox1" type="Area2D" parent="." unique_id=299951584]
 position = Vector2(22, 15)
 collision_layer = 2
 collision_mask = 32
 script = ExtResource("7_mc5lw")
 metadata/_edit_lock_ = true
 
-[node name="Head2" type="Sprite2D" parent="HitBox2" unique_id=110307855]
+[node name="Head2" type="Sprite2D" parent="HitBox1" unique_id=110307855]
 z_index = 1
 position = Vector2(-29, -1)
 rotation = 1.5707964
@@ -578,24 +540,62 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_j86en")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2" unique_id=550954144]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox1" unique_id=550954144]
 shape = SubResource("RectangleShape2D_p56jn")
 
-[node name="GunAnimator2" type="AnimationPlayer" parent="HitBox2" unique_id=1882883718]
+[node name="GunAnimator2" type="AnimationPlayer" parent="HitBox1" unique_id=1882883718]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_qqjw3")
 
-[node name="HurtSFX" type="AudioStreamPlayer2D" parent="HitBox2" unique_id=319865726]
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="HitBox1" unique_id=319865726]
 position = Vector2(-22, 33)
 stream = ExtResource("7_0mdos")
 
-[node name="DeathSFX" type="AudioStreamPlayer2D" parent="HitBox2" unique_id=361386369]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="HitBox1" unique_id=361386369]
 stream = ExtResource("8_qqjw3")
 bus = &"SFX"
 
-[node name="ExplosionSprite" type="Sprite2D" parent="HitBox2" unique_id=1344096254]
+[node name="ExplosionSprite" type="Sprite2D" parent="HitBox1" unique_id=1344096254]
 visible = false
 z_index = 1
+position = Vector2(5, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_xc3fl")
+hframes = 8
+
+[node name="HitBox2" type="Area2D" parent="." unique_id=167814674]
+position = Vector2(22, -33)
+collision_layer = 2
+collision_mask = 32
+script = ExtResource("6_kbyjk")
+
+[node name="Head3" type="Sprite2D" parent="HitBox2" unique_id=870700791]
+position = Vector2(-29, -1)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+texture = ExtResource("5_j86en")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2" unique_id=526080372]
+shape = SubResource("RectangleShape2D_rgbnb")
+metadata/_edit_lock_ = true
+
+[node name="GunAnimator1" type="AnimationPlayer" parent="HitBox2" unique_id=1771529825]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_0mdos")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="HitBox2" unique_id=1683568759]
+position = Vector2(-22, 33)
+stream = ExtResource("7_0mdos")
+metadata/_edit_lock_ = true
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="HitBox2" unique_id=1269846110]
+stream = ExtResource("8_qqjw3")
+bus = &"SFX"
+
+[node name="ExplosionSprite" type="Sprite2D" parent="HitBox2" unique_id=1777271281]
+visible = false
+texture_filter = 1
 position = Vector2(5, 0)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_xc3fl")
@@ -640,8 +640,8 @@ stream = ExtResource("8_qqjw3")
 volume_db = 0.25
 bus = &"SFX"
 
-[connection signal="animation_finished" from="HitBox1/GunAnimator1" to="HitBox1" method="_on_gun_animator_1_animation_finished"]
-[connection signal="animation_finished" from="HitBox2/GunAnimator2" to="HitBox2" method="_on_gun_animator_2_animation_finished"]
+[connection signal="animation_finished" from="HitBox1/GunAnimator2" to="HitBox1" method="_on_gun_animator_2_animation_finished"]
+[connection signal="animation_finished" from="HitBox2/GunAnimator1" to="HitBox2" method="_on_gun_animator_1_animation_finished"]
 [connection signal="timeout" from="Spawn1Timer" to="." method="_on_spawn_1_timer_timeout"]
 [connection signal="timeout" from="Spawn2Timer" to="." method="_on_spawn_2_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

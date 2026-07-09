@@ -7,7 +7,6 @@ var is_active = false
 
 func _ready() -> void:
 	phase_1.start_phase_2.connect(_on_start_phase_2)
-	
 
 func _process(_delta) -> void:
 	is_active = parent_level.is_active

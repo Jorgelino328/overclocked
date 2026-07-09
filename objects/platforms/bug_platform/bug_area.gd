@@ -15,7 +15,7 @@ func _physics_process(_delta) -> void:
 	for body in bodies:
 		if body.has_meta("needs_reparent"):
 			_process_reparenting(body)
-		if body is Enemy and not body.is_doomed:
+		if body.name == "CrawlingBug" and not body.is_doomed:
 			alive_bugs.append(body)
 			
 	_check_bug_limit(alive_bugs)
@@ -37,5 +37,5 @@ func _check_bug_limit(alive_bugs: Array) -> void:
 			alive_bugs[i].is_doomed = true
 	
 func _on_body_entered(body: Node2D) -> void:
-	if body is Enemy and body not in get_children():
+	if body.name == "CrawlingBug" and body not in get_children():
 		body.set_meta("needs_reparent", self)
