@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vujvr8s7hkro"
-path="res://.godot/imported/grate0_bump.png-b88357eab1d804ee47446e2de7c17834.ctex"
+uid="uid://b2q02hcjvt8nj"
+path="res://.godot/imported/BODY_02_custom.png-8807c44e7b78df9d8167feb393826490.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background/grate0_bump.png"
-dest_files=["res://.godot/imported/grate0_bump.png-b88357eab1d804ee47446e2de7c17834.ctex"]
+source_file="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_02_custom.png"
+dest_files=["res://.godot/imported/BODY_02_custom.png-8807c44e7b78df9d8167feb393826490.ctex"]
 
 [params]
 

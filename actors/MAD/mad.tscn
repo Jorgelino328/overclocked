@@ -10,8 +10,10 @@ texture_filter = 1
 script = ExtResource("1_hdpep")
 
 [node name="Phase2" parent="." unique_id=552305390 instance=ExtResource("1_or3ba")]
+position = Vector2(23, 0)
+scale = Vector2(2, 2)
 
 [node name="Carapace" parent="." unique_id=1329339716 instance=ExtResource("2_hdpep")]
 
 [node name="Phase1" parent="." unique_id=323613499 instance=ExtResource("3_rontk")]
-position = Vector2(11, 3)
+position = Vector2(59, 19)

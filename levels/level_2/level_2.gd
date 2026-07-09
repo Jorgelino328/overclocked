@@ -2,7 +2,7 @@ extends Level
 
 @onready var hdd = $Hdd 
 
-@export var proxima_fase = "res://ui/end_game/end_game.tscn"
+@export var proxima_fase = "res://levels/level_3/level_3.tscn"
 @export var music = preload("res://assets/audio/music/ice.ogg")
 
 var wall_dialogue = "res://assets/dialogue/wall_dialogue.json"

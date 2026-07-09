@@ -12,8 +12,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1wry"]
 size = Vector2(19, 40)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbky"]
-radius = 37.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbky"]
+radius = 22.0
+height = 104.0
 
 [sub_resource type="Animation" id="Animation_7xuhm"]
 length = 0.001
@@ -144,6 +145,8 @@ shape = SubResource("CircleShape2D_h1wry")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1207740552]
 position = Vector2(9, -6)
+collision_layer = 2
+collision_mask = 33
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -154,11 +157,12 @@ shape = SubResource("RectangleShape2D_h1wry")
 metadata/_edit_lock_ = true
 
 [node name="ExplosionRange" type="Area2D" parent="." unique_id=1609028159]
-collision_layer = 2
+collision_layer = 128
 
 [node name="ExplosionShape2D" type="CollisionShape2D" parent="ExplosionRange" unique_id=1963640920]
-position = Vector2(3, 0)
-shape = SubResource("CircleShape2D_rkbky")
+position = Vector2(5, -12)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rkbky")
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2135050321]
 stream = ExtResource("3_rbvva")

@@ -6,11 +6,16 @@ extends StaticBody2D
 @onready var spawn2 = $Spawn2
 @onready var timer1 = $Spawn1Timer
 @onready var timer2 = $Spawn2Timer
+@onready var gun1 = $HitBox1
+@onready var gun2 = $HitBox2
+@onready var animation = $AnimationPlayer
+@onready var not_hurt_sfx = $NotHurtSFX
 @onready var boss_controller = get_parent()
 @onready var shoot_sfx := [$ShootSFX1,$ShootSFX1,$ShootSFX1]
 
 @export var bug_platforms : Array[StaticBody2D]
 @export var shoot_strength := 50
+@export var guns_destroyed = 0
 
 var bug_limit := 6
 var bug_amnt := 0 
@@ -19,16 +24,26 @@ var is_active := false
 var timers_started := false
 
 func _ready() -> void:
+	gun1.gun_destroyed.connect(progress_destruction)
+	gun2.gun_destroyed.connect(progress_destruction)
 	for platform in bug_platforms:
 		var bug_area = platform.get_node("BugArea")
 		bug_area.limit_reached.connect(_on_limit_reached)
 
-func _process(delta: float) -> void:
+func _process(_delta) -> void:
 	is_active = boss_controller.is_active
-	if is_active:
+	
+	if guns_destroyed >= 2 and animation.current_animation != "destroy":
+		animation.play("destroy")
+	elif animation.current_animation != "destroy":
+		animation.play("idle")
+		
+	
+	if is_active and not timers_started:
 		timer1.start()
 		timer2.start()
-
+		timers_started = true
+		
 func _on_spawn_1_timer_timeout() -> void:
 	if bug_amnt < bug_limit:
 		var new_bug = bug.instantiate()
@@ -48,3 +63,14 @@ func _on_spawn_2_timer_timeout() -> void:
 	var new_ball = energyBall.instantiate()
 	spawn2.add_child(new_ball)
 	timer2.start()
+
+func take_damage(_dmg):
+	not_hurt_sfx.play()
+	
+func progress_destruction():
+	guns_destroyed += 1
+	print(guns_destroyed)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "destroy":
+		queue_free()

@@ -47,4 +47,4 @@ position = Vector2(824, 331)
 devices = [NodePath("../GlitchWall")]
 
 [node name="MoveableBox" parent="." unique_id=1250028024 instance=ExtResource("7_774u3")]
-position = Vector2(115, 526)
+position = Vector2(111, 561)
