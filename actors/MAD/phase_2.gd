@@ -11,12 +11,12 @@ class_name RangedEnemy extends Enemy
 @onready var animation = $AnimationPlayer
 @export var min_turn := -PI/4
 @export var max_turn := PI/4
-
 @export var player_ref : Player
-var shoot_timer := 0.0
 
+var shoot_timer := 0.0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal boss_defeated()
 
 func _ready() -> void:
 	hp = 25
@@ -45,7 +45,12 @@ func _physics_process(delta: float) -> void:
 		_chase_player()
 		_aim_head_and_arms()
 		_handle_shooting(delta)
-		
+	
+	if velocity.x != 0:
+		animation.play("walk")
+	else:
+		animation.play("idle")
+	
 	move_and_slide()
 
 func _chase_player() -> void:
@@ -81,9 +86,11 @@ func _shoot() -> void:
 
 func take_damage(dmg):
 	hurt_sfx.play()
+	animation.play("hurt")
 	hp -= dmg
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "destroy":
+		boss_defeated.emit()
 		queue_free()

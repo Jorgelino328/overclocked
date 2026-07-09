@@ -24,6 +24,10 @@ config/icon="res://icon.svg"
 window/size/mode=3
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="/home/jorgelino/Documents/Godot_Projects/overclocked/assets/movie.avi"
+
 [input]
 
 walk_right={

@@ -16,9 +16,11 @@ enum DialogueState
 @onready var cpu = $Cpu
 @onready var mad = $Mad
 @onready var fight_trigger = $FightTrigger
+@onready var cpu_wall = $GlitchWall
 
 @export var proxima_fase = "res://ui/end_game/end_game.tscn"
-@export var music = preload("res://assets/audio/music/lab.ogg")
+@export var music = preload("res://assets/audio/music/poolsofcolor3.ogg")
+@export var battle_music = preload("res://assets/audio/music/darkritualmix.ogg")
 @export var is_active = false
 
 var tip_given = false
@@ -33,14 +35,20 @@ var level_clear_dialogue = "res://assets/dialogue/l3_level_clear.json"
 var phase_2_started = false
 
 func _ready() -> void:
-	ram.item_found.connect(play_scene.bind(find_ram_dialogue))
-	cpu.item_found.connect(play_scene.bind(find_cpu_dialogue))
+	player.has_psu = true
+	player.has_hdd = true
+	player.has_ram = false
+	player.has_cpus = false
+	ram.item_found.connect(func(): curr_dialogue = DialogueState.FIND_RAM)
+	cpu.item_found.connect(func(): curr_dialogue = DialogueState.FIND_CPU)
+	mad.level_clear.connect(_on_level_clear)
 	
 func _process(_delta) -> void:
-	if mad.phase_2.is_active and not phase_2_started:
-		player.anim_state = player.State.TRANSITION
-		is_active = false
-		phase_2_started = true
+	if is_instance_valid(mad.phase_2):
+		if mad.phase_2.is_active and not phase_2_started and player.hp > 0:
+			player.anim_state = player.State.TRANSITION
+			is_active = false
+			phase_2_started = true
 	
 	if(!has_node("DialogueUI")):
 		unfreeze_chars()
@@ -55,6 +63,8 @@ func _process(_delta) -> void:
 				play_scene(ram_tip_dialogue)
 				curr_dialogue = DialogueState.END
 			DialogueState.BATTLE_START:
+				music = battle_music
+				get_parent().change_track()
 				play_scene(battle_start_dialogue)
 				is_active = true
 				curr_dialogue = DialogueState.END
@@ -64,10 +74,10 @@ func _process(_delta) -> void:
 				curr_dialogue = DialogueState.END
 			DialogueState.FIND_CPU:
 				play_scene(find_cpu_dialogue)
-				curr_dialogue = DialogueState.END
+				curr_dialogue = DialogueState.LEVEL_CLEAR
 			DialogueState.LEVEL_CLEAR:
 				play_scene(level_clear_dialogue)
-				curr_dialogue = DialogueState.END
+				level_finish()
 			DialogueState.END:
 				pass
 	else:
@@ -76,12 +86,9 @@ func _process(_delta) -> void:
 func level_finish():
 	emit_signal("level_cleared", proxima_fase)
 
-#func _on_goal_body_entered(body: Node2D) -> void:
-	#if body is Player:
-		#if body.has_psu:
-			#level_finish()
-		#else:
-			#play_scene(psu_dialogue_2)
+func _on_level_clear():
+	cpu_wall.active = true
+	curr_dialogue = DialogueState.BATTLE_END
 
 func _on_death_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -99,3 +106,4 @@ func _on_fight_trigger_body_entered(body: Node2D) -> void:
 		elif not tip_given:
 			curr_dialogue = DialogueState.RAM_TIP
 			tip_given = true
+			

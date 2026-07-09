@@ -360,8 +360,9 @@ script = ExtResource("2_1ylvm")
 
 [node name="BugPlatform6" parent="PlatformPath/MovingPlatform6" unique_id=1849537357 instance=ExtResource("3_upa32")]
 
-[node name="Mad" parent="." unique_id=1623589940 instance=ExtResource("4_1ylvm")]
+[node name="Mad" parent="." unique_id=1623589940 node_paths=PackedStringArray("player") instance=ExtResource("4_1ylvm")]
 position = Vector2(-48, -98)
+player = NodePath("../Robonildo")
 
 [node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("5_0c4fo")]
 position = Vector2(1000, -68)

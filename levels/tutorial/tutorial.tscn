@@ -246,7 +246,7 @@ shape = SubResource("RectangleShape2D_8ah21")
 [node name="DarkScreen" type="ColorRect" parent="." unique_id=1465890835]
 offset_left = -552.0
 offset_top = -96.0
-offset_right = 613.0
+offset_right = 640.0
 offset_bottom = 567.0
 color = Color(0.06469647, 0.06469655, 0.0646965, 1)
 metadata/_edit_group_ = true
@@ -254,7 +254,7 @@ metadata/_edit_group_ = true
 [node name="CrtEffect" type="TextureRect" parent="DarkScreen" unique_id=1992955882]
 self_modulate = Color(1, 1, 1, 0.15294118)
 layout_mode = 0
-offset_right = 1150.0
+offset_right = 1192.0
 offset_bottom = 652.0
 texture = SubResource("GradientTexture2D_8i3dv")
 stretch_mode = 1
@@ -262,7 +262,7 @@ stretch_mode = 1
 [node name="ScreenGlow" type="TextureRect" parent="DarkScreen" unique_id=951567217]
 self_modulate = Color(1, 1, 1, 0.36862746)
 layout_mode = 0
-offset_right = 1151.0
+offset_right = 1192.0
 offset_bottom = 651.0
 texture = SubResource("GradientTexture2D_le3jl")
 

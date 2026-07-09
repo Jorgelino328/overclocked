@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ck6o3vgtxod2q" path="res://actors/MAD/phase_2.gd" id="1_difua"]
 [ext_resource type="PackedScene" uid="uid://dhempjjn5qx6a" path="res://objects/projectiles/death_ray/death_ray.tscn" id="2_nui6v"]
 [ext_resource type="Texture2D" uid="uid://bfobh8e0iyhrg" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_04.png" id="2_qgset"]
+[ext_resource type="Script" uid="uid://d4ag58rwscjnd" path="res://actors/MAD/head.gd" id="3_6en1k"]
 [ext_resource type="Texture2D" uid="uid://dfv1a2vkrs2lu" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/SIDEATTACH_04.png" id="3_8ocua"]
 [ext_resource type="Texture2D" uid="uid://dv13dasvmmkde" path="res://assets/sprites/explosion/Small Explosion Spriteheet.png" id="4_n0588"]
 [ext_resource type="Texture2D" uid="uid://coem836egjyg7" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/TRACK_01.png" id="4_wxdrb"]
@@ -221,6 +222,7 @@ metadata/_edit_lock_ = true
 position = Vector2(1, -15)
 collision_layer = 2
 collision_mask = 33
+script = ExtResource("3_6en1k")
 metadata/_edit_group_ = true
 
 [node name="Head" type="Sprite2D" parent="Head" unique_id=1931973766]

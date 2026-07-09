@@ -10,6 +10,10 @@ var hdd_dialogue_1 = "res://assets/dialogue/hdd_dialogue_1.json"
 var hdd_dialogue_2 = "res://assets/dialogue/hdd_dialogue_2.json"
 
 func _ready() -> void:
+	player.has_psu = true
+	player.has_hdd = false
+	player.has_ram = false
+	player.has_cpus = false
 	hdd.item_found.connect(play_scene.bind(hdd_dialogue_1))
 	play_scene(wall_dialogue)
 

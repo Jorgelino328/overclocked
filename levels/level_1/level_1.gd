@@ -9,6 +9,10 @@ var psu_dialogue_1 = "res://assets/dialogue/psu_dialogue_1.json"
 var psu_dialogue_2 = "res://assets/dialogue/psu_dialogue_2.json"
 
 func _ready() -> void:
+	player.has_psu = false
+	player.has_hdd = false
+	player.has_ram = false
+	player.has_cpu = false
 	fonte.item_found.connect(play_scene.bind(psu_dialogue_1))
 
 func _process(_delta) -> void:

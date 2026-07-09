@@ -14,6 +14,7 @@ const MAIN_MENU = preload("res://ui/main_menu/main_menu.tscn")
 const SETTINGS = preload("res://ui/settings/settings.tscn")
 const LEVEL_CLEAR = preload("res://ui/level_clear/level_clear.tscn")
 const GAME_OVER = preload("res://ui/game_over/game_over.tscn")
+const CREDITS = preload("res://ui/credits/credits.tscn")
 
 func _ready() -> void:
 	bgm_player.stream = current_track
@@ -40,6 +41,7 @@ func change_scene(next_scene):
 
 ## Troca música da cena.
 func change_track():
+	print(current_scene)
 	var scene_music = current_scene.get("music")
 	if scene_music != null:
 		if scene_music.resource_path != current_track.resource_path:
@@ -67,6 +69,9 @@ func _on_settings():
 	await play_sfx(select_sfx)
 	change_scene(SETTINGS.instantiate())
 
+func _on_credits():
+	await play_sfx(select_sfx)
+	change_scene(CREDITS.instantiate())
 
 func _on_level_clear(proxima_fase_path: String):
 	
@@ -89,7 +94,6 @@ func _on_quit():
 
 ## Carrega próximo nível
 func _on_next_level(level_path : String):
-	print("next is ", level_path)
 	if level_path != "":
 		await play_sfx(select_sfx)
 		var next_level = load(level_path)

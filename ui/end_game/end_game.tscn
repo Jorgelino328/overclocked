@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vtekf6hkfypw" path="res://ui/end_game/end_game.gd" id="1_g1mwf"]
 [ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_qfj27"]
+[ext_resource type="AudioStream" uid="uid://b1oeekfae2ehi" path="res://assets/audio/sfx/button_hover.ogg" id="3_om5k2"]
 
 [sub_resource type="Gradient" id="Gradient_i5wg5"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
@@ -94,13 +95,26 @@ offset_right = 743.0
 offset_bottom = 465.0
 text = "> Voltar ao Menu"
 
+[node name="Credits" type="Button" parent="." unique_id=970772447]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 456.0
+offset_right = 732.0
+offset_bottom = 496.0
+text = "> Cŕeditos"
+
 [node name="QuitButton" type="Button" parent="." unique_id=322705990]
 layout_mode = 0
-offset_left = 437.0
-offset_top = 456.0
-offset_right = 738.0
-offset_bottom = 496.0
+offset_left = 435.0
+offset_top = 489.0
+offset_right = 736.0
+offset_bottom = 529.0
 text = "> Sair do Jogo"
 
+[node name="HoverSFX" type="AudioStreamPlayer" parent="." unique_id=1152375717]
+stream = ExtResource("3_om5k2")
+
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="Credits" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

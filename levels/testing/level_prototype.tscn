@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dt0svricimogi" path="res://objects/items/glitch_wall/glitch_wall.tscn" id="5_kwye7"]
 [ext_resource type="PackedScene" uid="uid://ctdgy7cxaexgs" path="res://objects/items/lever/lever.tscn" id="6_h6t6w"]
 [ext_resource type="PackedScene" uid="uid://5fir6qm2yekr" path="res://objects/platforms/moveable_box/moveable_box.tscn" id="7_774u3"]
-[ext_resource type="PackedScene" uid="uid://dymudr31wo0gn" path="res://actors/MAD/phase_2.tscn" id="8_behfy"]
+[ext_resource type="PackedScene" uid="uid://cwk1iqp1m5i3p" path="res://actors/MAD/mad.tscn" id="8_behfy"]
 
 [node name="LevelPrototype" type="Node2D" unique_id=993375350 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1egrw")
@@ -52,8 +52,8 @@ devices = [NodePath("../GlitchWall")]
 [node name="MoveableBox" parent="." unique_id=1250028024 instance=ExtResource("7_774u3")]
 position = Vector2(52, 562)
 
-[node name="Phase2" parent="." unique_id=552305390 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_behfy")]
-position = Vector2(334, 479)
-scale = Vector2(4, 4)
-is_active = true
-player_ref = NodePath("../Robonildo")
+[node name="Mad" parent="." unique_id=1623589940 node_paths=PackedStringArray("player") instance=ExtResource("8_behfy")]
+position = Vector2(329, 544)
+player = NodePath("../Robonildo")
+
+[editable path="Mad"]
