@@ -171,6 +171,7 @@ _data = {
 radius = 20.03902
 
 [node name="EnergyBall" type="Area2D" unique_id=1059357825]
+collision_layer = 32
 script = ExtResource("1_ottrt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=188814100]

@@ -1,14 +1,30 @@
 [gd_scene format=3 uid="uid://dndli1awf74nm"]
 
+[ext_resource type="Texture2D" uid="uid://dipwlflhkngtm" path="res://assets/sprites/energy_ball/ball.png" id="1_w75iv"]
 [ext_resource type="Script" uid="uid://d4d4c754375s8" path="res://ui/hud/heart_containers.gd" id="2_4d6w6"]
 [ext_resource type="Script" uid="uid://dfoae2fkmhgjm" path="res://ui/hud/battery_charges.gd" id="2_e0nub"]
+[ext_resource type="Script" uid="uid://cryx50fnqce5d" path="res://ui/hud/can_dash.gd" id="2_imuuq"]
 [ext_resource type="Texture2D" uid="uid://b127ifyk3opg6" path="res://assets/sprites/battery.png" id="3_e0nub"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imuuq"]
+atlas = ExtResource("1_w75iv")
+region = Rect2(0, 320, 116, 64)
+margin = Rect2(0, -2, 0, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w75iv"]
 atlas = ExtResource("3_e0nub")
 region = Rect2(72, 0, 18, 8)
 
 [node name="Hud" type="CanvasLayer" unique_id=1337000759]
+
+[node name="CanDash" type="TextureRect" parent="." unique_id=1125544859]
+offset_left = 136.0
+offset_top = 104.0
+offset_right = 252.0
+offset_bottom = 168.0
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_imuuq")
+script = ExtResource("2_imuuq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1813130093]
 texture_filter = 1

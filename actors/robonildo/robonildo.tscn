@@ -140,6 +140,42 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_1m4xx"]
+resource_name = "dashing"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [71, 72]
+}
+
+[sub_resource type="Animation" id="Animation_pp3ug"]
+resource_name = "dashing_up"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [73, 74]
+}
+
 [sub_resource type="Animation" id="Animation_maejr"]
 resource_name = "death"
 length = 1.5
@@ -774,6 +810,8 @@ tracks/2/keys = {
 _data = {
 &"RESET": SubResource("Animation_uxixy"),
 &"RESET_side": SubResource("Animation_lp60f"),
+&"dashing_side": SubResource("Animation_1m4xx"),
+&"dashing_up": SubResource("Animation_pp3ug"),
 &"death_front": SubResource("Animation_maejr"),
 &"death_run": SubResource("Animation_hi04f"),
 &"death_side": SubResource("Animation_irofe"),
@@ -812,7 +850,7 @@ shape = SubResource("RectangleShape2D_18luw")
 [node name="RobonildoSprite" type="Sprite2D" parent="." unique_id=1565838249]
 scale = Vector2(5, 5)
 texture = ExtResource("2_maejr")
-hframes = 71
+hframes = 75
 
 [node name="GunArm" type="Sprite2D" parent="." unique_id=365195994]
 visible = false
@@ -863,9 +901,14 @@ wait_time = 2.0
 wait_time = 2.0
 autostart = true
 
+[node name="DashTimer" type="Timer" parent="." unique_id=821895294]
+wait_time = 2.0
+autostart = true
+
 [node name="Hearing" type="AudioListener2D" parent="." unique_id=786666545]
 current = true
 
 [connection signal="morreu" from="." to="." method="_on_player_morreu"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]
 [connection signal="timeout" from="BatteryTimer" to="." method="_on_battery_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

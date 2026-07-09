@@ -3,7 +3,7 @@ extends Node2D
 @onready var collider = $CollisionShape2D
 
 @export var speed: float = 600.0
-@export var damage: int = 5
+@export var damage: int = 10
 
 func _ready() -> void:
 	animation.play("shoot")

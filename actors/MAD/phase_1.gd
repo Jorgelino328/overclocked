@@ -23,6 +23,8 @@ var bug_counter := 0
 var is_active := false
 var timers_started := false
 
+signal start_phase_2()
+
 func _ready() -> void:
 	gun1.gun_destroyed.connect(progress_destruction)
 	gun2.gun_destroyed.connect(progress_destruction)
@@ -73,4 +75,5 @@ func progress_destruction():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "destroy":
+		start_phase_2.emit()
 		queue_free()

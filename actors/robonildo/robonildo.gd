@@ -26,10 +26,11 @@ signal morreu
 @onready var gun_arm = $GunArm
 @onready var gun_timer = $GunTimer
 @onready var battery_timer = $BatteryTimer
+@onready var dash_timer = $DashTimer
 @onready var muzzle = $GunArm/Muzzle
 
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DASHING, DYING}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -47,7 +48,12 @@ var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
 var is_pushing = false
+var is_dashing := false
+var can_dash := true
 
+@export var dash_speed := 800.0
+@export var dash_duration := 0.2
+@export var dash_up_multiplier := 0.6
 @export var has_psu = false
 @export var has_hdd = false
 @export var has_ram = false
@@ -66,8 +72,9 @@ func _ready():
 	gun_timer.wait_time = 0.5
 
 func _physics_process(delta):
-	# Adiciona gravidade caso esteja fora do chão.
-	if not is_on_floor():
+
+	# Suspende a gravidade enquanto estiver dando dash
+	if not is_on_floor() and not is_dashing:
 		velocity.y += gravity * delta
 		
 	# Se a HP do jogador chega a 0, toca a animação de morte
@@ -109,8 +116,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot") and has_psu and energy >= shoot_cost and anim_state != State.DYING:
 		shoot_logic()
 
+	# 3. Gatilho do Dash
+	if Input.is_action_just_pressed("dash") and has_ram and can_dash and anim_state != State.DYING:
+		_start_dash()
+		
 	# Define o estado atual de movimento
-	if anim_state != State.DYING:
+	if anim_state != State.DYING and not is_dashing:
 		
 		# Se está no ar 
 		if not is_on_floor():
@@ -137,17 +148,18 @@ func _physics_process(delta):
 		# Se está parado no chão
 		elif anim_state != State.LOOKING:
 			anim_state = State.IDLE
-			
+	
 	# Aciona as animações PRIMEIRO, pois elas alteram a variável de velocidade. 
 	animation_handler(direction, delta)
 	
 	# Se o personagem estiver vivo, aplica o movimento
 	if anim_state != State.DYING:
-		# Aplica a velocidade x (Sem travar se estiver atirando!)
-		if direction:
-			velocity.x = direction * current_speed
-		else:
-			velocity.x = move_toward(velocity.x, 0, current_speed)
+		# Aplica a velocidade x APENAS se não estiver dando dash
+		if not is_dashing:
+			if direction:
+				velocity.x = direction * current_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, current_speed)
 		
 		# Aplica o Knockback, se houver
 		velocity += knockback
@@ -321,7 +333,18 @@ func animation_handler(direction, delta):
 			time_idle = 0.0
 			time_pushing += delta 
 				
-		
+		State.DASHING:
+			if is_on_floor():
+				animation_player.play("dashing_side")
+			else:
+				animation_player.play("dashing_up")
+			
+			# Zera os timers para não ativar lógicas antigas acidentalmente
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+			time_pushing = 0.0
+			
 		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:
@@ -372,6 +395,31 @@ func shoot_logic():
 	# Reinicia o timer toda vez que atiramos
 	gun_timer.start()
 
+func _start_dash():
+	can_dash = false
+	is_dashing = true
+	anim_state = State.DASHING
+	
+	# Pega o vetor 2D da direção baseada nos inputs mapeados
+	var dash_dir = Input.get_vector("walk_left", "walk_right", "look_up", "look_down")
+	
+	# Se nenhum botão direcional estiver sendo pressionado, dá o dash para a frente
+	if dash_dir == Vector2.ZERO:
+		dash_dir.x = -1 if sprite.flip_h else 1
+		
+	# Aplica a velocidade instantânea na direção calculada
+	velocity = dash_dir.normalized() * dash_speed
+	
+	# Pequeno nerf em dash para cima
+	if velocity.y < 0:
+		velocity.y *= dash_up_multiplier
+	
+	# Espera o tempo de duração do dash
+	await get_tree().create_timer(dash_duration).timeout
+	
+	is_dashing = false
+	# O estado voltará ao normal (JUMPING/IDLE/etc) no próximo frame do _physics_process
+
 func _gerenciar_sequencia_morte():
 	await get_tree().create_timer(1.5).timeout
 	emit_signal("morreu")
@@ -383,3 +431,8 @@ func _on_battery_timer_timeout() -> void:
 	energy = clamp(energy + 1, 0, 4)
 	emit_signal("battery_changed", energy)
 	battery_timer.start()
+
+func _on_dash_timer_timeout() -> void:
+	can_dash = true
+	dash_timer.start()
+	
