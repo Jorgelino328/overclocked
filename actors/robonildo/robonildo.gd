@@ -10,8 +10,8 @@ signal morreu
 @export var jump_velocity := -350.0
 @export var hp := 10
 @export var max_hp := 10
-@export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
-@export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
+@export var i_frames: float = 1.0
+@export var i_frame_dur: float = 0.2
 @export var energy: int = 4
 @export var shoot_cost: int = 1
 
@@ -27,7 +27,6 @@ signal morreu
 @onready var gun_timer = $GunTimer
 @onready var battery_timer = $BatteryTimer
 @onready var muzzle = $GunArm/Muzzle
-
 
 # Define estados possíveis do personagem
 enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DYING}
@@ -51,6 +50,8 @@ var is_pushing = false
 
 @export var has_psu = false
 @export var has_hdd = false
+@export var has_ram = false
+@export var has_cpu = false
 
 var h_updated = false
 
@@ -79,8 +80,10 @@ func _physics_process(delta):
 		hp = max_hp
 		emit_signal("health_changed", hp, max_hp)
 		h_updated = true
+		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
+	
 	# Lógica da arma visível (rastrear mouse, virar corpo e inverter ombro)
 	if gun_arm.visible and anim_state != State.DYING:
 		var mouse_pos = get_global_mouse_position()
@@ -102,7 +105,7 @@ func _physics_process(delta):
 		# Vira o sprite da arma de cabeça para baixo caso esteja apontando pra trás
 		gun_arm.flip_v = aiming_left
 
-	# LÓGICA DE TIRO (Separada do movimento para permitir atirar andando)
+	# Lógica de tiro
 	if Input.is_action_just_pressed("shoot") and has_psu and energy >= shoot_cost and anim_state != State.DYING:
 		shoot_logic()
 
@@ -156,7 +159,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func animation_handler(direction, delta):
-	# Vira o sprite caso esteja indo pra esquerda E a arma não esteja forçando a direção
+	# Vira o sprite caso esteja indo pra esquerda e a arma não esteja forçando a direção
 	if direction != 0 and anim_state != State.DYING and not gun_arm.visible:
 		sprite.flip_h = (direction < 0)
 		if is_pushing and (direction < 0):

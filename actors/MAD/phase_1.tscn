@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://b8g3htaiuuxmm" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/BODY_02.png" id="3_hyfqt"]
 [ext_resource type="Texture2D" uid="uid://semt11cuxo1e" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/SIDEATTACH_02a.png" id="4_v15pv"]
 [ext_resource type="Texture2D" uid="uid://skps0e10mxtc" path="res://assets/sprites/Modular 64x Robots by YuriNikolai/HEAD_05.png" id="5_j86en"]
+[ext_resource type="AudioStream" uid="uid://dkryntp23s4rb" path="res://assets/audio/sfx/cannon1.ogg" id="6_v15pv"]
+[ext_resource type="AudioStream" uid="uid://cwuw5c8yni1xu" path="res://assets/audio/sfx/cannon2.ogg" id="7_j86en"]
+[ext_resource type="AudioStream" uid="uid://y05pgan6jn7v" path="res://assets/audio/sfx/cannon3.ogg" id="8_kbyjk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbnb"]
 size = Vector2(6, 23)
@@ -14,6 +17,8 @@ size = Vector2(6, 23)
 
 [node name="Phase1" type="StaticBody2D" unique_id=323613499]
 texture_filter = 1
+collision_layer = 6
+collision_mask = 33
 script = ExtResource("1_hp56b")
 shoot_strength = 25
 
@@ -67,6 +72,8 @@ polygon = PackedVector2Array(29.056824, -2.4539204, 34.056824, -2.4539204, 34.05
 
 [node name="HitBox1" type="Area2D" parent="." unique_id=167814674]
 position = Vector2(10, -9)
+collision_layer = 2
+collision_mask = 32
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox1" unique_id=526080372]
@@ -75,6 +82,8 @@ shape = SubResource("RectangleShape2D_rgbnb")
 
 [node name="HitBox2" type="Area2D" parent="." unique_id=299951584]
 position = Vector2(18, 9)
+collision_layer = 2
+collision_mask = 32
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox2" unique_id=550954144]
@@ -89,6 +98,18 @@ position = Vector2(13, -10)
 
 [node name="Spawn1Timer" type="Timer" parent="." unique_id=636005586]
 wait_time = 3.0
-autostart = true
+
+[node name="Spawn2Timer" type="Timer" parent="." unique_id=1051969536]
+wait_time = 5.0
+
+[node name="ShootSFX1" type="AudioStreamPlayer2D" parent="." unique_id=1454026508]
+stream = ExtResource("6_v15pv")
+
+[node name="ShootSFX2" type="AudioStreamPlayer2D" parent="." unique_id=1699271051]
+stream = ExtResource("7_j86en")
+
+[node name="ShootSFX3" type="AudioStreamPlayer2D" parent="." unique_id=776323819]
+stream = ExtResource("8_kbyjk")
 
 [connection signal="timeout" from="Spawn1Timer" to="." method="_on_spawn_1_timer_timeout"]
+[connection signal="timeout" from="Spawn2Timer" to="." method="_on_spawn_2_timer_timeout"]

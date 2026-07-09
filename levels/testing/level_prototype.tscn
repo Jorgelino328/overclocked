@@ -21,7 +21,7 @@ color = Color(0.0392157, 0, 0.109804, 1)
 metadata/_edit_lock_ = true
 
 [node name="Robonildo" parent="." unique_id=345648955 instance=ExtResource("1_qm64n")]
-position = Vector2(838, 287)
+position = Vector2(773, 551)
 has_psu = true
 
 [node name="TestPlatform" parent="." unique_id=371593943 instance=ExtResource("3_13kkt")]
@@ -35,7 +35,8 @@ scale = Vector2(5.52, 1)
 position = Vector2(906, 370)
 
 [node name="CrawlingBug" parent="." unique_id=596403267 instance=ExtResource("3_1phht")]
-position = Vector2(129, 334)
+position = Vector2(413, 591)
+is_doomed = true
 
 [node name="GlitchWall" parent="." unique_id=1307216441 instance=ExtResource("5_kwye7")]
 position = Vector2(969, 231)
@@ -46,4 +47,4 @@ position = Vector2(824, 331)
 devices = [NodePath("../GlitchWall")]
 
 [node name="MoveableBox" parent="." unique_id=1250028024 instance=ExtResource("7_774u3")]
-position = Vector2(350, 528)
+position = Vector2(115, 526)

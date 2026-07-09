@@ -863,6 +863,9 @@ wait_time = 2.0
 wait_time = 2.0
 autostart = true
 
+[node name="Hearing" type="AudioListener2D" parent="." unique_id=786666545]
+current = true
+
 [connection signal="morreu" from="." to="." method="_on_player_morreu"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]
 [connection signal="timeout" from="BatteryTimer" to="." method="_on_battery_timer_timeout"]

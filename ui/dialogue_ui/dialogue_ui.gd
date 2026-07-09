@@ -1,5 +1,5 @@
 extends CanvasLayer
-@export var dialoguePath = "res://assets/dialogue/tutorial.json"	
+@export var dialoguePath : String
 @export var textSpeed := 0.05
 
 @onready var portrait = $VBoxContainer/Panel/Portrait
@@ -27,7 +27,6 @@ func _process(_delta):
 			textbox.visible_characters = len(textbox.text)
 
 func getDialogue():
-	
 	var f = FileAccess.open(dialoguePath,FileAccess.READ)
 	assert(FileAccess.file_exists(dialoguePath), "File path does not exist")
 	var json_object = JSON.new()

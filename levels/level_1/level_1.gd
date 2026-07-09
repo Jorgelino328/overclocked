@@ -9,7 +9,7 @@ var psu_dialogue_1 = "res://assets/dialogue/psu_dialogue_1.json"
 var psu_dialogue_2 = "res://assets/dialogue/psu_dialogue_2.json"
 
 func _ready() -> void:
-	fonte.found_psu.connect(play_scene.bind(psu_dialogue_1))
+	fonte.item_found.connect(play_scene.bind(psu_dialogue_1))
 
 func _process(_delta) -> void:
 	if(!has_node("DialogueUI")):
