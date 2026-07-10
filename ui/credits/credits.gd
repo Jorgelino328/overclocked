@@ -7,6 +7,8 @@ extends Control
 @onready var message_box: Control = $MessageBox
 @onready var credits_label: Label = $MessageBox/Credits
 
+var is_finished = false
+
 
 signal menu()
 
@@ -32,7 +34,9 @@ func load_credits_from_file() -> void:
 		credits_label.text = "Erro: credits.txt não encontrado em " + credits_file_path
 
 func finish_credits() -> void:
-	menu.emit()
+	if not is_finished:
+		menu.emit()
+		is_finished = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel"):

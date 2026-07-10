@@ -38,7 +38,7 @@ func _ready() -> void:
 	player.has_psu = true
 	player.has_hdd = true
 	player.has_ram = false
-	player.has_cpus = false
+	player.has_cpu = false
 	ram.item_found.connect(func(): curr_dialogue = DialogueState.FIND_RAM)
 	cpu.item_found.connect(func(): curr_dialogue = DialogueState.FIND_CPU)
 	mad.level_clear.connect(_on_level_clear)
@@ -64,7 +64,7 @@ func _process(_delta) -> void:
 				curr_dialogue = DialogueState.END
 			DialogueState.BATTLE_START:
 				music = battle_music
-				get_parent().change_track()
+				get_parent().play_music(battle_music)
 				play_scene(battle_start_dialogue)
 				is_active = true
 				curr_dialogue = DialogueState.END

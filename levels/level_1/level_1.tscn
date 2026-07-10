@@ -32,8 +32,6 @@ layer_2/tile_data = PackedInt32Array(2293761, 393224, 12, 2359297, 393224, 13, 2
 texture_filter = 0
 position = Vector2(89, 521)
 scale = Vector2(0.5, 0.5)
-has_psu = true
-has_hdd = true
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2018794097]
 position = Vector2(77, -141)

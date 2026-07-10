@@ -13,7 +13,7 @@ func _ready() -> void:
 	player.has_psu = true
 	player.has_hdd = false
 	player.has_ram = false
-	player.has_cpus = false
+	player.has_cpu = false
 	hdd.item_found.connect(play_scene.bind(hdd_dialogue_1))
 	play_scene(wall_dialogue)
 

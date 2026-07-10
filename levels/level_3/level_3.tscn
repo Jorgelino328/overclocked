@@ -367,8 +367,6 @@ player = NodePath("../Robonildo")
 [node name="Robonildo" parent="." unique_id=1274667847 instance=ExtResource("5_0c4fo")]
 position = Vector2(1000, -68)
 scale = Vector2(0.5, 0.5)
-has_psu = true
-has_hdd = true
 
 [node name="Camera2D" type="Camera2D" parent="Robonildo" unique_id=2014196989]
 limit_left = -206

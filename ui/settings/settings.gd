@@ -35,13 +35,13 @@ func _ready():
 	if ResourceLoader.exists(save_file_path + save_file_name):
 		settingsData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	
-	v_master.value = db_to_linear(settingsData.volume_master)
-	v_music.value = db_to_linear(settingsData.volume_music)
-	v_sfx.value = db_to_linear(settingsData.volume_sfx)
+	v_master.set_value_no_signal(db_to_linear(settingsData.volume_master))
+	v_music.set_value_no_signal(db_to_linear(settingsData.volume_music))
+	v_sfx.set_value_no_signal(db_to_linear(settingsData.volume_sfx))
 	
-	fscreen.button_pressed = settingsData.fullscreen
-	borderless.button_pressed = settingsData.borderless
-	vsync.button_pressed = settingsData.vsync
+	fscreen.set_pressed_no_signal(settingsData.fullscreen)
+	borderless.set_pressed_no_signal(settingsData.borderless)
+	vsync.set_pressed_no_signal(settingsData.vsync)
 	
 	init_volume()
 	
