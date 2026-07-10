@@ -165,6 +165,11 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "> Configurações"
 
+[node name="Credits" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer" unique_id=2049299511]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "> Créditos"
+
 [node name="Exit" type="Button" parent="CanvasContainer/MenuContainer/ButtonsContainer" unique_id=934584516]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -188,6 +193,8 @@ bus = &"SFX"
 [connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Settings" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Credits" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="mouse_entered" from="CanvasContainer/MenuContainer/ButtonsContainer/Exit" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CanvasContainer/MenuContainer/ButtonsContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="animation_finished" from="TitleAnimator" to="." method="_on_title_animator_animation_finished"]

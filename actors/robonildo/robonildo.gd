@@ -10,8 +10,8 @@ signal morreu
 @export var jump_velocity := -350.0
 @export var hp := 10
 @export var max_hp := 10
-@export var i_frames: float = 1.0 # Mudado para float para a divisão ser perfeita
-@export var i_frame_dur: float = 0.2 # Tipagem explícita adicionada
+@export var i_frames: float = 1.0
+@export var i_frame_dur: float = 0.2
 @export var energy: int = 4
 @export var shoot_cost: int = 1
 
@@ -26,17 +26,18 @@ signal morreu
 @onready var gun_arm = $GunArm
 @onready var gun_timer = $GunTimer
 @onready var battery_timer = $BatteryTimer
+@onready var dash_timer = $DashTimer
 @onready var muzzle = $GunArm/Muzzle
-
+@onready var collider = $RobonildoCollider
 
 # Define estados possíveis do personagem
-enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DYING}
+enum State { IDLE, WALKING, RUNNING, JUMPING, LOOKING, PUSHING, DASHING, DYING, TRANSITION}
 
 # Pega valor de gravidade definida nas configurações do projeto.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Inicia o jogo no estado Idle
-var anim_state := State.IDLE
+@export var anim_state := State.IDLE
 
 var time_walking := 0.0
 var time_running := 0.0
@@ -48,9 +49,16 @@ var dead_anim := false
 var knockback = Vector2.ZERO
 var is_invincible = false
 var is_pushing = false
+var is_dashing := false
+var can_dash := true
 
+@export var dash_speed := 800.0
+@export var dash_duration := 0.2
+@export var dash_up_multiplier := 0.6
 @export var has_psu = false
 @export var has_hdd = false
+@export var has_ram = false
+@export var has_cpu = false
 
 var h_updated = false
 
@@ -65,12 +73,13 @@ func _ready():
 	gun_timer.wait_time = 0.5
 
 func _physics_process(delta):
-	# Adiciona gravidade caso esteja fora do chão.
-	if not is_on_floor():
+
+	# Suspende a gravidade enquanto estiver dando dash ou em transição
+	if not is_on_floor() and not is_dashing and anim_state != State.TRANSITION:
 		velocity.y += gravity * delta
 		
 	# Se a HP do jogador chega a 0, toca a animação de morte
-	if hp <= 0 and anim_state != State.DYING:
+	if hp <= 0 and anim_state != State.DYING and anim_state != State.TRANSITION:
 		anim_state = State.DYING
 		_gerenciar_sequencia_morte()
 	
@@ -79,35 +88,24 @@ func _physics_process(delta):
 		hp = max_hp
 		emit_signal("health_changed", hp, max_hp)
 		h_updated = true
+		
 	# Pega a direção do input
 	var direction := Input.get_axis("walk_left", "walk_right")
+	
 	# Lógica da arma visível (rastrear mouse, virar corpo e inverter ombro)
-	if gun_arm.visible and anim_state != State.DYING:
-		var mouse_pos = get_global_mouse_position()
-		gun_arm.look_at(mouse_pos)
+	if gun_arm.visible and anim_state != State.DYING and anim_state != State.TRANSITION:
+		_update_aim()
 		
-		var aiming_left = mouse_pos.x < global_position.x
-		sprite.flip_h = aiming_left
-		sideways = true
-		
-		# Pega a distância base do braço (offset X)
-		var arm_offset_x = abs(gun_arm.position.x)
-		
-		# Inverte a posição do braço para simular a troca de ombro
-		if aiming_left:
-			gun_arm.position.x = -arm_offset_x
-		else:
-			gun_arm.position.x = arm_offset_x
-			
-		# Vira o sprite da arma de cabeça para baixo caso esteja apontando pra trás
-		gun_arm.flip_v = aiming_left
-
-	# LÓGICA DE TIRO (Separada do movimento para permitir atirar andando)
-	if Input.is_action_just_pressed("shoot") and has_psu and energy >= shoot_cost and anim_state != State.DYING:
+	# Lógica de tiro
+	if Input.is_action_just_pressed("shoot") and has_psu and energy >= shoot_cost and anim_state != State.DYING and anim_state != State.TRANSITION:
 		shoot_logic()
 
+	# 3. Gatilho do Dash
+	if Input.is_action_just_pressed("dash") and has_ram and can_dash and anim_state != State.DYING and anim_state != State.TRANSITION:
+		_start_dash()
+		
 	# Define o estado atual de movimento
-	if anim_state != State.DYING:
+	if anim_state != State.DYING and anim_state != State.TRANSITION and  not is_dashing:
 		
 		# Se está no ar 
 		if not is_on_floor():
@@ -134,20 +132,25 @@ func _physics_process(delta):
 		# Se está parado no chão
 		elif anim_state != State.LOOKING:
 			anim_state = State.IDLE
-			
+	
 	# Aciona as animações PRIMEIRO, pois elas alteram a variável de velocidade. 
 	animation_handler(direction, delta)
 	
 	# Se o personagem estiver vivo, aplica o movimento
-	if anim_state != State.DYING:
-		# Aplica a velocidade x (Sem travar se estiver atirando!)
-		if direction:
-			velocity.x = direction * current_speed
-		else:
-			velocity.x = move_toward(velocity.x, 0, current_speed)
-		
+	if anim_state != State.DYING and anim_state != State.TRANSITION:
+		# Aplica a velocidade x APENAS se não estiver dando dash
+		if not is_dashing:
+			if direction:
+				velocity.x = direction * current_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, current_speed)
+				
 		# Aplica o Knockback, se houver
 		velocity += knockback
+		
+	elif anim_state == State.TRANSITION:
+		velocity.x = 0.0
+		velocity.y = -150.0
 	else:
 		# Garante que a velocidade seja zerada ao morrer
 		velocity.x = 0.0
@@ -156,7 +159,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func animation_handler(direction, delta):
-	# Vira o sprite caso esteja indo pra esquerda E a arma não esteja forçando a direção
+	# Vira o sprite caso esteja indo pra esquerda e a arma não esteja forçando a direção
 	if direction != 0 and anim_state != State.DYING and not gun_arm.visible:
 		sprite.flip_h = (direction < 0)
 		if is_pushing and (direction < 0):
@@ -318,7 +321,17 @@ func animation_handler(direction, delta):
 			time_idle = 0.0
 			time_pushing += delta 
 				
-		
+		State.DASHING:
+			if is_on_floor():
+				animation_player.play("dashing_side")
+			else:
+				animation_player.play("dashing_up")
+			
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+			time_pushing = 0.0
+			
 		State.DYING:
 			# Toca animação de morte correta para a situação
 			if !dead_anim:
@@ -331,6 +344,20 @@ func animation_handler(direction, delta):
 				else:
 					animation_player.play("death_front")
 				dead_anim = true # Evita que animação toque novamente
+				
+		State.TRANSITION:
+			collider.disabled = true
+			if not animation_player.current_animation == "flying_transition":
+				animation_player.play("flying_transition")
+				
+			if position.y <= -100:
+				anim_state = State.IDLE
+				collider.disabled = false
+			
+			time_walking = 0.0
+			time_running = 0.0
+			time_idle = 0.0
+			time_pushing = 0.0
 
 func heal(heal_amnt):
 	heal_sfx.play()
@@ -360,14 +387,59 @@ func spawn_projectile():
 	projectile.global_position = muzzle.global_position
 	projectile.rotation = gun_arm.rotation
 	get_tree().current_scene.add_child(projectile)
+
+func _update_aim():
+	var mouse_pos = get_global_mouse_position()
+	gun_arm.look_at(mouse_pos)
+	
+	var aiming_left = mouse_pos.x < global_position.x
+	sprite.flip_h = aiming_left
+	sideways = true
+	
+	# Pega a distância base do braço (offset X)
+	var arm_offset_x = abs(gun_arm.position.x)
+	
+	# Inverte a posição do braço para simular a troca de ombro
+	if aiming_left:
+		gun_arm.position.x = -arm_offset_x
+	else:
+		gun_arm.position.x = arm_offset_x
+		
+	# Vira o sprite da arma de cabeça para baixo caso esteja apontando pra trás
+	gun_arm.flip_v = aiming_left
 	
 func shoot_logic():
 	energy -= shoot_cost
 	emit_signal("battery_changed", energy)
 	gun_arm.visible = true
+	_update_aim() # Atualiza a mira no exato frame do tiro
 	spawn_projectile()
-	# Reinicia o timer toda vez que atiramos
 	gun_timer.start()
+
+func _start_dash():
+	can_dash = false
+	is_dashing = true
+	anim_state = State.DASHING
+	
+	# Pega o vetor 2D da direção baseada nos inputs mapeados
+	var dash_dir = Input.get_vector("walk_left", "walk_right", "look_up", "look_down")
+	
+	# Se nenhum botão direcional estiver sendo pressionado, dá o dash para a frente
+	if dash_dir == Vector2.ZERO:
+		dash_dir.x = -1 if sprite.flip_h else 1
+		
+	# Aplica a velocidade instantânea na direção calculada
+	velocity = dash_dir.normalized() * dash_speed
+	
+	# Pequeno nerf em dash para cima
+	if velocity.y < 0:
+		velocity.y *= dash_up_multiplier
+	
+	# Espera o tempo de duração do dash
+	await get_tree().create_timer(dash_duration).timeout
+	
+	is_dashing = false
+	# O estado voltará ao normal (JUMPING/IDLE/etc) no próximo frame do _physics_process
 
 func _gerenciar_sequencia_morte():
 	await get_tree().create_timer(1.5).timeout
@@ -380,3 +452,8 @@ func _on_battery_timer_timeout() -> void:
 	energy = clamp(energy + 1, 0, 4)
 	emit_signal("battery_changed", energy)
 	battery_timer.start()
+
+func _on_dash_timer_timeout() -> void:
+	can_dash = true
+	dash_timer.start()
+	

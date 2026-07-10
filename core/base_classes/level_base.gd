@@ -41,14 +41,23 @@ func freeze_chars():
 	if has_node("NPCs"):
 		for e in get_node("NPCs").get_children():
 			e.process_mode = Node.PROCESS_MODE_DISABLED
+	if has_node("Mad"):
+		for e in get_node("Mad").get_children():
+			e.process_mode = Node.PROCESS_MODE_DISABLED
+	if has_node("PlatformPath"):
+		get_node("PlatformPath").process_mode = PROCESS_MODE_DISABLED
 
 func unfreeze_chars():
 	freeze = false
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 	if has_node("NPCs"):
-		print()
 		for e in get_node("NPCs").get_children():
 			e.process_mode = Node.PROCESS_MODE_INHERIT
+	if has_node("Mad"):
+		for e in get_node("Mad").get_children():
+			e.process_mode = Node.PROCESS_MODE_INHERIT
+	if has_node("PlatformPath"):
+		get_node("PlatformPath").process_mode = PROCESS_MODE_INHERIT
 		
 
 func play_scene(scene):

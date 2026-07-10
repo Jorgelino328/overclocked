@@ -100,6 +100,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SFX/RocketSFX:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lp60f"]
 resource_name = "RESET_side"
@@ -138,6 +150,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1m4xx"]
+resource_name = "dashing"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [71, 72]
+}
+
+[sub_resource type="Animation" id="Animation_pp3ug"]
+resource_name = "dashing_up"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [73, 74]
 }
 
 [sub_resource type="Animation" id="Animation_maejr"]
@@ -204,6 +252,35 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [59, 60, 59, 60, 61, 62]
+}
+
+[sub_resource type="Animation" id="Animation_0ke63"]
+resource_name = "flying_transition"
+length = 5.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RobonildoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [73, 74, 73, 74, 73, 74]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SFX/RocketSFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_ufnah"]
@@ -774,10 +851,13 @@ tracks/2/keys = {
 _data = {
 &"RESET": SubResource("Animation_uxixy"),
 &"RESET_side": SubResource("Animation_lp60f"),
+&"dashing_side": SubResource("Animation_1m4xx"),
+&"dashing_up": SubResource("Animation_pp3ug"),
 &"death_front": SubResource("Animation_maejr"),
 &"death_run": SubResource("Animation_hi04f"),
 &"death_side": SubResource("Animation_irofe"),
 &"death_walk": SubResource("Animation_lfj1e"),
+&"flying_transition": SubResource("Animation_0ke63"),
 &"idle": SubResource("Animation_ufnah"),
 &"jump_front": SubResource("Animation_ewks5"),
 &"jump_front_land": SubResource("Animation_j43hc"),
@@ -803,7 +883,7 @@ _data = {
 
 [node name="Robonildo" type="CharacterBody2D" unique_id=1274667847]
 texture_filter = 1
-collision_mask = 28
+collision_mask = 188
 script = ExtResource("1_vnl3t")
 
 [node name="RobonildoCollider" type="CollisionShape2D" parent="." unique_id=1564527355]
@@ -812,7 +892,7 @@ shape = SubResource("RectangleShape2D_18luw")
 [node name="RobonildoSprite" type="Sprite2D" parent="." unique_id=1565838249]
 scale = Vector2(5, 5)
 texture = ExtResource("2_maejr")
-hframes = 71
+hframes = 75
 
 [node name="GunArm" type="Sprite2D" parent="." unique_id=365195994]
 visible = false
@@ -863,6 +943,14 @@ wait_time = 2.0
 wait_time = 2.0
 autostart = true
 
+[node name="DashTimer" type="Timer" parent="." unique_id=821895294]
+wait_time = 2.0
+autostart = true
+
+[node name="Hearing" type="AudioListener2D" parent="." unique_id=786666545]
+current = true
+
 [connection signal="morreu" from="." to="." method="_on_player_morreu"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_gun_timer_timeout"]
 [connection signal="timeout" from="BatteryTimer" to="." method="_on_battery_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

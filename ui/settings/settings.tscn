@@ -61,7 +61,6 @@ offset_bottom = 649.0
 texture = SubResource("GradientTexture2D_5at5d")
 
 [node name="Options" type="Control" parent="." unique_id=1963148940]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -197,6 +196,7 @@ text = "Back
 "
 
 [node name="Audio" type="Control" parent="." unique_id=503565143]
+visible = false
 anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 648.0

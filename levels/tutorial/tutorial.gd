@@ -15,11 +15,10 @@ enum DialogueState
 	END 
 }
 
-@onready var dialogue_box = $DialogueUI
 @onready var dark_screen = $DarkScreen
 @onready var animation = $AnimationPlayer
-@onready var level_path = "res://levels/nivel_1/nivel_1.tscn"
-@export var music = preload("res://assets/audio/music/overworld.ogg")
+@onready var level_path = "res://levels/level_1/level_1.tscn"
+@export var music = preload("res://assets/audio/music/deepSpace.ogg")
 
 var curr_dialogue = DialogueState.WAKEUP_1
 var wakeup_dialogue_1 = "res://assets/dialogue/wakeup_1.json"
@@ -94,8 +93,7 @@ func _process(_delta):
 						play_scene(tutorial_ufrn_2)
 						curr_dialogue = DialogueState.END
 					DialogueState.END:
-						if dialogue_box:
-							dialogue_box.queue_free()
+						pass
 		else:
 			freeze_chars()
 

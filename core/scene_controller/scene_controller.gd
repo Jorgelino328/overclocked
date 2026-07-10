@@ -7,6 +7,7 @@ extends Node
 var current_track := preload("res://assets/audio/music/menu_music.ogg")
 var select_sfx := preload("res://assets/audio/sfx/button_select.ogg")
 var death_sfx := preload("res://assets/audio/sfx/death.ogg")
+var music_tween: Tween
 
 
 # Preload de Cenas de UI para transições mais rápidas
@@ -14,6 +15,7 @@ const MAIN_MENU = preload("res://ui/main_menu/main_menu.tscn")
 const SETTINGS = preload("res://ui/settings/settings.tscn")
 const LEVEL_CLEAR = preload("res://ui/level_clear/level_clear.tscn")
 const GAME_OVER = preload("res://ui/game_over/game_over.tscn")
+const CREDITS = preload("res://ui/credits/credits.tscn")
 
 func _ready() -> void:
 	bgm_player.stream = current_track
@@ -35,21 +37,39 @@ func change_scene(next_scene):
 	add_child(next_scene)
 	current_scene.queue_free() 
 	current_scene = next_scene
-	change_track()
+	if "music" in current_scene:
+		play_music(current_scene.music)
+	else:
+		stop_music()
 	connect_signals()
 
-## Troca música da cena.
-func change_track():
-	var scene_music = current_scene.get("music")
-	if scene_music != null:
-		if scene_music.resource_path != current_track.resource_path:
-			current_track = scene_music
-			bgm_player.stream = current_track
-			bgm_player.play()
-	else:
+func play_music(music: AudioStream) -> void:
+	if bgm_player.stream == music and bgm_player.playing:
+		return
+		
+	if music_tween:
+		music_tween.kill()
+		
+	if bgm_player.playing:
+		music_tween = create_tween()
+		music_tween.tween_property(bgm_player, "volume_db", -80.0, 0.5)
+		await music_tween.finished
+		
+	bgm_player.stream = music
+	bgm_player.volume_db = 0.0 
+	bgm_player.play()
+
+
+func stop_music() -> void:
+	if music_tween:
+		music_tween.kill()
+		
+	if bgm_player.playing:
+		music_tween = create_tween()
+		music_tween.tween_property(bgm_player, "volume_db", -80.0, 0.5)
+		await music_tween.finished
 		bgm_player.stop()
-		current_track = null
-	
+		
 ## Toca SFX global.
 func play_sfx(sfx):
 	sfx_player.stream = sfx
@@ -67,6 +87,9 @@ func _on_settings():
 	await play_sfx(select_sfx)
 	change_scene(SETTINGS.instantiate())
 
+func _on_credits():
+	await play_sfx(select_sfx)
+	change_scene(CREDITS.instantiate())
 
 func _on_level_clear(proxima_fase_path: String):
 	
@@ -89,7 +112,6 @@ func _on_quit():
 
 ## Carrega próximo nível
 func _on_next_level(level_path : String):
-	print("next is ", level_path)
 	if level_path != "":
 		await play_sfx(select_sfx)
 		var next_level = load(level_path)

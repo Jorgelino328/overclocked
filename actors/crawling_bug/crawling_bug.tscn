@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5ykievy8scoo" path="res://actors/crawling_bug/crawling_bug.gd" id="1_h1wry"]
 [ext_resource type="Texture2D" uid="uid://dl5v2h0jpfil6" path="res://assets/sprites/platformer-bugs/crawler_0.png" id="1_n6yih"]
+[ext_resource type="Script" uid="uid://ea1nmt36d4qm" path="res://actors/crawling_bug/hit_box.gd" id="3_2whhf"]
 [ext_resource type="AudioStream" uid="uid://cie06c8twb21d" path="res://assets/audio/sfx/explosion.ogg" id="3_rbvva"]
 [ext_resource type="AudioStream" uid="uid://dmcd4st37xax7" path="res://assets/audio/sfx/bug_walk_1.ogg" id="4_7xuhm"]
 [ext_resource type="AudioStream" uid="uid://dd14e61fcdum8" path="res://assets/audio/sfx/hit_enemy.ogg" id="4_rkbky"]
@@ -11,6 +12,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1wry"]
 size = Vector2(19, 40)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbky"]
+radius = 22.0
+height = 104.0
 
 [sub_resource type="Animation" id="Animation_7xuhm"]
 length = 0.001
@@ -141,6 +146,9 @@ shape = SubResource("CircleShape2D_h1wry")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1207740552]
 position = Vector2(9, -6)
+collision_layer = 2
+collision_mask = 33
+script = ExtResource("3_2whhf")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -149,6 +157,14 @@ position = Vector2(-5, 6.5000005)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_h1wry")
 metadata/_edit_lock_ = true
+
+[node name="ExplosionRange" type="Area2D" parent="." unique_id=1609028159]
+collision_layer = 128
+
+[node name="ExplosionShape2D" type="CollisionShape2D" parent="ExplosionRange" unique_id=1963640920]
+position = Vector2(5, -12)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rkbky")
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2135050321]
 stream = ExtResource("3_rbvva")
@@ -171,6 +187,10 @@ bus = &"SFX"
 [node name="CBugAnimator" type="AnimationPlayer" parent="." unique_id=1017653521]
 libraries/ = SubResource("AnimationLibrary_ukt5g")
 
+[node name="DoomTracker" type="Timer" parent="." unique_id=2092064763]
+wait_time = 5.0
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]
 [connection signal="animation_finished" from="CBugAnimator" to="." method="_on_c_bug_animator_animation_finished"]
+[connection signal="timeout" from="DoomTracker" to="." method="_on_doom_tracker_timeout"]

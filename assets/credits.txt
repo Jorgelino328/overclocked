@@ -1,0 +1,46 @@
+AUDIO:
+
+Música Tema do Tutorial: "Deep Space Flight" by remaxim ([https://opengameart.org/content/deep-space-flight](https://www.google.com/search?q=https://opengameart.org/content/deep-space-flight)). Licensed under CC BY-SA 3.0.
+
+
+Música Tema do Nível 1: "High Tech Lab" by remaxim ([https://opengameart.org/content/high-tech-lab](https://opengameart.org/content/high-tech-lab)). Licensed under CC BY 4.0.
+
+
+Música Tema do Nível 2: "Hold the line" by bart ([https://opengameart.org/content/hold-line-boss-theme](https://opengameart.org/content/hold-line-boss-theme)). Licensed under CC BY-SA 3.0.
+
+
+Música Tema do Nível 3: "Pools of Color" by wattmo ([https://opengameart.org/content/pools-of-color-dark-exploration-emotional-moment-atmosphere-etc](https://opengameart.org/content/pools-of-color-dark-exploration-emotional-moment-atmosphere-etc)). Licensed under CC BY 4.0.
+
+
+Música Tema do Nível 3 (Boss): "Dark Ritual" by Of Far Different Nature ([https://opengameart.org/content/dark-ritual](https://opengameart.org/content/dark-ritual)). Licensed under CC BY 4.0. Contains elements of "Electric stream" by Tricsntraps ([https://opengameart.org/content/t-t-free-cyberpunk-pack-2](https://opengameart.org/content/t-t-free-cyberpunk-pack-2)) licensed under CC0.
+
+
+Wind SFX: "Wind, Synthesized, A.wav" by InspectorJ - www.jshaw.co.uk ([https://freesound.org/people/InspectorJ/sounds/376415/](https://www.google.com/search?q=https://freesound.org/people/InspectorJ/sounds/376415/)). Licensed under CC BY 4.0.
+
+
+
+SPRITES:
+
+Boss: "Modular Robot Assets" by Croomfolk ([https://opengameart.org/content/modular-64x-robots](https://opengameart.org/content/modular-64x-robots)). Licensed under CC BY-SA 4.0.
+
+
+Crawling Bug: "Platformer bugs from Last Escape" by Stephen Challener (Redshrike) and Poss ([https://opengameart.org/content/platformer-bugs-from-last-escape](https://opengameart.org/content/platformer-bugs-from-last-escape)). Licensed under CC BY 3.0.
+
+
+Energy Ball: "Energy Ball" by yiannisd ([https://opengameart.org/content/energy-ball](https://opengameart.org/content/energy-ball)). Licensed under CC BY 3.0.
+
+
+Cooler: "Cooler" by Pong Man ([https://opengameart.org/content/cooler](https://www.google.com/search?q=https://opengameart.org/content/cooler)). Public Domain / CC0.
+
+
+Explosion: "ARW Explosion" by Color Optimist ([https://opengameart.org/content/arw-explosion](https://opengameart.org/content/arw-explosion)). Public Domain / CC0.
+
+
+Furniture: "Glitch Furniture Spaceship" originally from Glitch ([http://glitchthegame.com](http://glitchthegame.com)) via bart. SVG files cleaned up/reworked by anarres ([https://opengameart.org/content/glitch-furniture-spaceship](https://opengameart.org/content/glitch-furniture-spaceship)). Public Domain / CC0.
+
+
+
+TILESETS:
+
+All Levels: "Sci-Fi Platform Tiles" by Eris ([https://opengameart.org/content/sci-fi-platform-tiles](https://opengameart.org/content/sci-fi-platform-tiles)). Public Domain / CC0.
+

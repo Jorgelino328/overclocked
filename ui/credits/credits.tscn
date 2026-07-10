@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bndjtcb7lri04"]
+
+[ext_resource type="Theme" uid="uid://bll1u5sr4vd6f" path="res://ui/themes/terminal_theme.tres" id="1_qj0v0"]
+[ext_resource type="Script" uid="uid://bcbndb5muw5g4" path="res://ui/credits/credits.gd" id="2_rbklx"]
+
+[sub_resource type="Gradient" id="Gradient_i5wg5"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 0.995475)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.0980392, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.313726, 0.313726, 0.945098, 0.282353, 0.0980392)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_om5k2"]
+gradient = SubResource("Gradient_i5wg5")
+height = 10
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3c04x"]
+offsets = PackedFloat32Array(0, 0.171946, 0.339367, 0.574661, 0.701357)
+colors = PackedColorArray(0.313726, 0.945098, 0.282353, 0.235294, 0.313726, 0.945098, 0.282353, 0.0980392, 0, 0, 0, 0, 0, 0.0451197, 0, 0.784314, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f3ljx"]
+gradient = SubResource("Gradient_3c04x")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1.5, 0.5)
+
+[node name="Credits" type="Control" unique_id=2059751552]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qj0v0")
+script = ExtResource("2_rbklx")
+
+[node name="ScreenEffect" type="Control" parent="." unique_id=1031314355]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_group_ = true
+
+[node name="DarkBackground" type="ColorRect" parent="ScreenEffect" unique_id=1322830426]
+layout_mode = 0
+offset_right = 1198.0
+offset_bottom = 682.0
+color = Color(0, 0, 0, 1)
+
+[node name="CrtEffect" type="TextureRect" parent="ScreenEffect" unique_id=1743779990]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 650.0
+texture = SubResource("GradientTexture2D_om5k2")
+stretch_mode = 1
+
+[node name="ScreenGlow" type="TextureRect" parent="ScreenEffect" unique_id=977161448]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 649.0
+texture = SubResource("GradientTexture2D_f3ljx")
+
+[node name="CreditsTitle" type="Label" parent="." unique_id=884673966]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 48.0
+offset_right = 939.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 48
+text = "Créditos e Atribuições"
+clip_text = true
+
+[node name="MessageBox" type="ColorRect" parent="." unique_id=2081491399]
+clip_contents = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 1144.0
+offset_bottom = 645.0
+color = Color(0, 0, 0, 0.49803922)
+metadata/_edit_group_ = true
+
+[node name="Credits" type="Label" parent="MessageBox" unique_id=2142018556]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 15.0
+offset_right = 1128.0
+offset_bottom = 495.0
+theme_override_font_sizes/font_size = 16
+text = "
+"
+autowrap_mode = 3
