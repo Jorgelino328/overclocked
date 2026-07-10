@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		_handle_shooting(delta)
 	
 	if velocity.x != 0:
-		animation.play("walk")
+		animation.play("walking")
 	else:
 		animation.play("idle")
 	

@@ -35,6 +35,7 @@ var level_clear_dialogue = "res://assets/dialogue/l3_level_clear.json"
 var phase_2_started = false
 
 func _ready() -> void:
+	super()
 	player.has_psu = true
 	player.has_hdd = true
 	player.has_ram = false
